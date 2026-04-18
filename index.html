@@ -193,13 +193,25 @@ body.dark #cartModal{
 
 <body>
 
-<header>
-<h2>🍷Acacia Liquor Store</h2>
-<div>
-<button onclick="toggleTheme()">🌙</button>
-<button onclick="showCart()">🛒 Cart</button>
+ <header style="display:flex; align-items:center; justify-content:space-between;">
+
+  <div style="display:flex; align-items:center; gap:10px;">
+  <img src="acacia-logo.png" alt="Acacia Pharmacy Logo" style="width:45px; height:45px;">
+  <h2 style="margin:0; color:#1b8f3c; font-weight:bold;">
+   🍷Acacia Liquor Store
+  </h2>
 </div>
+
+  <div id="motto" style="font-size:14px; color:#ccc;"></div>
+
+  
+  <div>
+    <button onclick="toggleTheme()">🌙</button>
+    <button onclick="showCart()">🛒 Cart</button>
+  </div>
+
 </header>
+
 
 <section id="container">
 
@@ -337,6 +349,24 @@ background:rgba(0,0,0,0.6);">
 </footer>
 
 <script>
+const mottos = [
+  "🚚 Fast & Reliable Delivery Across Kenya",
+  "✅ Trusted Quality Medicines & Health Products",
+  "💰 Affordable Prices + Special Discounts Available",
+  "📞 Call / WhatsApp: +254 731 858 997",
+  "💳 Flexible Payment Plans Available (M-PESA, Card, Cash)",
+  "⚡ Order Now – Quick Service & Secure Payments"
+];
+
+let index = 0;
+
+function changeMotto(){
+  document.getElementById("motto").textContent = mottos[index];
+  index = (index + 1) % mottos.length;
+}
+
+setInterval(changeMotto, 2000);
+changeMotto();
 
 const productList = [
   { name: "Baron de Valls Red", price: 650, category: "Red Wine", size: "750ml", image: "images/baron-de-valls-red-wine.jpg", stock: 50, abv:"", country:"", brand:"", description:"" },
