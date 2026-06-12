@@ -3,371 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Acacia Liquor Store</title>
+<title>Acacia Liquor Store</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-body{
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, sans-serif;
-  margin:0;
-  background:#f5f5f5;
-}
-
-body.dark{
-  background:#111;
-  color:#fff;
-}
-
-header{
-  background:#111;
-  color:#fff;
-  padding:15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-#container{
-  display:flex;
-  gap:20px;
-  padding:20px;
-}
-
-#filters{
-  width:260px;
-}
-
-#grid{
-  flex:1;
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:15px;
-}
-
-.card{
-  background:#fff;
-  padding:15px;
-  border-radius:10px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
-  text-align:center;
-}
-
-body.dark .card{
-  background:#1e1e1e;
-}
-
-.card img{
-  width:300%;
-  height:300px;
-  object-fit:cover;
-  border-radius:8px;
-}
-
-button{
-  padding:8px;
-  margin-top:8px;
-  cursor:pointer;
-}
-
-.add{
-  background:#b30000;
-  color:#fff;
-  border:none;
-  width:100%;
-}
-
-.instock{color:green;}
-.outstock{color:red;}
-
-#viewModal, #cartModal{
-  display:none;
-  position:fixed;
-  top:15%;
-  left:50%;
-  transform:translateX(-50%);
-  background:#fff;
-  padding:20px;
-  border-radius:10px;
-  width:300px;
-  z-index:999;
-}
-
-body.dark #viewModal,
-body.dark #cartModal{
-  background:#222;
-}
-.top-icons {
-  display: flex;
-  align-items: center;
-  gap: 10px; 
-}
-
-.icon-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.top-icons a {
-  font-size: 18px;
-  text-decoration: none;
-}
-
-.footer{
-  background:#111;
-  color:white;
-  padding:40px 20px;
-  margin-top:40px;
-}
-
-.footer-container{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:20px;
-}
-
-.footer-section{
-  flex:1;
-  min-width:180px;
-}
-
-.footer-section h3,
-.footer-section h4{
-  margin-bottom:10px;
-}
-
-.footer-section p{
-  font-size:14px;
-  margin:5px 0;
-}
-
-.footer-bottom{
-  text-align:center;
-  margin-top:20px;
-  border-top:1px solid #444;
-  padding-top:10px;
-  font-size:13px;
-}
-.love{
-  width:100%;
-  padding:8px;
-  margin-top:5px;
-  border:none;
-  cursor:pointer;
-  background:#eee;
-  border-radius:6px;
-}
-
-.love.active{
-  background:#ff4d6d;
-  color:white;
-}
-.top-icons{
-  display:flex;
-  gap:20px;
-  align-items:center;
-}
-
-.icon-btn{
-  background:none;
-  border:none;
-  font-size:24px;
-  cursor:pointer;
-  text-decoration:none;
-}
-
-.heart{
-  color:red;
-}
-
-.whatsapp{
-  color:#25D366;
-}
-
-@media(max-width:800px){
-  #container{flex-direction:column;}
-}
+body{font-family:Cambria,Cochin,Georgia,'Times New Roman',serif;margin:0;background:#f5f5f5;color:#222;}
+body.dark{background:#111;color:#fff;}
+header{background:#111;color:#fff;padding:15px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+#motto{min-width:260px;text-align:center;}
+#container{display:flex;gap:20px;padding:20px;}
+#filters{width:240px;}
+#grid{flex:1;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:15px;align-items:start;}
+.card{background:#fff;padding:12px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.1);text-align:center;position:relative;display:flex;flex-direction:column;min-height:380px;}
+body.dark .card{background:#1e1e1e;}
+.card img{width:100%;height:200px;object-fit:cover;border-radius:8px;cursor:pointer;background:#f0f0f0;display:block;}
+.card-body{flex:1;display:flex;flex-direction:column;justify-content:space-between;}
+.card h3{font-size:15px;margin:8px 0 4px;}
+.badge-discount{position:absolute;top:8px;left:8px;background:#e63946;color:#fff;padding:3px 8px;border-radius:5px;font-size:12px;font-weight:bold;}
+.old-price{text-decoration:line-through;color:#888;font-size:13px;}
+.new-price{color:#b30000;font-weight:bold;}
+button{padding:8px;margin-top:4px;cursor:pointer;border-radius:6px;border:1px solid #ccc;background:#fff;}
+button:hover{background:#f0f0f0;}
+.btn-primary{background:#b30000;color:#fff;border:none;}
+.btn-primary:hover{background:#900;}
+.instock{color:green;font-size:13px;}
+.outstock{color:red;font-size:13px;}
+.stars{color:#f5a623;letter-spacing:2px;}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:998;align-items:center;justify-content:center;padding:15px;overflow-y:auto;}
+.modal-bg.open{display:flex;}
+.modal{background:#fff;color:#222;border-radius:10px;padding:20px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;position:relative;}
+body.dark .modal{background:#222;color:#fff;}
+.modal h3{margin-top:0;}
+.modal input,.modal select,.modal textarea{width:100%;padding:8px;margin:6px 0;border:1px solid #ccc;border-radius:5px;box-sizing:border-box;font-family:inherit;}
+.close-x{position:absolute;top:8px;right:12px;background:none;border:none;font-size:22px;cursor:pointer;color:inherit;}
+.icon-btn{background:none;border:none;font-size:18px;cursor:pointer;padding:4px;}
+.top-icons{display:flex;gap:6px;align-items:center;justify-content:center;margin-top:6px;}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px;}
+th,td{border:1px solid #ddd;padding:6px;text-align:left;}
+body.dark th,body.dark td{border-color:#444;}
+th{background:#f0f0f0;}
+body.dark th{background:#333;}
+.status-pill{padding:3px 8px;border-radius:12px;font-size:12px;font-weight:bold;color:#fff;}
+.status-Pending{background:#888;} .status-Processing{background:#3a86ff;}
+.status-Shipped{background:#ff9f1c;} .status-Delivered{background:#06a77d;}
+.status-Cancelled{background:#999;}
+.tab-btn{padding:8px 14px;border:none;background:#eee;cursor:pointer;border-radius:6px 6px 0 0;margin-right:4px;}
+.tab-btn.active{background:#b30000;color:#fff;}
+body.dark .tab-btn{background:#333;color:#fff;}
+body.dark .tab-btn.active{background:#b30000;}
+.footer{background:#111;color:#fff;padding:30px 20px;margin-top:40px;}
+.footer-container{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+.footer-section{flex:1;min-width:180px;}
+.footer-bottom{text-align:center;margin-top:20px;border-top:1px solid #444;padding-top:10px;font-size:13px;}
+.rate-row{display:flex;gap:4px;justify-content:center;font-size:22px;cursor:pointer;color:#f5a623;}
+.rate-row span:hover{transform:scale(1.2);}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:10px 0;}
+.kpi{background:#f7f7f7;padding:12px;border-radius:8px;text-align:center;}
+body.dark .kpi{background:#2a2a2a;}
+.kpi b{display:block;font-size:22px;color:#b30000;}
+@media(max-width:800px){#container{flex-direction:column;}#filters{width:100%;}}
 </style>
 </head>
-
 <body>
-
- <header style="display:flex; align-items:center; justify-content:space-between;">
-
-  <div style="display:flex; align-items:center; gap:10px;">
-  <img src="acacia-logo.png" alt="Acacia Pharmacy Logo" style="width:45px; height:45px;">
-  <h2 style="margin:0; color:#1b8f3c; font-weight:bold;">
-   🍷Acacia Liquor Store
-  </h2>
-</div>
-
-  <div id="motto" style="font-size:14px; color:#ccc;"></div>
-
-  
-  <div>
-    <button onclick="toggleTheme()">🌙</button>
-    <button onclick="showCart()">🛒 Cart</button>
+<header>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <h2 style="margin:0;color:#1b8f3c;">🍷 Acacia Liquor Store</h2>
   </div>
-
+  <div id="motto" style="font-size:14px;color:#ccc;"></div>
+  <div class="top-icons">
+    <button class="icon-btn" onclick="toggleTheme()" title="Theme">🌙</button>
+    <button class="icon-btn" onclick="openInquiry()" title="Contact / Inquiry">✉️</button>
+    <button class="icon-btn" onclick="openCart()" title="Cart">🛒<span id="cartCount" style="background:#b30000;color:#fff;border-radius:50%;padding:2px 6px;font-size:11px;margin-left:2px;">0</span></button>
+    <span id="userArea"></span>
+  </div>
 </header>
 
-
 <section id="container">
-
-<div id="filters">
-
-<input type="text" id="search" placeholder="Search drink..." oninput="applyFilters()" style="width:100%;padding:8px;">
-
-<h3>Category</h3>
-<label><input type="checkbox" value="Red Wine" onchange="applyFilters()"> Red Wine</label><br>
-<label><input type="checkbox" value="White Wine" onchange="applyFilters()"> White Wine</label><br>
-<label><input type="checkbox" value="Whiskey" onchange="applyFilters()"> Whiskey</label><br>
-<label><input type="checkbox" value="Vodka" onchange="applyFilters()"> Vodka</label><br>
-<label><input type="checkbox" value="Gin" onchange="applyFilters()"> Gin</label><br>
-<label><input type="checkbox" value="Rum" onchange="applyFilters()"> Rum</label><br>
-<label><input type="checkbox" value="Tequila" onchange="applyFilters()"> Tequila</label><br>
-<label><input type="checkbox" value="Beer" onchange="applyFilters()"> Beer</label><br>
-<label><input type="checkbox" value="Champagne" onchange="applyFilters()"> Champagne</label><br>
-<label><input type="checkbox" value="Soda" onchange="applyFilters()"> Soda</label><br>
-<label><input type="checkbox" value="Soft Drinks" onchange="applyFilters()"> Soft Drinks</label><br>
-<label><input type="checkbox" value="Gifts for him" onchange="applyFilters()"> Gifts for him</label><br>
-<label><input type="checkbox" value="Gifts for her" onchange="applyFilters()"> Gifts for her</label><br>
-
-<h3>Size</h3>
-<label><input type="checkbox" value="187ml" data-type="size" onchange="applyFilters()"> 187ml</label><br>
-<label><input type="checkbox" value="250ml" data-type="size" onchange="applyFilters()"> 250ml</label><br>
-<label><input type="checkbox" value="330ml" data-type="size" onchange="applyFilters()"> 330ml</label><br>
-<label><input type="checkbox" value="500ml" data-type="size" onchange="applyFilters()"> 500ml</label><br>
-<label><input type="checkbox" value="750ml" data-type="size" onchange="applyFilters()"> 750ml</label><br>
-<label><input type="checkbox" value="1L" data-type="size" onchange="applyFilters()"> 1L</label><br>
-<label><input type="checkbox" value="1.5L" data-type="size" onchange="applyFilters()"> 1.5L</label><br>
-<label><input type="checkbox" value="2L" data-type="size" onchange="applyFilters()"> 2L</label><br>
-
-<h3>Price</h3>
-<label><input type="checkbox" value="under1000" data-type="price" onchange="applyFilters()"> Under 1000</label><br>
-<label><input type="checkbox" value="1000-1999" data-type="price" onchange="applyFilters()"> 1000–1999</label><br>
-<label><input type="checkbox" value="2000-2999" data-type="price" onchange="applyFilters()"> 2000–2999</label><br>
-<label><input type="checkbox" value="3000-4999" data-type="price" onchange="applyFilters()"> 3000–4999</label><br>
-<label><input type="checkbox" value="5000plus" data-type="price" onchange="applyFilters()"> 5000+</label><br>
-
-<button onclick="clearFilters()">Clear Filters</button>
-
-</div>
-
-<div id="grid"></div>
-
+  <div id="filters">
+    <input type="text" id="search" placeholder="Search drink..." oninput="applyFilters()" style="width:100%;padding:8px;box-sizing:border-box;">
+    <h3>Category</h3>
+    <div id="catFilters"></div>
+    <h3>Size</h3>
+    <div id="sizeFilters"></div>
+    <h3>Price</h3>
+    <label><input type="checkbox" value="under1000" data-type="price" onchange="applyFilters()"> Under 1000</label><br>
+    <label><input type="checkbox" value="1000-1999" data-type="price" onchange="applyFilters()"> 1000–1999</label><br>
+    <label><input type="checkbox" value="2000-2999" data-type="price" onchange="applyFilters()"> 2000–2999</label><br>
+    <label><input type="checkbox" value="3000-4999" data-type="price" onchange="applyFilters()"> 3000–4999</label><br>
+    <label><input type="checkbox" value="5000plus" data-type="price" onchange="applyFilters()"> 5000+</label><br>
+    <button onclick="clearFilters()" style="margin-top:10px;">Clear Filters</button>
+  </div>
+  <div id="grid"></div>
 </section>
-<div id="viewModal" style="display:none; position:fixed; top:10; left:10; width:100%; height:100%;
-background:rgba(0,0,0,0.6);">
 
-  <div style="background:#fff; width:320px; margin:80px auto; padding:15px; border-radius:10px; text-align:center;">
-
-    <img id="viewImg" style="width:100%; height:200px; object-fit:cover; border-radius:10px;">
-
+<!-- Product view modal -->
+<div id="viewModal" class="modal-bg" onclick="if(event.target===this)closeModal('viewModal')">
+  <div class="modal">
+    <button class="close-x" onclick="closeModal('viewModal')">×</button>
+    <img id="viewImg" style="width:100%;max-height:320px;object-fit:contain;border-radius:10px;background:#f0f0f0;">
     <h3 id="viewName"></h3>
     <p id="viewPrice"></p>
-    <p id="viewCategory"></p>
-    <p id="viewABV"></p>
-    <p id="viewCountry"></p>
-    <p id="viewBrand"></p>
-    <p id="viewStock"></p>
-    <p id="viewDesc" style="font-size:13px; text-align:left;"></p>
-
-    <button onclick="closeView()">Close</button>
-
+    <p id="viewMeta"></p>
+    <p id="viewDesc" style="font-size:14px;"></p>
+    <div id="viewRatingSummary"></div>
+    <div id="viewRateBlock"></div>
+    <div id="viewReviews" style="margin-top:10px;"></div>
+    <button class="btn-primary" style="width:100%;margin-top:10px;" id="viewAddBtn">Add to Cart</button>
   </div>
 </div>
 
-<div id="cartModal">
-<h3>Your Order</h3>
-<ul id="cartList"></ul>
-<p><b>Total: KES <span id="total">0</span></b></p>
-<button onclick="checkout()">WhatsApp Order</button>
-<button onclick="closeCart()">Close</button>
+<!-- Cart modal -->
+<div id="cartModal" class="modal-bg" onclick="if(event.target===this)closeModal('cartModal')">
+  <div class="modal">
+    <button class="close-x" onclick="closeModal('cartModal')">×</button>
+    <h3>Your Cart</h3>
+    <div id="cartList"></div>
+    <p style="text-align:right;font-size:18px;"><b>Total: KES <span id="total">0</span></b></p>
+    <button class="btn-primary" style="width:100%;" onclick="checkout()">Place Order</button>
+  </div>
+</div>
+
+<!-- Auth modal -->
+<div id="authModal" class="modal-bg" onclick="if(event.target===this)closeModal('authModal')">
+  <div class="modal">
+    <button class="close-x" onclick="closeModal('authModal')">×</button>
+    <div style="display:flex;margin-bottom:10px;">
+      <button class="tab-btn active" id="tabLogin" onclick="authTab('login')">Login</button>
+      <button class="tab-btn" id="tabSignup" onclick="authTab('signup')">Create Account</button>
+    </div>
+    <div id="loginForm">
+      <input id="loginUser" placeholder="Username or email">
+      <input id="loginPass" type="password" placeholder="Password">
+      <button class="btn-primary" style="width:100%;" onclick="doLogin()">Login</button>
+      <p style="font-size:12px;color:#888;margin-top:8px;">Staff use your assigned credentials.</p>
+    </div>
+    <div id="signupForm" style="display:none;">
+      <input id="suName" placeholder="Full name">
+      <input id="suUser" placeholder="Username">
+      <input id="suEmail" type="email" placeholder="Email">
+      <input id="suPhone" placeholder="Phone">
+      <input id="suPass" type="password" placeholder="Password (min 4 chars)">
+      <button class="btn-primary" style="width:100%;" onclick="doSignup()">Create Buyer Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- Buyer orders modal -->
+<div id="ordersModal" class="modal-bg" onclick="if(event.target===this)closeModal('ordersModal')">
+  <div class="modal" style="max-width:680px;">
+    <button class="close-x" onclick="closeModal('ordersModal')">×</button>
+    <h3>My Orders</h3>
+    <div id="ordersList"></div>
+  </div>
+</div>
+
+<!-- Checkout details modal -->
+<div id="checkoutModal" class="modal-bg" onclick="if(event.target===this)closeModal('checkoutModal')">
+  <div class="modal">
+    <button class="close-x" onclick="closeModal('checkoutModal')">×</button>
+    <h3>Delivery Details</h3>
+    <input id="coName" placeholder="Full name">
+    <input id="coPhone" placeholder="Phone">
+    <input id="coAddr" placeholder="Delivery address">
+    <textarea id="coNote" placeholder="Notes (optional)" rows="2"></textarea>
+    <button class="btn-primary" style="width:100%;" onclick="confirmOrder()">Confirm Order</button>
+    <button style="width:100%;margin-top:6px;" onclick="confirmOrderWhatsApp()">Also Send via WhatsApp</button>
+  </div>
+</div>
+
+<!-- Admin panel modal -->
+<div id="adminModal" class="modal-bg" onclick="if(event.target===this)closeModal('adminModal')">
+  <div class="modal" style="max-width:920px;">
+    <button class="close-x" onclick="closeModal('adminModal')">×</button>
+    <h3 id="adminTitle">Admin Panel</h3>
+    <div style="margin-bottom:10px;">
+      <button class="tab-btn active" data-tab="orders" onclick="adminTab('orders')">Orders</button>
+      <button class="tab-btn" data-tab="messages" onclick="adminTab('messages')">Messages <span id="msgBadge" style="background:#b30000;color:#fff;border-radius:50%;padding:1px 6px;font-size:11px;display:none;">0</span></button>
+      <button class="tab-btn" data-tab="products" onclick="adminTab('products')" id="adminTabProducts">Products</button>
+      <button class="tab-btn" data-tab="reports" onclick="adminTab('reports')">Sales Reports</button>
+      <button class="tab-btn" data-tab="users" onclick="adminTab('users')" id="adminTabUsers">Users</button>
+    </div>
+    <div id="adminContent"></div>
+  </div>
+</div>
+
+<!-- Inquiry modal -->
+<div id="inquiryModal" class="modal-bg" onclick="if(event.target===this)closeModal('inquiryModal')">
+  <div class="modal">
+    <button class="close-x" onclick="closeModal('inquiryModal')">×</button>
+    <h3>Send an Inquiry</h3>
+    <p style="font-size:13px;color:#888;margin:0 0 6px;">Your message goes directly to the admin team.</p>
+    <input id="inqName" placeholder="Your name">
+    <input id="inqContact" placeholder="Phone or email">
+    <input id="inqProduct" placeholder="Product (optional)" readonly style="background:#f5f5f5;">
+    <textarea id="inqMessage" placeholder="Your message" rows="4"></textarea>
+    <button class="btn-primary" style="width:100%;" onclick="submitInquiry()">Send Message</button>
+  </div>
+
+<!-- Product editor modal (admin) -->
+<div id="prodModal" class="modal-bg" onclick="if(event.target===this)closeModal('prodModal')">
+  <div class="modal">
+    <button class="close-x" onclick="closeModal('prodModal')">×</button>
+    <h3 id="prodModalTitle">Add Product</h3>
+    <input id="pfName" placeholder="Name">
+    <input id="pfPrice" type="number" placeholder="Price (KES)">
+    <input id="pfCategory" placeholder="Category">
+    <input id="pfSize" placeholder="Size (e.g. 750ml)">
+    <input id="pfStock" type="number" placeholder="Stock">
+    <input id="pfDiscount" type="number" placeholder="Discount % (0-90, optional)" min="0" max="90">
+    <input id="pfAbv" placeholder="ABV (optional)">
+    <input id="pfCountry" placeholder="Country (optional)">
+    <input id="pfBrand" placeholder="Brand (optional)">
+    <textarea id="pfDesc" placeholder="Description" rows="2"></textarea>
+    <label style="font-size:13px;">Image URL or upload:</label>
+    <input id="pfImage" placeholder="Image URL (or use upload)">
+    <input type="file" id="pfImageFile" accept="image/*" onchange="handleImageUpload(event)">
+    <img id="pfImagePreview" style="max-width:100%;max-height:160px;margin-top:6px;display:none;border-radius:6px;">
+    <button class="btn-primary" style="width:100%;margin-top:8px;" onclick="saveProduct()">Save Product</button>
+  </div>
 </div>
 
 <footer class="footer">
-
 <div class="footer-container">
-
-  <div class="footer-section">
-    <h3>🛒 Smart Tech Store</h3>
-    <p>Your trusted shop for phones, laptops, and accessories.</p>
-  </div>
-
- <div class="footer-section">
-  <h4>📞 Contact Us</h4>
-  <p>📱 Phone: +254 731 858 997</p>
-
-  <p>
-    💬 <a href="https://wa.me/254731858997" target="_blank" style="color:#25D366;">WhatsApp</a>
-  </p>
-
-  <p>📧 Email: support@smarttech.com</p>
-  <p>📍 Nairobi, Kenya</p>
-
-  <div style="margin-top:10px; font-size:22px; display:flex; gap:12px;">
-    
-    <a href="https://wa.me/254731858997" target="_blank" style="color:#25D366;">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-
-  <a href="https://facebook.com" target="_blank" style="color:#1877F2;">
-    <i class="fab fa-facebook-f"></i>
-  </a>
-
-  <a href="https://instagram.com" target="_blank" style="color:#E4405F;">
-    <i class="fab fa-instagram"></i>
-  </a>
-
-
+  <div class="footer-section"><h3>🍷 Acacia Liquor Store</h3><p>Your trusted shop for premium drinks & gifts.</p></div>
+  <div class="footer-section"><h4>📞 Contact</h4><p>📱 +254 731 858 997</p><p>💬 <a href="https://wa.me/254731858997" target="_blank" style="color:#25D366;">WhatsApp</a></p><p>📍 Nairobi, Kenya</p></div>
+  <div class="footer-section"><h4>💳 Payment</h4><p>M-PESA Till: 123456</p><p>Cash on Delivery</p></div>
 </div>
-
-</div>
-
-  <div class="footer-section">
-    <h4>💳 Payment</h4>
-    <p>M-PESA Till: 123456</p>
-    <p>Visa / MasterCard</p>
-    <p>Cash on Delivery</p>
-  </div>
-
-  <div class="footer-section">
-    <h4>📜 Terms</h4>
-    <p>No refunds after 7 days</p>
-    <p>Warranty where stated</p>
-    <p>Prices may change</p>
-  </div>
-
-</div>
-
-<div class="footer-bottom">
-  <p>© 2026Acacia Liquor Store</p>
-</div>
-
+<div class="footer-bottom">© 2026 Acacia Liquor Store</div>
 </footer>
 
 <script>
-const mottos = [
-  "🚚 Fast & Reliable Delivery Across Kenya",
-  "✅ Trusted Quality Medicines & Health Products",
-  "💰 Affordable Prices + Special Discounts Available",
-  "📞 Call / WhatsApp: +254 731 858 997",
-  "💳 Flexible Payment Plans Available (M-PESA, Card, Cash)",
-  "⚡ Order Now – Quick Service & Secure Payments"
-];
-
-let index = 0;
-
-function changeMotto(){
-  document.getElementById("motto").textContent = mottos[index];
-  index = (index + 1) % mottos.length;
-}
-
-setInterval(changeMotto, 2000);
-changeMotto();
-
+/* ============ DATA ============ */
 const productList = [
   { name: "Baron de Valls Red", price: 650, category: "Red Wine", size: "750ml", image: "images/baron-de-valls-red-wine.jpg", stock: 50, abv:"", country:"", brand:"", description:"" },
   { name: "Asconi Pastoral Red", price: 1300, category: "Red Wine", size: "750ml", image: "images/Asconi Pastoral Red.jpg", stock: 50, abv:"", country:"", brand:"", description:"" },
@@ -525,193 +390,532 @@ const productList = [
 ];
 
 
-let cart = {};
+/* hardcoded staff */
+const STAFF = {
+  admin: { password: "admin123", role: "admin", name: "Administrator" },
+  sales: { password: "sales123", role: "sales", name: "Sales Team" }
+};
 
+const LS = {
+  get(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
+  set(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
+};
+
+// Load admin-managed product overrides + new products
+let adminProducts = LS.get('acacia_products', null);
+if (adminProducts) {
+  // merge: admin list is authoritative if exists
+  productList.length = 0;
+  adminProducts.forEach(p => productList.push(p));
+} else {
+  // first run: ensure discount field exists
+  productList.forEach(p => { if (p.discount == null) p.discount = 0; });
+  LS.set('acacia_products', productList);
+}
+
+let users    = LS.get('acacia_users', []);      // buyer accounts
+let orders   = LS.get('acacia_orders', []);
+let ratings  = LS.get('acacia_ratings', {});    // {productName: [{user, stars, comment, date}]}
+let cart     = LS.get('acacia_cart', {});
+let session  = LS.get('acacia_session', null);  // {username, role, name}
+let inquiries = LS.get('acacia_inquiries', []); // [{id, user, name, contact, product, message, date, read, reply}]
+
+function saveAll(){
+  LS.set('acacia_products', productList);
+  LS.set('acacia_users', users);
+  LS.set('acacia_orders', orders);
+  LS.set('acacia_ratings', ratings);
+  LS.set('acacia_cart', cart);
+  LS.set('acacia_session', session);
+  LS.set('acacia_inquiries', inquiries);
+}
+
+/* ============ MOTTO ============ */
+const mottos = ["🚚 Fast & Reliable Delivery","✅ Trusted Quality Drinks","💰 Special Discounts Available","📞 +254 731 858 997","💳 M-PESA, Card, Cash"];
+let mIdx = 0;
+function changeMotto(){ document.getElementById('motto').textContent = mottos[mIdx]; mIdx = (mIdx+1)%mottos.length; }
+setInterval(changeMotto, 2500); changeMotto();
+
+/* ============ FILTERS UI ============ */
+function buildFilterUI(){
+  const cats = [...new Set(productList.map(p=>p.category))].sort();
+  const sizes = [...new Set(productList.map(p=>p.size).filter(Boolean))];
+  document.getElementById('catFilters').innerHTML = cats.map(c=>`<label><input type="checkbox" value="${c}" onchange="applyFilters()"> ${c}</label><br>`).join('');
+  document.getElementById('sizeFilters').innerHTML = sizes.map(s=>`<label><input type="checkbox" value="${s}" data-type="size" onchange="applyFilters()"> ${s}</label><br>`).join('');
+}
+
+/* ============ DISPLAY ============ */
+function priceOf(p){
+  const d = +p.discount || 0;
+  return d > 0 ? Math.round(p.price * (100 - d) / 100) : p.price;
+}
+function avgRating(name){
+  const rs = ratings[name] || [];
+  if (!rs.length) return 0;
+  return rs.reduce((s,r)=>s+r.stars,0)/rs.length;
+}
+function starHtml(avg){
+  const full = Math.round(avg);
+  return '<span class="stars">' + '★'.repeat(full) + '☆'.repeat(5-full) + '</span>';
+}
 function display(list = productList){
-const grid = document.getElementById("grid");
-grid.innerHTML = "";
-
-list.forEach(p=>{
-grid.innerHTML += `
-<div class="card">
-
-<img src="${p.image}" alt="${p.name}"
-onclick="viewProduct('${p.name}')"
-style="width:100%; height:200px; object-fit:cover; border-radius:20px; cursor:pointer;">
-
-<h3>${p.name}</h3>
-<p>KES ${p.price}</p>
-<p>${p.category} | ${p.size}</p>
-
-<p class="${p.stock > 0 ? 'instock' : 'outstock'}">
-${p.stock > 0 ? 'Available' : 'Out of stock'}
-</p>
-
-<div class="top-icons">
-
-  <button onclick="add('${p.name}')" class="icon-btn">🛒</button>
-
-  <button onclick="toggleLove('${p.name}')" class="icon-btn heart">
-    ${likes[p.name] ? "❤️" : "🤍"}
-  </button>
-
- <a href="https://wa.me/254731858997" target="_blank" style="color:#25D366;">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-  
-  <a href="https://instagram.com" target="_blank" style="color:#E4405F;">
-    <i class="fab fa-instagram"></i>
-  </a>
-
-</div>
-
-</div>
-`;
-});
+  const grid = document.getElementById('grid');
+  if (!list.length){ grid.innerHTML = '<p>No products match.</p>'; return; }
+  grid.innerHTML = list.map(p=>{
+    const np = priceOf(p);
+    const hasD = (+p.discount||0) > 0;
+    const avg = avgRating(p.name);
+    const rCount = (ratings[p.name]||[]).length;
+    const img = p.image && p.image.startsWith('data:') ? p.image : (p.image || 'https://via.placeholder.com/220x200?text=No+Image');
+    return `<div class="card">
+      ${hasD ? `<div class="badge-discount">-${p.discount}%</div>` : ''}
+      <img src="${img}" alt="${escapeAttr(p.name)}" width="220" height="200" loading="lazy" decoding="async" onclick="viewProduct('${escapeAttr(p.name)}')" onerror="if(this.src.indexOf('placeholder')<0)this.src='https://via.placeholder.com/220x200?text=No+Image'">
+      <div class="card-body">
+        <div>
+          <h3>${escapeHtml(p.name)}</h3>
+          <p>${hasD ? `<span class="old-price">KES ${p.price}</span> <span class="new-price">KES ${np}</span>` : `<b>KES ${np}</b>`}</p>
+          <p style="font-size:12px;color:#888;">${p.category} | ${p.size||''}</p>
+          ${avg ? `<div>${starHtml(avg)} <small>(${rCount})</small></div>` : '<div style="color:#aaa;font-size:12px;">No ratings yet</div>'}
+          <p class="${p.stock>0?'instock':'outstock'}">${p.stock>0?'In stock ('+p.stock+')':'Out of stock'}</p>
+        </div>
+        <div class="top-icons">
+          <button class="icon-btn" onclick="add('${escapeAttr(p.name)}')" title="Add to cart">🛒</button>
+          <button class="icon-btn" onclick="viewProduct('${escapeAttr(p.name)}')" title="View">👁</button>
+          <button class="icon-btn" onclick="openInquiry('${escapeAttr(p.name)}')" title="Send inquiry">✉️</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  updateCartCount();
 }
-let likes = {};
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function escapeAttr(s){ return String(s).replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
 
-function toggleLove(name){
-  if(likes[name]){
-    delete likes[name];
-  } else {
-    likes[name] = true;
-  }
-  display(productList);
-}
+/* ============ VIEW PRODUCT ============ */
+let currentView = null;
 function viewProduct(name){
-  const p = productList.find(x => x.name === name);
-  if(!p) return;
-
-  document.getElementById("viewImg").src = p.image;
-  document.getElementById("viewName").textContent = p.name;
-  document.getElementById("viewPrice").textContent = "KES " + p.price;
-  document.getElementById("viewCategory").textContent = p.category + " | " + (p.size || "");
-
-  document.getElementById("viewABV").textContent = "ABV: " + (p.abv || "N/A");
-  document.getElementById("viewCountry").textContent = "Country: " + (p.country || "N/A");
-  document.getElementById("viewBrand").textContent = "Brand: " + (p.brand || "N/A");
-  document.getElementById("viewStock").textContent = "Availability: " + (p.stock || "In Stock");
-  document.getElementById("viewDesc").textContent = p.description || "";
-
-  document.getElementById("viewModal").style.display = "block";
+  const p = productList.find(x => x.name === name); if (!p) return;
+  currentView = p;
+  const np = priceOf(p);
+  document.getElementById('viewImg').src = p.image || 'https://via.placeholder.com/400x300?text=No+Image';
+  document.getElementById('viewImg').onerror = function(){ this.src='https://via.placeholder.com/400x300?text=No+Image'; };
+  document.getElementById('viewName').textContent = p.name;
+  document.getElementById('viewPrice').innerHTML = (+p.discount||0) > 0
+    ? `<span class="old-price">KES ${p.price}</span> <span class="new-price" style="font-size:18px;">KES ${np}</span> <span class="badge-discount" style="position:static;">-${p.discount}%</span>`
+    : `<b style="font-size:18px;">KES ${np}</b>`;
+  document.getElementById('viewMeta').innerHTML = `${p.category} • ${p.size||''} • ABV: ${p.abv||'N/A'} • ${p.country||''} ${p.brand?'• '+p.brand:''} • Stock: ${p.stock}`;
+  document.getElementById('viewDesc').textContent = p.description || '';
+  const avg = avgRating(p.name), rs = ratings[p.name]||[];
+  document.getElementById('viewRatingSummary').innerHTML = rs.length ? `${starHtml(avg)} ${avg.toFixed(1)} (${rs.length} review${rs.length>1?'s':''})` : '<small>No reviews yet</small>';
+  // Rate block (buyers only, must have purchased)
+  const canRate = session && session.role==='buyer' && hasPurchased(session.username, p.name);
+  if (canRate){
+    document.getElementById('viewRateBlock').innerHTML = `
+      <div style="margin-top:10px;"><b>Your rating:</b>
+      <div class="rate-row" id="rateRow">
+        ${[1,2,3,4,5].map(i=>`<span onclick="setRate(${i})" id="rs${i}">☆</span>`).join('')}
+      </div>
+      <textarea id="rateComment" placeholder="Optional comment" rows="2"></textarea>
+      <button onclick="submitRating()">Submit Rating</button></div>`;
+    setRate(0);
+  } else if (session && session.role==='buyer'){
+    document.getElementById('viewRateBlock').innerHTML = '<small style="color:#888;">Buy this product to leave a rating.</small>';
+  } else {
+    document.getElementById('viewRateBlock').innerHTML = '<small style="color:#888;">Login as buyer to leave a rating.</small>';
+  }
+  document.getElementById('viewReviews').innerHTML = rs.length
+    ? '<b>Reviews:</b>' + rs.slice(-5).reverse().map(r=>`<div style="border-top:1px solid #eee;padding:6px 0;font-size:13px;"><b>${escapeHtml(r.user)}</b> ${starHtml(r.stars)}<br>${escapeHtml(r.comment||'')}</div>`).join('')
+    : '';
+  document.getElementById('viewAddBtn').onclick = ()=>{ add(p.name); };
+  openModal('viewModal');
+}
+let _pendingStars = 0;
+function setRate(n){
+  _pendingStars = n;
+  for (let i=1;i<=5;i++){ const el = document.getElementById('rs'+i); if(el) el.textContent = i<=n?'★':'☆'; }
+}
+function submitRating(){
+  if (!_pendingStars){ alert('Pick a star rating'); return; }
+  if (!currentView || !session) return;
+  ratings[currentView.name] = ratings[currentView.name] || [];
+  // replace existing review by same user
+  ratings[currentView.name] = ratings[currentView.name].filter(r=>r.user!==session.username);
+  ratings[currentView.name].push({ user:session.username, stars:_pendingStars, comment:document.getElementById('rateComment').value.trim(), date:new Date().toISOString() });
+  saveAll(); viewProduct(currentView.name); display(); alert('Thanks for your rating!');
+}
+function hasPurchased(username, productName){
+  return orders.some(o => o.user === username && o.items.some(i => i.name === productName));
 }
 
-function closeView(){
-document.getElementById("viewModal").style.display = "none";
-}
-
-function applyFilters() {
-  const search = document.getElementById("search").value.toLowerCase();
-
-  const checked = [...document.querySelectorAll("input[type=checkbox]:checked")];
-
-  const category = checked
-    .filter(c => !c.dataset.type)
-    .map(c => c.value);
-
-  const size = checked
-    .filter(c => c.dataset.type === "size")
-    .map(c => c.value);
-
-  const price = checked
-    .filter(c => c.dataset.type === "price")
-    .map(c => c.value);
-
-  const filtered = productList.filter(p => {
-
-    const matchSearch = p.name.toLowerCase().includes(search);
-
-    const matchCategory = !category.length || category.includes(p.category);
-
-    const matchSize = !size.length || size.includes(p.size);
-
-    const matchPrice =
-      !price.length ||
-      price.some(r => {
-        if (r === "under1000") return p.price < 1000;
-
-        if (r === "1000-1999") return p.price >= 1000 && p.price <= 1999;
-
-        if (r === "2000-2999") return p.price >= 2000 && p.price <= 2999;
-
-        if (r === "3000-4999") return p.price >= 3000 && p.price <= 4999;
-
-        if (r === "5000plus") return p.price >= 5000;
-
-        return false;
-      });
-
-    return matchSearch && matchCategory && matchSize && matchPrice;
+/* ============ FILTERS ============ */
+function applyFilters(){
+  const search = document.getElementById('search').value.toLowerCase();
+  const checked = [...document.querySelectorAll('#filters input[type=checkbox]:checked')];
+  const cats = checked.filter(c=>!c.dataset.type).map(c=>c.value);
+  const sizes = checked.filter(c=>c.dataset.type==='size').map(c=>c.value);
+  const prices = checked.filter(c=>c.dataset.type==='price').map(c=>c.value);
+  const filtered = productList.filter(p=>{
+    if (search && !p.name.toLowerCase().includes(search)) return false;
+    if (cats.length && !cats.includes(p.category)) return false;
+    if (sizes.length && !sizes.includes(p.size)) return false;
+    if (prices.length){
+      const v = priceOf(p);
+      const ok = prices.some(r =>
+        (r==='under1000'&&v<1000)||(r==='1000-1999'&&v>=1000&&v<=1999)||
+        (r==='2000-2999'&&v>=2000&&v<=2999)||(r==='3000-4999'&&v>=3000&&v<=4999)||
+        (r==='5000plus'&&v>=5000));
+      if (!ok) return false;
+    }
+    return true;
   });
-
   display(filtered);
 }
 function clearFilters(){
-document.querySelectorAll("input[type=checkbox]").forEach(c=>c.checked=false);
-document.getElementById("search").value = "";
-display(productList);
+  document.querySelectorAll('#filters input[type=checkbox]').forEach(c=>c.checked=false);
+  document.getElementById('search').value=''; display(productList);
 }
 
+/* ============ CART ============ */
 function add(name){
-const p = productList.find(x => x.name === name);
-if(!p) return;
-
-if(p.stock <= 0){
-alert("Out of stock");
-return;
+  const p = productList.find(x=>x.name===name); if(!p) return;
+  if (p.stock<=0){ alert('Out of stock'); return; }
+  const inCart = cart[name]?cart[name].qty:0;
+  if (inCart >= p.stock){ alert('No more stock available'); return; }
+  cart[name] = { qty: inCart+1, price: priceOf(p), name };
+  saveAll(); updateCartCount();
 }
-
-if(!cart[name]){
-cart[name] = {qty:1, price:p.price};
-}else{
-cart[name].qty++;
+function updateCartCount(){
+  document.getElementById('cartCount').textContent = Object.values(cart).reduce((s,i)=>s+i.qty,0);
 }
-
-p.stock--;
-display(productList);
+function openCart(){
+  const list = document.getElementById('cartList'); let total=0;
+  const entries = Object.entries(cart);
+  if (!entries.length){ list.innerHTML='<p>Cart is empty.</p>'; }
+  else {
+    list.innerHTML = entries.map(([n,i])=>{ const sub=i.qty*i.price; total+=sub;
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #eee;">
+        <span>${escapeHtml(n)}<br><small>KES ${i.price} × ${i.qty}</small></span>
+        <span><button onclick="cartDec('${escapeAttr(n)}')">−</button>
+        <button onclick="cartInc('${escapeAttr(n)}')">+</button>
+        <button onclick="cartDel('${escapeAttr(n)}')">🗑</button>
+        <b style="margin-left:8px;">KES ${sub}</b></span></div>`;
+    }).join('');
+  }
+  document.getElementById('total').textContent = total;
+  openModal('cartModal');
 }
-
-function showCart(){
-const list = document.getElementById("cartList");
-list.innerHTML = "";
-let total = 0;
-
-for(const [name,item] of Object.entries(cart)){
-const sub = item.qty * item.price;
-total += sub;
-list.innerHTML += `<li>${name} x${item.qty} = KES ${sub}</li>`;
-}
-
-document.getElementById("total").textContent = total;
-document.getElementById("cartModal").style.display = "block";
-}
-
-function closeCart(){
-document.getElementById("cartModal").style.display = "none";
-}
-
+function cartInc(n){ const p=productList.find(x=>x.name===n); if(cart[n].qty<p.stock){ cart[n].qty++; saveAll(); openCart(); } else alert('Max stock'); }
+function cartDec(n){ if(--cart[n].qty<=0) delete cart[n]; saveAll(); openCart(); updateCartCount(); }
+function cartDel(n){ delete cart[n]; saveAll(); openCart(); updateCartCount(); }
 function checkout(){
-let msg = "🛒 Liquor Order:%0A%0A";
-let total = 0;
-
-for(const [name,item] of Object.entries(cart)){
-const sub = item.qty * item.price;
-msg += `${name} x${item.qty} = KES ${sub}%0A`;
-total += sub;
+  if (!Object.keys(cart).length){ alert('Cart empty'); return; }
+  if (!session || session.role!=='buyer'){
+    alert('Please login or create a buyer account to place an order.');
+    closeModal('cartModal'); openAuth(); return;
+  }
+  // prefill
+  const u = users.find(x=>x.username===session.username);
+  if (u){ document.getElementById('coName').value=u.name||''; document.getElementById('coPhone').value=u.phone||''; }
+  closeModal('cartModal'); openModal('checkoutModal');
+}
+function buildOrderObj(){
+  const items = Object.values(cart).map(i=>({name:i.name, qty:i.qty, price:i.price, subtotal:i.qty*i.price}));
+  const total = items.reduce((s,i)=>s+i.subtotal,0);
+  return {
+    id: 'ORD-'+Date.now().toString(36).toUpperCase(),
+    user: session.username, userName: session.name,
+    date: new Date().toISOString(),
+    name: document.getElementById('coName').value.trim(),
+    phone: document.getElementById('coPhone').value.trim(),
+    address: document.getElementById('coAddr').value.trim(),
+    note: document.getElementById('coNote').value.trim(),
+    items, total, status: 'Pending'
+  };
+}
+function commitOrder(o){
+  // reduce stock
+  o.items.forEach(it=>{ const p=productList.find(x=>x.name===it.name); if(p) p.stock=Math.max(0,p.stock-it.qty); });
+  orders.push(o); cart = {}; saveAll();
+  updateCartCount();
+}
+function confirmOrder(){
+  if (!document.getElementById('coName').value.trim() || !document.getElementById('coPhone').value.trim() || !document.getElementById('coAddr').value.trim()){
+    alert('Please fill name, phone and address'); return;
+  }
+  const o = buildOrderObj(); commitOrder(o);
+  closeModal('checkoutModal');
+  alert('Order placed! ID: '+o.id+'\nTrack it under "My Orders".');
+}
+function confirmOrderWhatsApp(){
+  if (!document.getElementById('coName').value.trim() || !document.getElementById('coPhone').value.trim() || !document.getElementById('coAddr').value.trim()){
+    alert('Please fill name, phone and address'); return;
+  }
+  const o = buildOrderObj(); commitOrder(o);
+  let msg = `🛒 Order ${o.id}%0A%0A` + o.items.map(i=>`${i.name} x${i.qty} = KES ${i.subtotal}`).join('%0A') + `%0A%0ATotal: KES ${o.total}%0A${o.name} | ${o.phone}%0A${o.address}`;
+  window.open(`https://wa.me/254731858997?text=${msg}`, '_blank');
+  closeModal('checkoutModal');
 }
 
-msg += `%0A💰 Total: KES ${total}`;
-
-window.open(`https://wa.me/254731858997?text=${msg}`, "_blank");
+/* ============ AUTH ============ */
+function authTab(t){
+  document.getElementById('tabLogin').classList.toggle('active', t==='login');
+  document.getElementById('tabSignup').classList.toggle('active', t==='signup');
+  document.getElementById('loginForm').style.display = t==='login'?'block':'none';
+  document.getElementById('signupForm').style.display = t==='signup'?'block':'none';
+}
+function openAuth(){ authTab('login'); openModal('authModal'); }
+function doLogin(){
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value;
+  // staff first
+  if (STAFF[u] && STAFF[u].password===p){
+    session = { username:u, role:STAFF[u].role, name:STAFF[u].name }; saveAll(); afterLogin(); return;
+  }
+  const usr = users.find(x => (x.username===u||x.email===u) && x.password===p);
+  if (!usr){ alert('Invalid credentials'); return; }
+  session = { username:usr.username, role:'buyer', name:usr.name }; saveAll(); afterLogin();
+}
+function doSignup(){
+  const name=document.getElementById('suName').value.trim();
+  const user=document.getElementById('suUser').value.trim();
+  const email=document.getElementById('suEmail').value.trim();
+  const phone=document.getElementById('suPhone').value.trim();
+  const pass=document.getElementById('suPass').value;
+  if (!name||!user||!email||!pass||pass.length<4){ alert('Fill all fields. Password ≥ 4 chars.'); return; }
+  if (STAFF[user] || users.some(x=>x.username===user)){ alert('Username taken'); return; }
+  if (users.some(x=>x.email===email)){ alert('Email already registered'); return; }
+  users.push({ name, username:user, email, phone, password:pass, createdAt:new Date().toISOString() });
+  session = { username:user, role:'buyer', name }; saveAll(); afterLogin();
+}
+function afterLogin(){ closeModal('authModal'); renderUser(); alert('Welcome, '+session.name+'!'); }
+function logout(){ session=null; saveAll(); renderUser(); }
+function renderUser(){
+  const el = document.getElementById('userArea');
+  if (!session){
+    el.innerHTML = `<button class="icon-btn" onclick="openAuth()" title="Login / Sign up">👤 Login</button>`;
+    return;
+  }
+  if (session.role==='buyer'){
+    el.innerHTML = `<button class="icon-btn" onclick="openOrders()" title="My orders">📦 My Orders</button>
+      <span style="font-size:13px;">👤 ${escapeHtml(session.name)}</span>
+      <button class="icon-btn" onclick="logout()" title="Logout">🚪</button>`;
+  } else {
+    el.innerHTML = `<button class="icon-btn" onclick="openAdmin()" title="Staff panel">🛠 ${session.role==='admin'?'Admin':'Sales'} Panel</button>
+      <span style="font-size:13px;">${escapeHtml(session.name)}</span>
+      <button class="icon-btn" onclick="logout()" title="Logout">🚪</button>`;
+  }
 }
 
-function toggleTheme(){
-document.body.classList.toggle("dark");
+/* ============ BUYER ORDERS ============ */
+function openOrders(){
+  const mine = orders.filter(o => o.user === session.username).reverse();
+  const el = document.getElementById('ordersList');
+  if (!mine.length){ el.innerHTML='<p>No orders yet.</p>'; openModal('ordersModal'); return; }
+  el.innerHTML = mine.map(o=>`
+    <div style="border:1px solid #ddd;border-radius:8px;padding:10px;margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;">
+        <b>${o.id}</b>
+        <span class="status-pill status-${o.status}">${o.status}</span>
+      </div>
+      <small>${new Date(o.date).toLocaleString()}</small>
+      <table><tr><th>Item</th><th>Qty</th><th>Subtotal</th></tr>
+        ${o.items.map(i=>`<tr><td>${escapeHtml(i.name)}</td><td>${i.qty}</td><td>KES ${i.subtotal}</td></tr>`).join('')}
+        <tr><th colspan="2">Total</th><th>KES ${o.total}</th></tr>
+      </table>
+      <p style="font-size:12px;color:#888;margin-top:6px;">Ship to: ${escapeHtml(o.address)}</p>
+    </div>`).join('');
+  openModal('ordersModal');
 }
 
+/* ============ ADMIN/SALES PANEL ============ */
+function openAdmin(){
+  document.getElementById('adminTitle').textContent = session.role==='admin' ? 'Admin Panel' : 'Sales Panel';
+  document.getElementById('adminTabProducts').style.display = session.role==='admin'?'inline-block':'none';
+  document.getElementById('adminTabUsers').style.display = session.role==='admin'?'inline-block':'none';
+  updateMsgBadge();
+  adminTab('orders'); openModal('adminModal');
+}
+function adminTab(t){
+  document.querySelectorAll('#adminModal .tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===t));
+  const c = document.getElementById('adminContent');
+  if (t==='orders') c.innerHTML = adminOrdersHtml();
+  else if (t==='products') c.innerHTML = adminProductsHtml();
+  else if (t==='reports') c.innerHTML = adminReportsHtml();
+  else if (t==='users') c.innerHTML = adminUsersHtml();
+  else if (t==='messages') { c.innerHTML = adminMessagesHtml(); markInquiriesRead(); }
+}
+function adminMessagesHtml(){
+  if (!inquiries.length) return '<p>No messages yet.</p>';
+  return inquiries.slice().reverse().map(m=>`
+    <div style="border:1px solid #ddd;border-radius:8px;padding:10px;margin-bottom:10px;${m.read?'':'background:#fff8e1;'}">
+      <div style="display:flex;justify-content:space-between;">
+        <b>${escapeHtml(m.name)}</b>
+        <small>${new Date(m.date).toLocaleString()}</small>
+      </div>
+      <small>📞 ${escapeHtml(m.contact)} ${m.user?'• 👤 '+escapeHtml(m.user):''} ${m.product?'• 🍷 '+escapeHtml(m.product):''}</small>
+      <p style="margin:8px 0;white-space:pre-wrap;">${escapeHtml(m.message)}</p>
+      <button onclick="deleteInquiry('${m.id}')">🗑 Delete</button>
+      <a href="https://wa.me/${m.contact.replace(/[^0-9]/g,'')}" target="_blank" style="margin-left:8px;">💬 Reply on WhatsApp</a>
+    </div>`).join('');
+}
+function deleteInquiry(id){
+  if(!confirm('Delete this message?')) return;
+  inquiries = inquiries.filter(m=>m.id!==id); saveAll(); adminTab('messages'); updateMsgBadge();
+}
+function markInquiriesRead(){
+  inquiries.forEach(m=>m.read=true); saveAll(); updateMsgBadge();
+}
+function updateMsgBadge(){
+  const b = document.getElementById('msgBadge'); if(!b) return;
+  const n = inquiries.filter(m=>!m.read).length;
+  b.textContent = n; b.style.display = n>0 ? 'inline-block' : 'none';
+}
+
+/* ============ INQUIRIES (buyer side) ============ */
+function openInquiry(productName){
+  document.getElementById('inqProduct').value = productName || '';
+  if (session && session.role==='buyer'){
+    const u = users.find(x=>x.username===session.username);
+    document.getElementById('inqName').value = u?.name || session.name || '';
+    document.getElementById('inqContact').value = u?.phone || u?.email || '';
+  } else {
+    document.getElementById('inqName').value = '';
+    document.getElementById('inqContact').value = '';
+  }
+  document.getElementById('inqMessage').value = '';
+  openModal('inquiryModal');
+}
+function submitInquiry(){
+  const name = document.getElementById('inqName').value.trim();
+  const contact = document.getElementById('inqContact').value.trim();
+  const message = document.getElementById('inqMessage').value.trim();
+  const product = document.getElementById('inqProduct').value.trim();
+  if (!name || !contact || !message){ alert('Name, contact and message are required.'); return; }
+  inquiries.push({
+    id: 'MSG-'+Date.now().toString(36).toUpperCase(),
+    user: session?.username || '', name, contact, product, message,
+    date: new Date().toISOString(), read:false
+  });
+  saveAll(); updateMsgBadge(); closeModal('inquiryModal');
+  alert('Message sent! The team will get back to you shortly.');
+}
+function adminOrdersHtml(){
+  if (!orders.length) return '<p>No orders.</p>';
+  const statuses = ['Pending','Processing','Shipped','Delivered','Cancelled'];
+  return `<table><tr><th>ID</th><th>Date</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Action</th></tr>${
+    orders.slice().reverse().map(o=>`
+      <tr>
+        <td>${o.id}</td><td>${new Date(o.date).toLocaleString()}</td>
+        <td>${escapeHtml(o.name)}<br><small>${escapeHtml(o.phone)}</small><br><small>${escapeHtml(o.address)}</small></td>
+        <td>${o.items.map(i=>`${escapeHtml(i.name)} ×${i.qty}`).join('<br>')}</td>
+        <td>KES ${o.total}</td>
+        <td><span class="status-pill status-${o.status}">${o.status}</span></td>
+        <td><select onchange="updateOrderStatus('${o.id}', this.value)">
+          ${statuses.map(s=>`<option ${s===o.status?'selected':''}>${s}</option>`).join('')}
+        </select></td>
+      </tr>`).join('')}</table>`;
+}
+function updateOrderStatus(id, status){
+  const o = orders.find(x=>x.id===id); if(!o) return;
+  o.status = status; saveAll(); adminTab('orders');
+}
+function adminProductsHtml(){
+  return `<button class="btn-primary" onclick="openProductEditor()">+ Add Product</button>
+    <input id="adminProdSearch" oninput="adminTab('products')" value="" placeholder="search..." style="margin-left:10px;padding:6px;">
+    <table style="margin-top:10px;"><tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Discount</th><th>Stock</th><th></th></tr>${
+    productList.map((p,i)=>`<tr>
+      <td><img src="${p.image||''}" style="width:40px;height:40px;object-fit:cover;border-radius:4px;" onerror="this.style.display='none'"></td>
+      <td>${escapeHtml(p.name)}</td><td>${p.category}</td>
+      <td>KES ${p.price}</td><td>${p.discount||0}%</td><td>${p.stock}</td>
+      <td><button onclick="openProductEditor(${i})">✏️</button>
+      <button onclick="deleteProduct(${i})">🗑</button></td>
+    </tr>`).join('')}</table>`;
+}
+let editIdx = -1;
+function openProductEditor(idx){
+  editIdx = (idx==null?-1:idx);
+  const p = editIdx>=0 ? productList[editIdx] : {name:'',price:'',category:'',size:'',stock:'',discount:0,abv:'',country:'',brand:'',description:'',image:''};
+  document.getElementById('prodModalTitle').textContent = editIdx>=0?'Edit Product':'Add Product';
+  ['Name','Price','Category','Size','Stock','Discount','Abv','Country','Brand','Desc','Image'].forEach(k=>{
+    const id='pf'+k; const key = k.toLowerCase()==='desc'?'description':k.toLowerCase();
+    const el=document.getElementById(id); if(el) el.value = p[key]??'';
+  });
+  document.getElementById('pfImagePreview').style.display = p.image ? 'block' : 'none';
+  document.getElementById('pfImagePreview').src = p.image || '';
+  document.getElementById('pfImageFile').value = '';
+  openModal('prodModal');
+}
+function handleImageUpload(e){
+  const file = e.target.files[0]; if (!file) return;
+  if (file.size > 800*1024){ if(!confirm('Image is large ('+Math.round(file.size/1024)+'KB) and may slow the site. Continue?')) return; }
+  const r = new FileReader();
+  r.onload = ev => { document.getElementById('pfImage').value = ev.target.result; document.getElementById('pfImagePreview').src=ev.target.result; document.getElementById('pfImagePreview').style.display='block'; };
+  r.readAsDataURL(file);
+}
+function saveProduct(){
+  const obj = {
+    name: document.getElementById('pfName').value.trim(),
+    price: +document.getElementById('pfPrice').value||0,
+    category: document.getElementById('pfCategory').value.trim(),
+    size: document.getElementById('pfSize').value.trim(),
+    stock: +document.getElementById('pfStock').value||0,
+    discount: Math.max(0, Math.min(90, +document.getElementById('pfDiscount').value||0)),
+    abv: document.getElementById('pfAbv').value.trim(),
+    country: document.getElementById('pfCountry').value.trim(),
+    brand: document.getElementById('pfBrand').value.trim(),
+    description: document.getElementById('pfDesc').value.trim(),
+    image: document.getElementById('pfImage').value.trim()
+  };
+  if (!obj.name||!obj.price||!obj.category){ alert('Name, price, category required'); return; }
+  if (editIdx>=0) productList[editIdx] = {...productList[editIdx], ...obj};
+  else productList.push(obj);
+  saveAll(); closeModal('prodModal'); adminTab('products'); display(); buildFilterUI();
+}
+function deleteProduct(i){
+  if (!confirm('Delete "'+productList[i].name+'"?')) return;
+  productList.splice(i,1); saveAll(); adminTab('products'); display(); buildFilterUI();
+}
+function adminReportsHtml(){
+  const delivered = orders.filter(o=>o.status==='Delivered');
+  const all = orders.filter(o=>o.status!=='Cancelled');
+  const rev = all.reduce((s,o)=>s+o.total,0);
+  const delRev = delivered.reduce((s,o)=>s+o.total,0);
+  const topProd = {};
+  all.forEach(o=>o.items.forEach(i=>{ topProd[i.name]=(topProd[i.name]||0)+i.qty; }));
+  const top = Object.entries(topProd).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  return `<div class="kpi-grid">
+    <div class="kpi"><b>${orders.length}</b>Total Orders</div>
+    <div class="kpi"><b>${delivered.length}</b>Delivered</div>
+    <div class="kpi"><b>KES ${rev.toLocaleString()}</b>Gross Revenue</div>
+    <div class="kpi"><b>KES ${delRev.toLocaleString()}</b>Delivered Revenue</div>
+    <div class="kpi"><b>${users.length}</b>Buyers</div>
+    <div class="kpi"><b>${productList.length}</b>Products</div>
+  </div>
+  <h4>Top Selling Products</h4>
+  ${top.length ? `<table><tr><th>#</th><th>Product</th><th>Units Sold</th></tr>${
+    top.map(([n,q],i)=>`<tr><td>${i+1}</td><td>${escapeHtml(n)}</td><td>${q}</td></tr>`).join('')}</table>` : '<p>No sales yet.</p>'}`;
+}
+function adminUsersHtml(){
+  if (!users.length) return '<p>No buyers registered yet.</p>';
+  return `<table><tr><th>Name</th><th>Username</th><th>Email</th><th>Phone</th><th>Joined</th><th>Orders</th></tr>${
+    users.map(u=>{
+      const cnt = orders.filter(o=>o.user===u.username).length;
+      return `<tr><td>${escapeHtml(u.name)}</td><td>${escapeHtml(u.username)}</td><td>${escapeHtml(u.email)}</td><td>${escapeHtml(u.phone||'')}</td><td>${new Date(u.createdAt).toLocaleDateString()}</td><td>${cnt}</td></tr>`;
+    }).join('')}</table>`;
+}
+
+/* ============ MODALS ============ */
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+function toggleTheme(){ document.body.classList.toggle('dark'); LS.set('acacia_theme', document.body.classList.contains('dark')); }
+if (LS.get('acacia_theme', false)) document.body.classList.add('dark');
+
+/* ============ INIT ============ */
+buildFilterUI();
 display();
+renderUser();
+updateCartCount();
+updateMsgBadge();
 </script>
-
 </body>
 </html>
