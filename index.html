@@ -70,6 +70,18 @@ body.dark .kpi{background:#2a2a2a;}
   </div>
   <div id="motto" style="font-size:14px;color:#ccc;"></div>
   <div class="top-icons">
+    <select id="currencySel" onchange="changeCurrency(this.value)" title="Currency" style="padding:6px;border-radius:6px;border:none;font-size:13px;cursor:pointer;">
+      <option value="KES">KES (KSh)</option>
+      <option value="USD">USD ($)</option>
+      <option value="EUR">EUR (€)</option>
+      <option value="GBP">GBP (£)</option>
+      <option value="UGX">UGX (USh)</option>
+      <option value="TZS">TZS (TSh)</option>
+      <option value="ZAR">ZAR (R)</option>
+      <option value="NGN">NGN (₦)</option>
+      <option value="INR">INR (₹)</option>
+      <option value="AED">AED (د.إ)</option>
+    </select>
     <button class="icon-btn" onclick="toggleTheme()" title="Theme">🌙</button>
     <button class="icon-btn" onclick="openInquiry()" title="Contact / Inquiry">✉️</button>
     <button class="icon-btn" onclick="openCart()" title="Cart">🛒<span id="cartCount" style="background:#b30000;color:#fff;border-radius:50%;padding:2px 6px;font-size:11px;margin-left:2px;">0</span></button>
@@ -97,7 +109,7 @@ body.dark .kpi{background:#2a2a2a;}
 
 <!-- Product view modal -->
 <div id="viewModal" class="modal-bg" onclick="if(event.target===this)closeModal('viewModal')">
-  <div class="modal">
+  <div class="modal" style="max-width:720px;">
     <button class="close-x" onclick="closeModal('viewModal')">×</button>
     <img id="viewImg" style="width:100%;max-height:320px;object-fit:contain;border-radius:10px;background:#f0f0f0;">
     <h3 id="viewName"></h3>
@@ -108,6 +120,12 @@ body.dark .kpi{background:#2a2a2a;}
     <div id="viewRateBlock"></div>
     <div id="viewReviews" style="margin-top:10px;"></div>
     <button class="btn-primary" style="width:100%;margin-top:10px;" id="viewAddBtn">Add to Cart</button>
+
+    <!-- Related Products -->
+    <div id="relatedBlock" style="margin-top:20px;display:none;">
+      <h4 style="margin-bottom:10px;border-bottom:1px solid #ddd;padding-bottom:6px;">You may also like</h4>
+      <div id="relatedList" style="display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;"></div>
+    </div>
   </div>
 </div>
 
@@ -117,7 +135,7 @@ body.dark .kpi{background:#2a2a2a;}
     <button class="close-x" onclick="closeModal('cartModal')">×</button>
     <h3>Your Cart</h3>
     <div id="cartList"></div>
-    <p style="text-align:right;font-size:18px;"><b>Total: KES <span id="total">0</span></b></p>
+    <p style="text-align:right;font-size:18px;"><b>Total: <span id="total">KSh 0</span></b></p>
     <button class="btn-primary" style="width:100%;" onclick="checkout()">Place Order</button>
   </div>
 </div>
@@ -198,6 +216,7 @@ body.dark .kpi{background:#2a2a2a;}
     <textarea id="inqMessage" placeholder="Your message" rows="4"></textarea>
     <button class="btn-primary" style="width:100%;" onclick="submitInquiry()">Send Message</button>
   </div>
+</div>
 
 <!-- Product editor modal (admin) -->
 <div id="prodModal" class="modal-bg" onclick="if(event.target===this)closeModal('prodModal')">
@@ -387,6 +406,60 @@ const productList = [
 { name: "Tusker Lager", price: 180, category: "Beer", size: "500ml", image: "images/tusker.jpg", stock: 50, abv:"4.2%", country:"Kenya", brand:"Tusker", description:"Kenya’s most popular beer." },
 { name: "Guinness Stout", price: 250, category: "Beer", size: "330ml", image: "images/guinness.jpg", stock: 40, abv:"4.2%", country:"Ireland", brand:"Guinness", description:"Rich dark stout with creamy finish." },
 { name: "Savanna Dry Cider", price: 300, category: "Beer", size: "330ml", image: "images/savanna.jpg", stock: 30, abv:"5.5%", country:"South Africa", brand:"Savanna", description:"Crisp apple cider with dry finish." }
+  ,
+  // ===== NEW: Gin =====
+  { name: "Gordon's London Dry Gin", price: 1800, category: "Gin", size: "750ml", image: "images/gordons-gin.jpg", stock: 15, abv:"37.5%", country:"UK", brand:"Gordon's", description:"Classic London dry gin with juniper notes." },
+  { name: "Bombay Sapphire", price: 3200, category: "Gin", size: "750ml", image: "images/bombay-sapphire.jpg", stock: 12, abv:"40%", country:"UK", brand:"Bombay", description:"Premium gin infused with 10 botanicals." },
+  { name: "Tanqueray London Dry", price: 3500, category: "Gin", size: "750ml", image: "images/tanqueray.jpg", stock: 10, abv:"43.1%", country:"UK", brand:"Tanqueray", description:"Award-winning gin with crisp citrus finish." },
+  { name: "Beefeater Gin", price: 2400, category: "Gin", size: "750ml", image: "images/beefeater.jpg", stock: 12, abv:"40%", country:"UK", brand:"Beefeater", description:"Traditional London dry gin." },
+  { name: "Hendrick's Gin", price: 5500, category: "Gin", size: "750ml", image: "images/hendricks.jpg", stock: 8, abv:"41.4%", country:"Scotland", brand:"Hendrick's", description:"Cucumber and rose petal infused gin." },
+  { name: "Monkey 47 Schwarzwald Gin", price: 8500, category: "Gin", size: "500ml", image: "images/monkey47.jpg", stock: 5, abv:"47%", country:"Germany", brand:"Monkey 47", description:"Complex craft gin with 47 botanicals." },
+
+  // ===== NEW: Brandy =====
+  { name: "Viceroy Brandy", price: 1900, category: "Brandy", size: "750ml", image: "images/viceroy.jpg", stock: 15, abv:"43%", country:"South Africa", brand:"Viceroy", description:"Smooth South African brandy." },
+  { name: "Klipdrift Premium", price: 2200, category: "Brandy", size: "750ml", image: "images/klipdrift.jpg", stock: 12, abv:"43%", country:"South Africa", brand:"Klipdrift", description:"Award-winning premium brandy." },
+  { name: "Richot Brandy", price: 1700, category: "Brandy", size: "750ml", image: "images/richot.jpg", stock: 15, abv:"43%", country:"South Africa", brand:"Richot", description:"Mellow and smooth brandy." },
+  { name: "Remy Martin VSOP", price: 8500, category: "Brandy", size: "750ml", image: "images/remy-vsop.jpg", stock: 6, abv:"40%", country:"France", brand:"Remy Martin", description:"Fine champagne cognac, aged to perfection." },
+
+  // ===== NEW: Champagne & Sparkling =====
+  { name: "Moet & Chandon Imperial", price: 12000, category: "Champagne", size: "750ml", image: "images/moet-imperial.jpg", stock: 6, abv:"12%", country:"France", brand:"Moet & Chandon", description:"Iconic champagne with bright fruitiness." },
+  { name: "Veuve Clicquot Yellow Label", price: 14000, category: "Champagne", size: "750ml", image: "images/veuve-clicquot.jpg", stock: 5, abv:"12%", country:"France", brand:"Veuve Clicquot", description:"Bold and powerful champagne." },
+  { name: "Dom Perignon Vintage", price: 38000, category: "Champagne", size: "750ml", image: "images/dom-perignon.jpg", stock: 2, abv:"12.5%", country:"France", brand:"Dom Perignon", description:"Prestige cuvee — rich and complex." },
+  { name: "JC Le Roux La Chanson", price: 1200, category: "Champagne", size: "750ml", image: "images/jc-le-roux.jpg", stock: 15, abv:"7%", country:"South Africa", brand:"JC Le Roux", description:"Sweet sparkling wine." },
+  { name: "Martini Asti", price: 2200, category: "Champagne", size: "750ml", image: "images/martini-asti.jpg", stock: 10, abv:"7.5%", country:"Italy", brand:"Martini", description:"Sweet Italian sparkling wine." },
+  { name: "Prosecco DOC", price: 2500, category: "Champagne", size: "750ml", image: "images/prosecco.jpg", stock: 12, abv:"11%", country:"Italy", brand:"Prosecco", description:"Light and crisp Italian sparkler." },
+
+  // ===== NEW: Liqueurs =====
+  { name: "Baileys Irish Cream", price: 2800, category: "Liqueur", size: "750ml", image: "images/baileys.jpg", stock: 15, abv:"17%", country:"Ireland", brand:"Baileys", description:"Creamy Irish whiskey liqueur." },
+  { name: "Amarula Cream", price: 2200, category: "Liqueur", size: "750ml", image: "images/amarula.jpg", stock: 15, abv:"17%", country:"South Africa", brand:"Amarula", description:"African marula fruit cream liqueur." },
+  { name: "Kahlua Coffee Liqueur", price: 2600, category: "Liqueur", size: "750ml", image: "images/kahlua.jpg", stock: 10, abv:"20%", country:"Mexico", brand:"Kahlua", description:"Rich coffee liqueur." },
+  { name: "Cointreau", price: 3500, category: "Liqueur", size: "700ml", image: "images/cointreau.jpg", stock: 8, abv:"40%", country:"France", brand:"Cointreau", description:"Premium triple sec orange liqueur." },
+  { name: "Sambuca Romana", price: 2400, category: "Liqueur", size: "750ml", image: "images/sambuca.jpg", stock: 10, abv:"38%", country:"Italy", brand:"Romana", description:"Classic Italian anise liqueur." },
+
+  // ===== NEW: Cider & Ready-to-drink =====
+  { name: "Hunter's Gold Cider", price: 250, category: "Cider", size: "330ml", image: "images/hunters-gold.jpg", stock: 40, abv:"4.5%", country:"South Africa", brand:"Hunter's", description:"Sweet apple cider." },
+  { name: "Savanna Light Cider", price: 280, category: "Cider", size: "330ml", image: "images/savanna-light.jpg", stock: 30, abv:"3%", country:"South Africa", brand:"Savanna", description:"Crisp light cider." },
+  { name: "Strongbow Apple Cider", price: 280, category: "Cider", size: "330ml", image: "images/strongbow.jpg", stock: 30, abv:"4.5%", country:"UK", brand:"Strongbow", description:"Classic apple cider." },
+  { name: "Smirnoff Ice Original", price: 260, category: "Cider", size: "275ml", image: "images/smirnoff-ice.jpg", stock: 40, abv:"5%", country:"Russia", brand:"Smirnoff", description:"Refreshing vodka-based RTD." },
+
+  // ===== NEW: Water & Juice =====
+  { name: "Dasani Bottled Water 500ml", price: 50, category: "Water & Juice", size: "500ml", image: "images/dasani-500.jpg", stock: 100, abv:"", country:"Kenya", brand:"Dasani", description:"Pure bottled drinking water." },
+  { name: "Aquafina 1L", price: 90, category: "Water & Juice", size: "1L", image: "images/aquafina.jpg", stock: 60, abv:"", country:"Kenya", brand:"Aquafina", description:"Purified bottled water." },
+  { name: "Keringet Mineral Water 1.5L", price: 110, category: "Water & Juice", size: "1.5L", image: "images/keringet.jpg", stock: 60, abv:"", country:"Kenya", brand:"Keringet", description:"Natural mineral water from Kenyan highlands." },
+  { name: "Minute Maid Orange Juice 1L", price: 200, category: "Water & Juice", size: "1L", image: "images/minute-maid.jpg", stock: 30, abv:"", country:"Kenya", brand:"Minute Maid", description:"100% orange juice." },
+  { name: "Del Monte Pineapple Juice 1L", price: 220, category: "Water & Juice", size: "1L", image: "images/del-monte.jpg", stock: 30, abv:"", country:"Kenya", brand:"Del Monte", description:"Sweet pineapple juice." },
+  { name: "Red Bull Energy Drink", price: 280, category: "Water & Juice", size: "250ml", image: "images/red-bull.jpg", stock: 40, abv:"", country:"Austria", brand:"Red Bull", description:"Classic energy drink." },
+  { name: "Monster Energy Drink", price: 300, category: "Water & Juice", size: "500ml", image: "images/monster.jpg", stock: 30, abv:"", country:"USA", brand:"Monster", description:"High-caffeine energy boost." },
+
+  // ===== NEW: Snacks =====
+  { name: "Pringles Original 165g", price: 350, category: "Snacks", size: "165g", image: "images/pringles.jpg", stock: 25, abv:"", country:"USA", brand:"Pringles", description:"Crispy stacked potato chips." },
+  { name: "Doritos Nacho Cheese", price: 320, category: "Snacks", size: "150g", image: "images/doritos.jpg", stock: 25, abv:"", country:"USA", brand:"Doritos", description:"Cheese tortilla chips." },
+  { name: "Lay's Salted Chips", price: 150, category: "Snacks", size: "75g", image: "images/lays.jpg", stock: 40, abv:"", country:"Kenya", brand:"Lay's", description:"Classic salted potato chips." },
+  { name: "Cadbury Dairy Milk 100g", price: 280, category: "Snacks", size: "100g", image: "images/cadbury.jpg", stock: 30, abv:"", country:"UK", brand:"Cadbury", description:"Smooth milk chocolate bar." },
+  { name: "KitKat 4-Finger", price: 180, category: "Snacks", size: "45g", image: "images/kitkat.jpg", stock: 50, abv:"", country:"UK", brand:"Nestle", description:"Crispy chocolate wafer bar." },
+  { name: "Salted Peanuts 200g", price: 250, category: "Snacks", size: "200g", image: "images/peanuts.jpg", stock: 30, abv:"", country:"Kenya", brand:"Local", description:"Roasted salted peanuts — perfect bar snack." },
+  { name: "Mixed Nuts Pack 250g", price: 600, category: "Snacks", size: "250g", image: "images/mixed-nuts.jpg", stock: 20, abv:"", country:"Kenya", brand:"Local", description:"Premium mixed nuts assortment." }
+
 ];
 
 
@@ -402,7 +475,7 @@ const LS = {
 };
 
 // Load admin-managed product overrides + new products
-let adminProducts = LS.get('acacia_products', null);
+let adminProducts = LS.get('acacia_products_v3', null);
 if (adminProducts) {
   // merge: admin list is authoritative if exists
   productList.length = 0;
@@ -410,7 +483,7 @@ if (adminProducts) {
 } else {
   // first run: ensure discount field exists
   productList.forEach(p => { if (p.discount == null) p.discount = 0; });
-  LS.set('acacia_products', productList);
+  LS.set('acacia_products_v3', productList);
 }
 
 let users    = LS.get('acacia_users', []);      // buyer accounts
@@ -419,15 +492,17 @@ let ratings  = LS.get('acacia_ratings', {});    // {productName: [{user, stars, 
 let cart     = LS.get('acacia_cart', {});
 let session  = LS.get('acacia_session', null);  // {username, role, name}
 let inquiries = LS.get('acacia_inquiries', []); // [{id, user, name, contact, product, message, date, read, reply}]
+let favorites = LS.get('acacia_favorites', []); // [productName]
 
 function saveAll(){
-  LS.set('acacia_products', productList);
+  LS.set('acacia_products_v3', productList);
   LS.set('acacia_users', users);
   LS.set('acacia_orders', orders);
   LS.set('acacia_ratings', ratings);
   LS.set('acacia_cart', cart);
   LS.set('acacia_session', session);
   LS.set('acacia_inquiries', inquiries);
+  LS.set('acacia_favorites', favorites);
 }
 
 /* ============ MOTTO ============ */
@@ -435,6 +510,7 @@ const mottos = ["🚚 Fast & Reliable Delivery","✅ Trusted Quality Drinks","�
 let mIdx = 0;
 function changeMotto(){ document.getElementById('motto').textContent = mottos[mIdx]; mIdx = (mIdx+1)%mottos.length; }
 setInterval(changeMotto, 2500); changeMotto();
+setTimeout(initCurrency,0);
 
 /* ============ FILTERS UI ============ */
 function buildFilterUI(){
@@ -449,6 +525,38 @@ function priceOf(p){
   const d = +p.discount || 0;
   return d > 0 ? Math.round(p.price * (100 - d) / 100) : p.price;
 }
+
+/* ============ CURRENCY ============ */
+const CURRENCIES = {
+  KES:{symbol:'KSh',rate:1},
+  USD:{symbol:'$',rate:0.0078},
+  EUR:{symbol:'€',rate:0.0072},
+  GBP:{symbol:'£',rate:0.0061},
+  UGX:{symbol:'USh',rate:29},
+  TZS:{symbol:'TSh',rate:20},
+  ZAR:{symbol:'R',rate:0.14},
+  NGN:{symbol:'₦',rate:12},
+  INR:{symbol:'₹',rate:0.65},
+  AED:{symbol:'د.إ',rate:0.029}
+};
+let currentCurrency = LS.get('acacia_currency','KES');
+function fmt(kes){
+  const c = CURRENCIES[currentCurrency] || CURRENCIES.KES;
+  const v = kes * c.rate;
+  const n = v >= 100 ? Math.round(v).toLocaleString() : v.toFixed(2);
+  return c.symbol + ' ' + n;
+}
+function changeCurrency(code){
+  currentCurrency = code;
+  LS.set('acacia_currency', code);
+  display();
+  renderCart && renderCart();
+}
+function initCurrency(){
+  const sel = document.getElementById('currencySel');
+  if (sel) sel.value = currentCurrency;
+}
+
 function avgRating(name){
   const rs = ratings[name] || [];
   if (!rs.length) return 0;
@@ -473,7 +581,7 @@ function display(list = productList){
       <div class="card-body">
         <div>
           <h3>${escapeHtml(p.name)}</h3>
-          <p>${hasD ? `<span class="old-price">KES ${p.price}</span> <span class="new-price">KES ${np}</span>` : `<b>KES ${np}</b>`}</p>
+          <p>${hasD ? `<span class="old-price">${fmt(p.price)}</span> <span class="new-price">${fmt(np)}</span>` : `<b>${fmt(np)}</b>`}</p>
           <p style="font-size:12px;color:#888;">${p.category} | ${p.size||''}</p>
           ${avg ? `<div>${starHtml(avg)} <small>(${rCount})</small></div>` : '<div style="color:#aaa;font-size:12px;">No ratings yet</div>'}
           <p class="${p.stock>0?'instock':'outstock'}">${p.stock>0?'In stock ('+p.stock+')':'Out of stock'}</p>
@@ -482,6 +590,7 @@ function display(list = productList){
           <button class="icon-btn" onclick="add('${escapeAttr(p.name)}')" title="Add to cart">🛒</button>
           <button class="icon-btn" onclick="viewProduct('${escapeAttr(p.name)}')" title="View">👁</button>
           <button class="icon-btn" onclick="openInquiry('${escapeAttr(p.name)}')" title="Send inquiry">✉️</button>
+          <button class="icon-btn" onclick="toggleFavorite('${escapeAttr(p.name)}')" title="Favorite">${isFavorite(p.name)?'❤️':'🤍'}</button>
         </div>
       </div>
     </div>`;
@@ -490,6 +599,14 @@ function display(list = productList){
 }
 function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function escapeAttr(s){ return String(s).replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
+
+
+function isFavorite(name){ return favorites.includes(name); }
+function toggleFavorite(name){
+  const i = favorites.indexOf(name);
+  if (i>=0) favorites.splice(i,1); else favorites.push(name);
+  saveAll(); display();
+}
 
 /* ============ VIEW PRODUCT ============ */
 let currentView = null;
@@ -501,14 +618,14 @@ function viewProduct(name){
   document.getElementById('viewImg').onerror = function(){ this.src='https://via.placeholder.com/400x300?text=No+Image'; };
   document.getElementById('viewName').textContent = p.name;
   document.getElementById('viewPrice').innerHTML = (+p.discount||0) > 0
-    ? `<span class="old-price">KES ${p.price}</span> <span class="new-price" style="font-size:18px;">KES ${np}</span> <span class="badge-discount" style="position:static;">-${p.discount}%</span>`
-    : `<b style="font-size:18px;">KES ${np}</b>`;
+    ? `<span class="old-price">${fmt(p.price)}</span> <span class="new-price" style="font-size:18px;">${fmt(np)}</span> <span class="badge-discount" style="position:static;">-${p.discount}%</span>`
+    : `<b style="font-size:18px;">${fmt(np)}</b>`;
   document.getElementById('viewMeta').innerHTML = `${p.category} • ${p.size||''} • ABV: ${p.abv||'N/A'} • ${p.country||''} ${p.brand?'• '+p.brand:''} • Stock: ${p.stock}`;
   document.getElementById('viewDesc').textContent = p.description || '';
   const avg = avgRating(p.name), rs = ratings[p.name]||[];
   document.getElementById('viewRatingSummary').innerHTML = rs.length ? `${starHtml(avg)} ${avg.toFixed(1)} (${rs.length} review${rs.length>1?'s':''})` : '<small>No reviews yet</small>';
   // Rate block (buyers only, must have purchased)
-  const canRate = session && session.role==='buyer' && hasPurchased(session.username, p.name);
+  const canRate = !!session;
   if (canRate){
     document.getElementById('viewRateBlock').innerHTML = `
       <div style="margin-top:10px;"><b>Your rating:</b>
@@ -518,16 +635,46 @@ function viewProduct(name){
       <textarea id="rateComment" placeholder="Optional comment" rows="2"></textarea>
       <button onclick="submitRating()">Submit Rating</button></div>`;
     setRate(0);
-  } else if (session && session.role==='buyer'){
-    document.getElementById('viewRateBlock').innerHTML = '<small style="color:#888;">Buy this product to leave a rating.</small>';
   } else {
-    document.getElementById('viewRateBlock').innerHTML = '<small style="color:#888;">Login as buyer to leave a rating.</small>';
+    document.getElementById('viewRateBlock').innerHTML = '<small style="color:#888;">Login to leave a rating.</small>';
   }
   document.getElementById('viewReviews').innerHTML = rs.length
     ? '<b>Reviews:</b>' + rs.slice(-5).reverse().map(r=>`<div style="border-top:1px solid #eee;padding:6px 0;font-size:13px;"><b>${escapeHtml(r.user)}</b> ${starHtml(r.stars)}<br>${escapeHtml(r.comment||'')}</div>`).join('')
     : '';
   document.getElementById('viewAddBtn').onclick = ()=>{ add(p.name); };
+  showRelatedProducts(p);
   openModal('viewModal');
+}
+function showRelatedProducts(currentP){
+  const related = getRelatedProducts(currentP.name, 6);
+  const block = document.getElementById('relatedBlock');
+  const list = document.getElementById('relatedList');
+  if (!related.length){ block.style.display='none'; return; }
+  block.style.display='block';
+  list.innerHTML = related.map(rp=>{
+    const rnp = priceOf(rp);
+    const hasD = (+rp.discount||0) > 0;
+    const img = rp.image && rp.image.startsWith('data:') ? rp.image : (rp.image || 'https://via.placeholder.com/140x100?text=No+Image');
+    return `<div style="flex:0 0 140px;background:#fff;border-radius:8px;padding:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);text-align:center;cursor:pointer;" onclick="viewProduct('${escapeAttr(rp.name)}')">
+      <img src="${img}" style="width:100%;height:100px;object-fit:cover;border-radius:6px;" onerror="if(this.src.indexOf('placeholder')<0)this.src='https://via.placeholder.com/140x100?text=No+Image'">
+      <p style="font-size:12px;margin:6px 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(rp.name)}</p>
+      <p style="font-size:13px;margin:0;">${hasD?`<span style="text-decoration:line-through;color:#888;font-size:11px;">${fmt(rp.price)}</span> <b style="color:#b30000;">${fmt(rnp)}</b>`:`<b>${fmt(rnp)}</b>`}</p>
+    </div>`;
+  }).join('');
+}
+function getRelatedProducts(name, limit=6){
+  const p = productList.find(x=>x.name===name); if(!p) return [];
+  // same category, same brand, or similar price range (+-30%)
+  const scored = productList.filter(x=>x.name!==name).map(x=>{
+    let score = 0;
+    if (x.category === p.category) score += 3;
+    if (x.brand && p.brand && x.brand === p.brand) score += 2;
+    const priceDiff = Math.abs(priceOf(x) - priceOf(p)) / Math.max(priceOf(p), 1);
+    if (priceDiff < 0.3) score += 1;
+    return { product: x, score };
+  });
+  scored.sort((a,b)=>b.score - a.score);
+  return scored.slice(0, limit).map(s=>s.product);
 }
 let _pendingStars = 0;
 function setRate(n){
@@ -594,11 +741,11 @@ function openCart(){
   else {
     list.innerHTML = entries.map(([n,i])=>{ const sub=i.qty*i.price; total+=sub;
       return `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #eee;">
-        <span>${escapeHtml(n)}<br><small>KES ${i.price} × ${i.qty}</small></span>
+        <span>${escapeHtml(n)}<br><small>${fmt(i.price)} × ${i.qty}</small></span>
         <span><button onclick="cartDec('${escapeAttr(n)}')">−</button>
         <button onclick="cartInc('${escapeAttr(n)}')">+</button>
         <button onclick="cartDel('${escapeAttr(n)}')">🗑</button>
-        <b style="margin-left:8px;">KES ${sub}</b></span></div>`;
+        <b style="margin-left:8px;">${fmt(sub)}</b></span></div>`;
     }).join('');
   }
   document.getElementById('total').textContent = total;
@@ -651,7 +798,7 @@ function confirmOrderWhatsApp(){
     alert('Please fill name, phone and address'); return;
   }
   const o = buildOrderObj(); commitOrder(o);
-  let msg = `🛒 Order ${o.id}%0A%0A` + o.items.map(i=>`${i.name} x${i.qty} = KES ${i.subtotal}`).join('%0A') + `%0A%0ATotal: KES ${o.total}%0A${o.name} | ${o.phone}%0A${o.address}`;
+  let msg = `🛒 Order ${o.id}%0A%0A` + o.items.map(i=>`${i.name} x${i.qty} = ${fmt(i.subtotal)}`).join('%0A') + `%0A%0ATotal: ${fmt(o.total)}%0A${o.name} | ${o.phone}%0A${o.address}`;
   window.open(`https://wa.me/254731858997?text=${msg}`, '_blank');
   closeModal('checkoutModal');
 }
@@ -719,8 +866,8 @@ function openOrders(){
       </div>
       <small>${new Date(o.date).toLocaleString()}</small>
       <table><tr><th>Item</th><th>Qty</th><th>Subtotal</th></tr>
-        ${o.items.map(i=>`<tr><td>${escapeHtml(i.name)}</td><td>${i.qty}</td><td>KES ${i.subtotal}</td></tr>`).join('')}
-        <tr><th colspan="2">Total</th><th>KES ${o.total}</th></tr>
+        ${o.items.map(i=>`<tr><td>${escapeHtml(i.name)}</td><td>${i.qty}</td><td>${fmt(i.subtotal)}</td></tr>`).join('')}
+        <tr><th colspan="2">Total</th><th>${fmt(o.total)}</th></tr>
       </table>
       <p style="font-size:12px;color:#888;margin-top:6px;">Ship to: ${escapeHtml(o.address)}</p>
     </div>`).join('');
@@ -808,7 +955,7 @@ function adminOrdersHtml(){
         <td>${o.id}</td><td>${new Date(o.date).toLocaleString()}</td>
         <td>${escapeHtml(o.name)}<br><small>${escapeHtml(o.phone)}</small><br><small>${escapeHtml(o.address)}</small></td>
         <td>${o.items.map(i=>`${escapeHtml(i.name)} ×${i.qty}`).join('<br>')}</td>
-        <td>KES ${o.total}</td>
+        <td>${fmt(o.total)}</td>
         <td><span class="status-pill status-${o.status}">${o.status}</span></td>
         <td><select onchange="updateOrderStatus('${o.id}', this.value)">
           ${statuses.map(s=>`<option ${s===o.status?'selected':''}>${s}</option>`).join('')}
@@ -826,7 +973,7 @@ function adminProductsHtml(){
     productList.map((p,i)=>`<tr>
       <td><img src="${p.image||''}" style="width:40px;height:40px;object-fit:cover;border-radius:4px;" onerror="this.style.display='none'"></td>
       <td>${escapeHtml(p.name)}</td><td>${p.category}</td>
-      <td>KES ${p.price}</td><td>${p.discount||0}%</td><td>${p.stock}</td>
+      <td>${fmt(p.price)}</td><td>${p.discount||0}%</td><td>${p.stock}</td>
       <td><button onclick="openProductEditor(${i})">✏️</button>
       <button onclick="deleteProduct(${i})">🗑</button></td>
     </tr>`).join('')}</table>`;
@@ -886,8 +1033,8 @@ function adminReportsHtml(){
   return `<div class="kpi-grid">
     <div class="kpi"><b>${orders.length}</b>Total Orders</div>
     <div class="kpi"><b>${delivered.length}</b>Delivered</div>
-    <div class="kpi"><b>KES ${rev.toLocaleString()}</b>Gross Revenue</div>
-    <div class="kpi"><b>KES ${delRev.toLocaleString()}</b>Delivered Revenue</div>
+    <div class="kpi"><b>${fmt(rev.toLocaleString())}</b>Gross Revenue</div>
+    <div class="kpi"><b>${fmt(delRev.toLocaleString())}</b>Delivered Revenue</div>
     <div class="kpi"><b>${users.length}</b>Buyers</div>
     <div class="kpi"><b>${productList.length}</b>Products</div>
   </div>
