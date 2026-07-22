@@ -3,1066 +3,1533 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Acacia Liquor Store</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<title>Haven Liquor & Gifts Store</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
 <style>
-body{font-family:Cambria,Cochin,Georgia,'Times New Roman',serif;margin:0;background:#f5f5f5;color:#222;}
-body.dark{background:#111;color:#fff;}
-header{background:#111;color:#fff;padding:15px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
-#motto{min-width:260px;text-align:center;}
-#container{display:flex;gap:20px;padding:20px;}
-#filters{width:240px;}
-#grid{flex:1;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:15px;align-items:start;}
-.card{background:#fff;padding:12px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.1);text-align:center;position:relative;display:flex;flex-direction:column;min-height:380px;}
-body.dark .card{background:#1e1e1e;}
-.card img{width:100%;height:200px;object-fit:cover;border-radius:8px;cursor:pointer;background:#f0f0f0;display:block;}
-.card-body{flex:1;display:flex;flex-direction:column;justify-content:space-between;}
-.card h3{font-size:15px;margin:8px 0 4px;}
-.badge-discount{position:absolute;top:8px;left:8px;background:#e63946;color:#fff;padding:3px 8px;border-radius:5px;font-size:12px;font-weight:bold;}
-.old-price{text-decoration:line-through;color:#888;font-size:13px;}
-.new-price{color:#b30000;font-weight:bold;}
-button{padding:8px;margin-top:4px;cursor:pointer;border-radius:6px;border:1px solid #ccc;background:#fff;}
-button:hover{background:#f0f0f0;}
-.btn-primary{background:#b30000;color:#fff;border:none;}
-.btn-primary:hover{background:#900;}
-.instock{color:green;font-size:13px;}
-.outstock{color:red;font-size:13px;}
-.stars{color:#f5a623;letter-spacing:2px;}
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:998;align-items:center;justify-content:center;padding:15px;overflow-y:auto;}
-.modal-bg.open{display:flex;}
-.modal{background:#fff;color:#222;border-radius:10px;padding:20px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;position:relative;}
-body.dark .modal{background:#222;color:#fff;}
-.modal h3{margin-top:0;}
-.modal input,.modal select,.modal textarea{width:100%;padding:8px;margin:6px 0;border:1px solid #ccc;border-radius:5px;box-sizing:border-box;font-family:inherit;}
-.close-x{position:absolute;top:8px;right:12px;background:none;border:none;font-size:22px;cursor:pointer;color:inherit;}
-.icon-btn{background:none;border:none;font-size:18px;cursor:pointer;padding:4px;}
-.top-icons{display:flex;gap:6px;align-items:center;justify-content:center;margin-top:6px;}
-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px;}
-th,td{border:1px solid #ddd;padding:6px;text-align:left;}
-body.dark th,body.dark td{border-color:#444;}
-th{background:#f0f0f0;}
-body.dark th{background:#333;}
-.status-pill{padding:3px 8px;border-radius:12px;font-size:12px;font-weight:bold;color:#fff;}
-.status-Pending{background:#888;} .status-Processing{background:#3a86ff;}
-.status-Shipped{background:#ff9f1c;} .status-Delivered{background:#06a77d;}
-.status-Cancelled{background:#999;}
-.tab-btn{padding:8px 14px;border:none;background:#eee;cursor:pointer;border-radius:6px 6px 0 0;margin-right:4px;}
-.tab-btn.active{background:#b30000;color:#fff;}
-body.dark .tab-btn{background:#333;color:#fff;}
-body.dark .tab-btn.active{background:#b30000;}
-.footer{background:#111;color:#fff;padding:30px 20px;margin-top:40px;}
-.footer-container{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;}
-.footer-section{flex:1;min-width:180px;}
-.footer-bottom{text-align:center;margin-top:20px;border-top:1px solid #444;padding-top:10px;font-size:13px;}
-.rate-row{display:flex;gap:4px;justify-content:center;font-size:22px;cursor:pointer;color:#f5a623;}
-.rate-row span:hover{transform:scale(1.2);}
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:10px 0;}
-.kpi{background:#f7f7f7;padding:12px;border-radius:8px;text-align:center;}
-body.dark .kpi{background:#2a2a2a;}
-.kpi b{display:block;font-size:22px;color:#b30000;}
-@media(max-width:800px){#container{flex-direction:column;}#filters{width:100%;}}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Cambria', sans-serif;
+}
+
+body{
+    background:#f8f6f6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.topbar{
+    background:#1a0005;
+    color:#fff;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    cursor: pointer;
+    user-select: none;
+    color: #e63946;
+}
+
+.logo span {
+    color: #fff;
+}
+
+.nav{
+    display:flex;
+    gap:20px;
+    align-items: center;
+}
+
+.nav a{
+    color:#fff;
+    text-decoration:none;
+    font-size:14px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    transition:0.3s;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+.nav a:hover, .nav a.active-nav{
+    color:#fff;
+    background: #e63946;
+}
+
+.cart-icon-btn {
+    background: #e63946;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.container{
+    display:flex;
+    gap:25px;
+    padding:30px;
+    flex: 1;
+}
+
+.sidebar{
+    width:280px;
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    height:fit-content;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+.sidebar h3{
+    margin-bottom:15px;
+    color: #1a0005;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 8px;
+}
+
+.filter-group{
+    margin-bottom:15px;
+}
+
+.filter-group label{
+    display:block;
+    margin-bottom:6px;
+    font-size:13px;
+    font-weight: bold;
+    color: #444;
+}
+
+.filter-group input,
+.filter-group select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ddd;
+    border-radius:6px;
+    font-size: 13px;
+}
+
+.price-inputs {
+    display: flex;
+    gap: 8px;
+}
+
+.apply-btn, .clear-btn{
+    width:100%;
+    background:#1a0005;
+    color:#fff;
+    border:none;
+    padding:12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-bottom: 8px;
+    transition: 0.3s;
+}
+
+.clear-btn { background: #666; }
+.apply-btn:hover{ background:#e63946; }
+.clear-btn:hover{ background:#444; }
+
+.content{ flex:1; }
+
+.search-bar{
+    background:#fff;
+    padding:18px;
+    border-radius:10px;
+    display:flex;
+    gap:15px;
+    margin-bottom:25px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+.search-bar input{
+    flex:1;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:6px;
+}
+
+.search-btn{
+    background:#e63946;
+    color:#fff;
+    border:none;
+    padding:12px 25px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.item-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    gap:20px;
+}
+
+.item-card{
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 2px 12px rgba(0,0,0,0.08);
+    transition:0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-card:hover{ transform:translateY(-5px); }
+
+.item-image{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.card-body{
+    padding:18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.item-title{
+    font-size:17px;
+    font-weight:bold;
+    margin-bottom:6px;
+    color: #111;
+}
+
+.stars {
+    color: #f39c12;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.item-info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    font-size:12px;
+    color:#666;
+    margin-bottom:15px;
+    background: #fdfdfd;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #f0f0f0;
+}
+
+.card-buttons{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:6px;
+    margin-top: auto;
+}
+
+.inquiry-btn, .view-btn, .add-cart-btn{
+    border:none;
+    padding:9px 5px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size: 12px;
+    text-align: center;
+}
+
+.add-cart-btn { background: #27ae60; color: #fff; }
+.inquiry-btn{ background:#1a0005; color:#fff; }
+.view-btn{ background:#e63946; color:#fff; }
+
+.inquiry-btn:hover, .view-btn:hover, .add-cart-btn:hover{ opacity:0.9; }
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.8);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+    padding:20px;
+}
+
+.modal-content{
+    background:#fff;
+    width:100%;
+    max-width:850px;
+    border-radius:10px;
+    overflow:hidden;
+    position:relative;
+    max-height:95vh;
+    overflow-y:auto;
+}
+
+.close-modal{
+    position:absolute;
+    top:15px;
+    right:15px;
+    width:35px;
+    height:35px;
+    border:none;
+    border-radius:50%;
+    background:#1a0005;
+    color:#fff;
+    cursor:pointer;
+    z-index:10;
+}
+
+.modal-gallery{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    padding:20px;
+}
+
+.main-image img{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.related-section {
+    padding: 20px;
+    background: #f9f9f9;
+    border-top: 1px solid #eee;
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.related-card {
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+    cursor: pointer;
+}
+
+.related-card img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* Payment Options */
+.payment-methods {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.payment-method-card {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.payment-method-card.active {
+    border-color: #e63946;
+    background: #fff5f5;
+}
+
+.admin-sidebar-menu {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.admin-sidebar-menu li {
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.2s;
+}
+
+.admin-sidebar-menu li:hover, .admin-sidebar-menu li.active-admin-tab {
+    background: #e63946;
+    color: #fff;
+}
+
+.admin-panel-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    min-height: 400px;
+}
+
+.admin-panel-card h2 {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #efefef;
+    padding-bottom: 10px;
+    color: #111;
+}
+
+.admin-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.admin-data-table th, .admin-data-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-data-table th {
+    background: #f9f9f9;
+    font-weight: bold;
+}
+
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-success { background: #e6f4ea; color: #137333; }
+.status-pending { background: #ffeec2; color: #b06000; }
+
+.action-btn {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 4px;
+}
+.btn-edit { background: #2980b9; color: #fff; }
+.btn-delete { background: #c0392b; color: #fff; }
+
+.page-section {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+.floating-social-container {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 1000;
+}
+
+.floating-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 22px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+}
+
+.floating-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
+}
+
+.btn-whatsapp {
+    background-color: #25d366;
+}
+
+.btn-facebook {
+    background-color: #1877f2;
+}
+
+.btn-instagram {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}
+
+.btn-x {
+    background-color: #000000;
+}
+
+footer {
+    background: #1a0005;
+    color: #fff;
+    margin-top: auto;
+    padding: 40px 40px 20px 40px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section h4 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    color: #e63946;
+}
+
+.footer-section p, .footer-section ul li a {
+    font-size: 14px;
+    color: #bbb;
+    text-decoration: none;
+    line-height: 1.6;
+}
+
+.footer-section ul { list-style: none; }
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    font-size: 13px;
+    color: #888;
+}
+
+@media(max-width:900px){
+    .container{ flex-direction:column; }
+    .sidebar{ width:100%; }
+    .search-bar{ flex-direction:column; }
+    .modal-gallery{ grid-template-columns:1fr; }
+}
 </style>
 </head>
 <body>
-<header>
-  <div style="display:flex;align-items:center;gap:10px;">
-    <h2 style="margin:0;color:#1b8f3c;">🍷 Acacia Liquor Store</h2>
-  </div>
-  <div id="motto" style="font-size:14px;color:#ccc;"></div>
-  <div class="top-icons">
-    <select id="currencySel" onchange="changeCurrency(this.value)" title="Currency" style="padding:6px;border-radius:6px;border:none;font-size:13px;cursor:pointer;">
-      <option value="KES">KES (KSh)</option>
-      <option value="USD">USD ($)</option>
-      <option value="EUR">EUR (€)</option>
-      <option value="GBP">GBP (£)</option>
-      <option value="UGX">UGX (USh)</option>
-      <option value="TZS">TZS (TSh)</option>
-      <option value="ZAR">ZAR (R)</option>
-      <option value="NGN">NGN (₦)</option>
-      <option value="INR">INR (₹)</option>
-      <option value="AED">AED (د.إ)</option>
-    </select>
-    <button class="icon-btn" onclick="toggleTheme()" title="Theme">🌙</button>
-    <button class="icon-btn" onclick="openInquiry()" title="Contact / Inquiry">✉️</button>
-    <button class="icon-btn" onclick="openCart()" title="Cart">🛒<span id="cartCount" style="background:#b30000;color:#fff;border-radius:50%;padding:2px 6px;font-size:11px;margin-left:2px;">0</span></button>
-    <span id="userArea"></span>
-  </div>
-</header>
 
-<section id="container">
-  <div id="filters">
-    <input type="text" id="search" placeholder="Search drink..." oninput="applyFilters()" style="width:100%;padding:8px;box-sizing:border-box;">
-    <h3>Category</h3>
-    <div id="catFilters"></div>
-    <h3>Size</h3>
-    <div id="sizeFilters"></div>
-    <h3>Price</h3>
-    <label><input type="checkbox" value="under1000" data-type="price" onchange="applyFilters()"> Under 1000</label><br>
-    <label><input type="checkbox" value="1000-1999" data-type="price" onchange="applyFilters()"> 1000–1999</label><br>
-    <label><input type="checkbox" value="2000-2999" data-type="price" onchange="applyFilters()"> 2000–2999</label><br>
-    <label><input type="checkbox" value="3000-4999" data-type="price" onchange="applyFilters()"> 3000–4999</label><br>
-    <label><input type="checkbox" value="5000plus" data-type="price" onchange="applyFilters()"> 5000+</label><br>
-    <button onclick="clearFilters()" style="margin-top:10px;">Clear Filters</button>
-  </div>
-  <div id="grid"></div>
-</section>
-
-<!-- Product view modal -->
-<div id="viewModal" class="modal-bg" onclick="if(event.target===this)closeModal('viewModal')">
-  <div class="modal" style="max-width:720px;">
-    <button class="close-x" onclick="closeModal('viewModal')">×</button>
-    <img id="viewImg" style="width:100%;max-height:320px;object-fit:contain;border-radius:10px;background:#f0f0f0;">
-    <h3 id="viewName"></h3>
-    <p id="viewPrice"></p>
-    <p id="viewMeta"></p>
-    <p id="viewDesc" style="font-size:14px;"></p>
-    <div id="viewRatingSummary"></div>
-    <div id="viewRateBlock"></div>
-    <div id="viewReviews" style="margin-top:10px;"></div>
-    <button class="btn-primary" style="width:100%;margin-top:10px;" id="viewAddBtn">Add to Cart</button>
-
-    <!-- Related Products -->
-    <div id="relatedBlock" style="margin-top:20px;display:none;">
-      <h4 style="margin-bottom:10px;border-bottom:1px solid #ddd;padding-bottom:6px;">You may also like</h4>
-      <div id="relatedList" style="display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;"></div>
+<div class="topbar">
+    <div class="logo" id="mainLogo" title="Click to open Admin Login">HAVEN <span>LIQUOR & GIFTS</span></div>
+    <div class="nav" id="mainNavbar">
+        <a href="#" class="active-nav" onclick="showPage('storefront', this)"><i class="fa fa-store"></i> Storefront</a>
+        <a href="#" onclick="showPage('wines', this)"><i class="fa fa-wine-glass"></i> Wines & Spirits</a>
+        <a href="#" onclick="showPage('gifts', this)"><i class="fa fa-gift"></i> Gift Boxes</a>
+        <a href="#" onclick="showPage('delivery', this)"><i class="fa fa-truck"></i> Delivery</a>
+        <a href="#" onclick="showPage('contact', this)"><i class="fa fa-envelope"></i> Contact</a>
+        <button class="cart-icon-btn" onclick="openCartModal()">
+            <i class="fa fa-shopping-cart"></i> Cart (<span id="cartCount">0</span>)
+        </button>
     </div>
-  </div>
 </div>
 
-<!-- Cart modal -->
-<div id="cartModal" class="modal-bg" onclick="if(event.target===this)closeModal('cartModal')">
-  <div class="modal">
-    <button class="close-x" onclick="closeModal('cartModal')">×</button>
-    <h3>Your Cart</h3>
-    <div id="cartList"></div>
-    <p style="text-align:right;font-size:18px;"><b>Total: <span id="total">KSh 0</span></b></p>
-    <button class="btn-primary" style="width:100%;" onclick="checkout()">Place Order</button>
-  </div>
-</div>
+<div class="container" id="publicContainer">
+   
+    <div class="sidebar" id="mainFilterSidebar">
+        <h3><i class="fa fa-filter"></i> Advanced Filters</h3>
 
-<!-- Auth modal -->
-<div id="authModal" class="modal-bg" onclick="if(event.target===this)closeModal('authModal')">
-  <div class="modal">
-    <button class="close-x" onclick="closeModal('authModal')">×</button>
-    <div style="display:flex;margin-bottom:10px;">
-      <button class="tab-btn active" id="tabLogin" onclick="authTab('login')">Login</button>
-      <button class="tab-btn" id="tabSignup" onclick="authTab('signup')">Create Account</button>
+        <div class="filter-group">
+            <label>Search Keyword</label>
+            <input type="text" id="filterKeyword" placeholder="e.g. Whiskey, Merlot">
+        </div>
+
+        <div class="filter-group">
+            <label>Category</label>
+            <select id="filterCategory">
+                <option value="All">All Categories</option>
+                <option value="Whisky">Whisky & Spirits</option>
+                <option value="Wine">Wines & Champagne</option>
+                <option value="SoftDrink">Soft Drinks & Mixers</option>
+                <option value="Gifts">Gift Boxes & Hampers</option>
+                <option value="Beer">Beer & Cider</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label>Price Range (KSh)</label>
+            <div class="price-inputs">
+                <input type="number" id="filterMinPrice" placeholder="Min">
+                <input type="number" id="filterMaxPrice" placeholder="Max">
+            </div>
+        </div>
+
+        <div class="filter-group">
+            <label>Volume / Size</label>
+            <select id="filterVolume">
+                <option value="All">All Sizes</option>
+                <option value="330ml">330ml (Cans/Small)</option>
+                <option value="750ml">750ml (Standard Bottle)</option>
+                <option value="1L">1 Litre & Above</option>
+                <option value="Gift Box">Gift Package Set</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label>Origin Country</label>
+            <select id="filterOrigin">
+                <option value="All">All Origins</option>
+                <option value="Scotland">Scotland</option>
+                <option value="France">France</option>
+                <option value="Italy">Italy</option>
+                <option value="Kenya">Kenya (Local)</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label>Alcohol Content (ABV)</label>
+            <select id="filterAbv">
+                <option value="All">Any Strength</option>
+                <option value="Non-Alcoholic">Non-Alcoholic (0%)</option>
+                <option value="Low">Low (&lt; 15% ABV)</option>
+                <option value="High">Spirits (&gt; 35% ABV)</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label><input type="checkbox" id="filterInStockOnly"> In Stock Only</label>
+        </div>
+
+        <button class="apply-btn" onclick="applyFilters()">Apply Filters</button>
+        <button class="clear-btn" onclick="resetFilters()">Reset Filters</button>
     </div>
-    <div id="loginForm">
-      <input id="loginUser" placeholder="Username or email">
-      <input id="loginPass" type="password" placeholder="Password">
-      <button class="btn-primary" style="width:100%;" onclick="doLogin()">Login</button>
-      <p style="font-size:12px;color:#888;margin-top:8px;">Staff use your assigned credentials.</p>
+
+    <div class="content">
+        <div class="search-bar" id="topSearchSection">
+            <input type="text" id="topSearchBar" placeholder="Search product name, brand, or gift hampers...">
+            <button class="search-btn" onclick="topSearch()">Search</button>
+        </div>
+
+        <div id="catalogSection">
+            <h2 id="pageSectionTitle" style="margin-bottom:15px; color:#1a0005;">Featured Catalog</h2>
+            <div class="item-grid" id="itemGrid"></div>
+        </div>
+
+       
+        <div id="deliverySection" class="page-section" style="display:none;">
+            <h2><i class="fa fa-truck"></i> Express Delivery Services</h2>
+            <p style="margin: 10px 0 20px 0; color:#555;">We offer same-day doorstep delivery within Nairobi and 24-48 hours nationwide shipping across Kenya.</p>
+            
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px; margin-bottom: 25px;">
+                <div style="background:#fdf2f2; padding:20px; border-radius:8px; border:1px solid #f8d7da;">
+                    <h3 style="color:#e63946;"><i class="fa fa-bolt"></i> Same-Day Express</h3>
+                    <p style="font-size:14px; margin-top:5px; color:#444;">Delivered within 2 hours in central business districts and surrounding suburbs.</p>
+                </div>
+                <div style="background:#f4f4f4; padding:20px; border-radius:8px;">
+                    <h3 style="color:#1a0005;"><i class="fa fa-gift"></i> Gift Package Delivery</h3>
+                    <p style="font-size:14px; margin-top:5px; color:#444;">Custom ribbon wrap & personalized note attached directly to the recipient.</p>
+                </div>
+            </div>
+
+            <form onsubmit="event.preventDefault(); alert('Delivery quote generated! Our dispatch team will contact you.');" style="display:grid; gap:12px; max-width:500px;">
+                <h3>Calculate Estimated Delivery</h3>
+                <select style="padding:10px; border-radius:6px; border:1px solid #ddd;" required>
+                    <option value="">Select Destination Zone</option>
+                    <option>Nairobi Zone A (CBD, Kilimani, Westlands) - KSh 300</option>
+                    <option>Nairobi Zone B (Karen, Runda, Thika Rd) - KSh 500</option>
+                    <option>Nationwide Courier Express - KSh 800</option>
+                </select>
+                <input type="text" placeholder="Specific Street / Apartment Address" required style="padding:10px; border-radius:6px; border:1px solid #ddd;">
+                <button type="submit" class="apply-btn">Check Rates & Availability</button>
+            </form>
+        </div>
+
+        <div id="contactSection" class="page-section" style="display:none;">
+            <h2><i class="fa fa-envelope"></i> Contact Us</h2>
+            <p style="margin-bottom:20px; color:#666;">Get in touch for custom corporate gift hampers, wholesale bulk orders, or general inquiries.</p>
+            
+            <form onsubmit="event.preventDefault(); alert('Thank you for your message! We will get back to you shortly.');" style="display:grid; gap:15px; max-width:600px;">
+                <input type="text" placeholder="Your Name" required style="padding:12px; border:1px solid #ddd; border-radius:6px;">
+                <input type="email" placeholder="Your Email Address" required style="padding:12px; border:1px solid #ddd; border-radius:6px;">
+                <input type="tel" placeholder="Phone Number" style="padding:12px; border:1px solid #ddd; border-radius:6px;">
+                <textarea rows="5" placeholder="Your Message or Bulk Order Requirements..." required style="padding:12px; border:1px solid #ddd; border-radius:6px;"></textarea>
+                <button type="submit" class="apply-btn">Send Message</button>
+            </form>
+        </div>
     </div>
-    <div id="signupForm" style="display:none;">
-      <input id="suName" placeholder="Full name">
-      <input id="suUser" placeholder="Username">
-      <input id="suEmail" type="email" placeholder="Email">
-      <input id="suPhone" placeholder="Phone">
-      <input id="suPass" type="password" placeholder="Password (min 4 chars)">
-      <button class="btn-primary" style="width:100%;" onclick="doSignup()">Create Buyer Account</button>
+</div>
+
+<div class="container" id="adminContainer" style="display: none;">
+    <div class="sidebar">
+        <h3>Admin Controls</h3>
+        <ul class="admin-sidebar-menu">
+            <li class="active-admin-tab" onclick="switchAdminTab('revenue')"><i class="fa fa-wallet"></i> Sales Revenue</li>
+            <li onclick="switchAdminTab('invoice')"><i class="fa fa-file-invoice-dollar"></i> Invoices</li>
+            <li onclick="switchAdminTab('commission')"><i class="fa fa-percentage"></i> Staff Commission</li>
+            <li onclick="switchAdminTab('products')"><i class="fa fa-boxes"></i> Inventory Products</li>
+            <li onclick="switchAdminTab('settings')"><i class="fa fa-sliders-h"></i> Settings</li>
+        </ul>
     </div>
-  </div>
-</div>
+    
+    <div class="content">
+        <div id="panel-revenue" class="admin-panel-card">
+            <h2>Revenue Overview</h2>
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px;">
+                <div style="background:#f4f4f4; padding:20px; border-radius:8px;">
+                    <p style="color:#666; font-size:14px;">Gross Store Sales</p>
+                    <h3 id="revenueGrossSales" style="font-size:24px; margin-top:5px; color:#1a0005;">KSh 0</h3>
+                </div>
+                <div style="background:#f4f4f4; padding:20px; border-radius:8px;">
+                    <p style="color:#666; font-size:14px;">Staff Commission Payouts</p>
+                    <h3 id="revenueCommissionsPaid" style="font-size:24px; margin-top:5px; color:#e63946;">KSh 0</h3>
+                </div>
+            </div>
+        </div>
 
-<!-- Buyer orders modal -->
-<div id="ordersModal" class="modal-bg" onclick="if(event.target===this)closeModal('ordersModal')">
-  <div class="modal" style="max-width:680px;">
-    <button class="close-x" onclick="closeModal('ordersModal')">×</button>
-    <h3>My Orders</h3>
-    <div id="ordersList"></div>
-  </div>
-</div>
+        <div id="panel-invoice" class="admin-panel-card" style="display: none;">
+            <h2>Invoices Management</h2>
+            <button class="apply-btn" style="width: auto; padding: 10px 20px; margin-bottom:15px;" onclick="openInvoiceModal()">+ Create Invoice</button>
+            <table class="admin-data-table">
+                <thead>
+                    <tr><th>Invoice ID</th><th>Customer</th><th>Product</th><th>Sales Rep</th><th>Amount</th><th>Status</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="adminInvoiceTableBody"></tbody>
+            </table>
+        </div>
 
-<!-- Checkout details modal -->
-<div id="checkoutModal" class="modal-bg" onclick="if(event.target===this)closeModal('checkoutModal')">
-  <div class="modal">
-    <button class="close-x" onclick="closeModal('checkoutModal')">×</button>
-    <h3>Delivery Details</h3>
-    <input id="coName" placeholder="Full name">
-    <input id="coPhone" placeholder="Phone">
-    <input id="coAddr" placeholder="Delivery address">
-    <textarea id="coNote" placeholder="Notes (optional)" rows="2"></textarea>
-    <button class="btn-primary" style="width:100%;" onclick="confirmOrder()">Confirm Order</button>
-    <button style="width:100%;margin-top:6px;" onclick="confirmOrderWhatsApp()">Also Send via WhatsApp</button>
-  </div>
-</div>
+        <div id="panel-commission" class="admin-panel-card" style="display: none;">
+            <h2>Sales Representative Commission</h2>
+            <table class="admin-data-table">
+                <thead>
+                    <tr><th>Staff Member</th><th>Role</th><th>Sales Volume</th><th>Commission Rate</th><th>Earned Payout</th></tr>
+                </thead>
+                <tbody id="adminCommissionTableBody"></tbody>
+            </table>
+        </div>
 
-<!-- Admin panel modal -->
-<div id="adminModal" class="modal-bg" onclick="if(event.target===this)closeModal('adminModal')">
-  <div class="modal" style="max-width:920px;">
-    <button class="close-x" onclick="closeModal('adminModal')">×</button>
-    <h3 id="adminTitle">Admin Panel</h3>
-    <div style="margin-bottom:10px;">
-      <button class="tab-btn active" data-tab="orders" onclick="adminTab('orders')">Orders</button>
-      <button class="tab-btn" data-tab="messages" onclick="adminTab('messages')">Messages <span id="msgBadge" style="background:#b30000;color:#fff;border-radius:50%;padding:1px 6px;font-size:11px;display:none;">0</span></button>
-      <button class="tab-btn" data-tab="products" onclick="adminTab('products')" id="adminTabProducts">Products</button>
-      <button class="tab-btn" data-tab="reports" onclick="adminTab('reports')">Sales Reports</button>
-      <button class="tab-btn" data-tab="users" onclick="adminTab('users')" id="adminTabUsers">Users</button>
+        <div id="panel-products" class="admin-panel-card" style="display: none;">
+            <h2>Product Catalog Inventory</h2>
+            <button class="apply-btn" style="width: auto; padding: 10px 20px; margin-bottom:15px;" onclick="openAddProductModal()">+ Add New Product</button>
+            <table class="admin-data-table">
+                <thead>
+                    <tr><th>Item Name</th><th>Category</th><th>Price</th><th>Stock Status</th></tr>
+                </thead>
+                <tbody id="adminProductsTableBody"></tbody>
+            </table>
+        </div>
+
+        <div id="panel-settings" class="admin-panel-card" style="display: none;">
+            <h2>Platform Settings & Staff Management</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                <div>
+                    <h3 style="font-size: 16px; margin-bottom: 15px; color:#e63946;">Add Staff Member</h3>
+                    <form id="addEmployeeForm" style="display: grid; gap: 12px; background: #f9f9f9; padding: 20px; border-radius: 8px;">
+                        <input type="text" id="empName" placeholder="Full Name" required style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+                        <input type="email" id="empEmail" placeholder="Email Address" required style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+                        <select id="empRole" style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+                            <option value="Salesperson">Sales Rep</option>
+                            <option value="Manager">Manager</option>
+                        </select>
+                        <input type="number" id="empCommRate" min="0" max="100" value="5" step="0.1" placeholder="Comm Rate %" required style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+                        <button type="submit" class="apply-btn">Save Staff</button>
+                    </form>
+                </div>
+                <div>
+                    <h3 style="font-size: 16px; margin-bottom: 15px; color:#e63946;">Active Roster</h3>
+                    <table class="admin-data-table">
+                        <thead><tr><th>Name</th><th>Role</th><th>Rate</th></tr></thead>
+                        <tbody id="adminEmployeesTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="adminContent"></div>
-  </div>
 </div>
 
-<!-- Inquiry modal -->
-<div id="inquiryModal" class="modal-bg" onclick="if(event.target===this)closeModal('inquiryModal')">
-  <div class="modal">
-    <button class="close-x" onclick="closeModal('inquiryModal')">×</button>
-    <h3>Send an Inquiry</h3>
-    <p style="font-size:13px;color:#888;margin:0 0 6px;">Your message goes directly to the admin team.</p>
-    <input id="inqName" placeholder="Your name">
-    <input id="inqContact" placeholder="Phone or email">
-    <input id="inqProduct" placeholder="Product (optional)" readonly style="background:#f5f5f5;">
-    <textarea id="inqMessage" placeholder="Your message" rows="4"></textarea>
-    <button class="btn-primary" style="width:100%;" onclick="submitInquiry()">Send Message</button>
-  </div>
+<div class="modal" id="adminLoginModal">
+    <div class="modal-content" style="max-width: 400px; padding: 30px;">
+        <button class="close-modal" onclick="closeModal('adminLoginModal')"><i class="fa fa-times"></i></button>
+        <h3 style="margin-bottom: 20px; text-align: center;">Admin Verification</h3>
+        <form id="adminLoginForm" style="display: grid; gap: 15px;">
+            <input type="email" id="adminEmail" placeholder="Email Address" required style="padding:12px; border:1px solid #ddd; border-radius:6px;">
+            <input type="password" id="adminPassword" placeholder="Password" required style="padding:12px; border:1px solid #ddd; border-radius:6px;">
+            <button type="submit" class="apply-btn" style="background:#e63946;">Login</button>
+        </form>
+    </div>
 </div>
 
-<!-- Product editor modal (admin) -->
-<div id="prodModal" class="modal-bg" onclick="if(event.target===this)closeModal('prodModal')">
-  <div class="modal">
-    <button class="close-x" onclick="closeModal('prodModal')">×</button>
-    <h3 id="prodModalTitle">Add Product</h3>
-    <input id="pfName" placeholder="Name">
-    <input id="pfPrice" type="number" placeholder="Price (KES)">
-    <input id="pfCategory" placeholder="Category">
-    <input id="pfSize" placeholder="Size (e.g. 750ml)">
-    <input id="pfStock" type="number" placeholder="Stock">
-    <input id="pfDiscount" type="number" placeholder="Discount % (0-90, optional)" min="0" max="90">
-    <input id="pfAbv" placeholder="ABV (optional)">
-    <input id="pfCountry" placeholder="Country (optional)">
-    <input id="pfBrand" placeholder="Brand (optional)">
-    <textarea id="pfDesc" placeholder="Description" rows="2"></textarea>
-    <label style="font-size:13px;">Image URL or upload:</label>
-    <input id="pfImage" placeholder="Image URL (or use upload)">
-    <input type="file" id="pfImageFile" accept="image/*" onchange="handleImageUpload(event)">
-    <img id="pfImagePreview" style="max-width:100%;max-height:160px;margin-top:6px;display:none;border-radius:6px;">
-    <button class="btn-primary" style="width:100%;margin-top:8px;" onclick="saveProduct()">Save Product</button>
-  </div>
+<div class="modal" id="invoiceModal">
+    <div class="modal-content" style="max-width: 500px; padding: 30px;">
+        <button class="close-modal" onclick="closeModal('invoiceModal')"><i class="fa fa-times"></i></button>
+        <h3 id="invoiceModalTitle" style="margin-bottom: 20px; text-align: center;">Create Invoice</h3>
+        <form id="invoiceForm" style="display: grid; gap: 12px;">
+            <input type="hidden" id="invId">
+            <input type="text" id="invCustomer" placeholder="Customer Name" required style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+            <input type="text" id="invProduct" placeholder="Product Description" required style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+            <select id="invSalesRep" style="padding:10px; border:1px solid #ddd; border-radius:6px;"></select>
+            <input type="number" id="invAmount" placeholder="Amount (KSh)" required style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+            <select id="invStatus" style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+                <option value="Paid">Paid</option>
+                <option value="Pending">Pending</option>
+            </select>
+            <button type="submit" class="apply-btn" style="background:#e63946;">Save Invoice</button>
+        </form>
+    </div>
 </div>
 
-<footer class="footer">
-<div class="footer-container">
-  <div class="footer-section"><h3>🍷 Acacia Liquor Store</h3><p>Your trusted shop for premium drinks & gifts.</p></div>
-  <div class="footer-section"><h4>📞 Contact</h4><p>📱 +254 731 858 997</p><p>💬 <a href="https://wa.me/254731858997" target="_blank" style="color:#25D366;">WhatsApp</a></p><p>📍 Nairobi, Kenya</p></div>
-  <div class="footer-section"><h4>💳 Payment</h4><p>M-PESA Till: 123456</p><p>Cash on Delivery</p></div>
+<div class="modal" id="itemModal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeModal('itemModal')"><i class="fa fa-times"></i></button>
+        <div class="modal-gallery">
+            <div class="main-image"><img id="modalMainImage" src=""></div>
+            <div>
+                <h2 id="modalTitle"></h2>
+                <div class="stars" id="modalStars"></div>
+                <h3 id="modalPriceText" style="color: #e63946; margin: 10px 0;"></h3>
+                <div class="item-info" id="modalItemInfo"></div>
+                
+                
+                <form style="display:grid; gap:8px; margin-top:15px;" onsubmit="event.preventDefault(); alert('Inquiry Sent!'); closeModal('itemModal');">
+                    <h4 style="font-size:14px;">Send Direct Inquiry / Message</h4>
+                    <input type="text" placeholder="Your Name" required style="padding:8px; border:1px solid #ddd; border-radius:4px;">
+                    <input type="email" placeholder="Your Email" required style="padding:8px; border:1px solid #ddd; border-radius:4px;">
+                    <textarea rows="2" placeholder="Inquiry message..." required style="padding:8px; border:1px solid #ddd; border-radius:4px;"></textarea>
+                    
+                    <label style="font-size:12px; font-weight:bold;">Rate Product:</label>
+                    <select id="userRating" style="padding:6px; border:1px solid #ddd; border-radius:4px;">
+                        <option value="5">5 - Excellent</option>
+                        <option value="4">4 - Very Good</option>
+                        <option value="3">3 - Average</option>
+                    </select>
+
+                    <button type="submit" class="apply-btn" style="margin-top:5px;">Submit Inquiry & Rating</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="related-section">
+            <h3><i class="fa fa-wine-bottle"></i> Related Products You May Like</h3>
+            <div class="related-grid" id="relatedGrid"></div>
+        </div>
+    </div>
 </div>
-<div class="footer-bottom">© 2026 Acacia Liquor Store</div>
+
+<div class="modal" id="cartModal">
+    <div class="modal-content" style="max-width: 600px; padding: 25px;">
+        <button class="close-modal" onclick="closeModal('cartModal')"><i class="fa fa-times"></i></button>
+        <h2><i class="fa fa-shopping-cart"></i> Shopping Cart & Checkout</h2>
+        
+        <div id="cartItemsList" style="margin:20px 0; max-height:200px; overflow-y:auto;"></div>
+        <div style="font-size:18px; font-weight:bold; text-align:right; margin-bottom:15px;">
+            Total: <span id="cartTotalPrice" style="color:#e63946;">KSh 0</span>
+        </div>
+
+       
+        <h3 style="font-size:15px; margin-bottom:8px;">Select Payment Method:</h3>
+        <div class="payment-methods">
+            <div class="payment-method-card active" id="payMpesa" onclick="selectPayment('mpesa')">
+                <i class="fa fa-mobile-alt fa-2x" style="color:#27ae60;"></i>
+                <div style="font-size:12px; margin-top:5px;">M-Pesa Express</div>
+            </div>
+            <div class="payment-method-card" id="payCard" onclick="selectPayment('card')">
+                <i class="fa fa-credit-card fa-2x" style="color:#2980b9;"></i>
+                <div style="font-size:12px; margin-top:5px;">Credit/Debit Card</div>
+            </div>
+            <div class="payment-method-card" id="payCod" onclick="selectPayment('cod')">
+                <i class="fa fa-money-bill-wave fa-2x" style="color:#f39c12;"></i>
+                <div style="font-size:12px; margin-top:5px;">Cash / POS</div>
+            </div>
+        </div>
+
+        <form onsubmit="processPayment(event)" style="display:grid; gap:10px;">
+            <div id="mpesaFields">
+                <input type="tel" id="mpesaPhone" placeholder="M-Pesa Phone Number (07XX XXX XXX)" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:6px;">
+            </div>
+            <div id="cardFields" style="display:none; gap:8px;">
+                <input type="text" placeholder="Cardholder Name" style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+                <input type="text" placeholder="Card Number" style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+            </div>
+            <button type="submit" class="apply-btn" style="background:#27ae60; font-size:16px;">Complete Order & Pay</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal" id="addProductModal">
+    <div class="modal-content" style="max-width: 500px; padding: 30px;">
+        <button class="close-modal" onclick="closeModal('addProductModal')"><i class="fa fa-times"></i></button>
+        <h3 style="margin-bottom: 20px; text-align: center;">Add Product Entry</h3>
+        <form id="addProductForm" style="display: grid; gap: 12px;">
+            <input type="text" id="addProdName" placeholder="Product Name" required style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+            <select id="addProdCat" style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+                <option value="Whisky">Whisky</option>
+                <option value="Wine">Wine</option>
+                <option value="SoftDrink">Soft Drink</option>
+                <option value="Gifts">Gift Set</option>
+            </select>
+            <input type="number" id="addProdPrice" placeholder="Price (KSh)" required style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+            <input type="text" id="addProdVolume" placeholder="Volume (e.g. 750ml)" style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+            <input type="text" id="addProdOrigin" placeholder="Origin Country (e.g. Scotland)" style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+            <input type="url" id="addProdImage" placeholder="Image URL" style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+            <button type="submit" class="apply-btn" style="background:#e63946;">Publish to Catalog</button>
+        </form>
+    </div>
+</div>
+
+<div class="floating-social-container">
+   
+    <a href="https://wa.me/254717346231?text=Hello%20Haven%20Liquor,%20I%20have%20an%20inquiry." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="floating-btn btn-whatsapp" 
+       title="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <a href="https://facebook.com/yourhandle" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="floating-btn btn-facebook" 
+       title="Follow us on Facebook">
+        <i class="fa-brands fa-facebook-f"></i>
+    </a>
+
+    <a href="https://instagram.com/yourhandle" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="floating-btn btn-instagram" 
+       title="Follow us on Instagram">
+        <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <a href="https://x.com/yourhandle" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="floating-btn btn-x" 
+       title="Follow us on X">
+        <i class="fa-brands fa-x-twitter"></i>
+    </a>
+</div>
+
+<footer>
+    <div class="footer-content">
+      
+        <div class="footer-section about">
+            <h4>About Haven</h4>
+            <p>Your premium marketplace for international wines, rare spirits, crisp soft drinks, and custom luxury gift hampers.</p>
+            <div class="footer-socials">
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-section links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#" onclick="showPage('wines')">Wines Collection</a></li>
+                <li><a href="#" onclick="showPage('storefront')">Wholesale Spirits</a></li>
+                <li><a href="#" onclick="showPage('gifts')">Custom Gift Hampers</a></li>
+                <li><a href="#" onclick="showPage('delivery')">Delivery Information</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section contact">
+            <h4>Contact Us</h4>
+            <p><i class="fa fa-user"></i> Joseph: +254 717 346 231</p>
+            <p><i class="fa fa-envelope"></i> sales@liquorhaven.com</p>
+            <p><i class="fa fa-clock"></i> Mon - Sat: 8:00 AM - 10:00 PM</p>
+            <p><i class="fa fa-map-marker-alt"></i> Nairobi, Kenya</p>
+        </div>
+
+       
+        <div class="footer-section newsletter">
+            <h4>Stay Connected</h4>
+            <p>Subscribe for exclusive deals and new arrivals.</p>
+            <form onsubmit="event.preventDefault();">
+                <div class="newsletter-group">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit"><i class="fa fa-paper-plane"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Haven Liquor & Gifts. All Rights Reserved.</p>
+    </div>
 </footer>
 
 <script>
-/* ============ DATA ============ */
-const productList = [
-  { name: "Baron de Valls Red", price: 650, category: "Red Wine", size: "750ml", image: "images/baron-de-valls-red-wine.jpg", stock: 50, abv:"", country:"", brand:"", description:"" },
-  { name: "Asconi Pastoral Red", price: 1300, category: "Red Wine", size: "750ml", image: "images/Asconi Pastoral Red.jpg", stock: 50, abv:"", country:"", brand:"", description:"" },
-  { name: "Obikwa Shiraz 2017", price: 1745, category: "Red Wine", size: "750ml", image: "images/Obikwa Shiraz 2017.jpg", stock: 50, abv:"", country:"", brand:"", description:"" },
-  { name: "Kumala Merlot Pinotage", price: 1575, category: "Red Wine", size: "750ml", image: "images/Kumala Merlot Pinotage.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Cielo Merlot 750 ml", price: 2200, category: "Red Wine", size: "750ml", image: "images/Cielo Merlot 750 ml.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Cielo Merlot 1l", price: 2850, category: "Red Wine", size: "1L", image: "images/Cielo Merlot 1l.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Amani Bay Smooth Red", price: 1550, category: "Red Wine", size: "750ml", image: "images/Amani Bay Smooth Red.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "4th Street Sweet Red", price: 1400, category: "Red Wine", size: "750ml", image: "images/4th Street Sweet Red.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Nederburg Cabernet Sauvignon", price: 1800, category: "Red Wine", size: "750ml", image: "images/nederburg cabernet sauvignon.jpg", stock: 20, abv:"", country:"", brand:"", description:"" },
-  { name: "Drostdy Hof Merlot", price: 1450, category: "Red Wine", size: "750ml", image: "images/drostdy hof merlot.jpg", stock: 20, abv:"", country:"", brand:"", description:"" },
-  { name: "Tall Horse Shiraz", price: 1350, category: "Red Wine", size: "750ml", image: "images/tall horse shiraz.jpg", stock: 20, abv:"", country:"", brand:"", description:"" },
-  { name: "Robertson Winery Sweet Red", price: 1200, category: "Red Wine", size: "750ml", image: "images/robertson sweet red.jpg", stock: 20, abv:"", country:"", brand:"", description:"" },
-  { name: "Four Cousins Natural Sweet Red", price: 1300, category: "Red Wine", size: "750ml", image: "images/four cousins sweet red.jpg", stock: 20, abv:"", country:"", brand:"", description:"" },
-  { name: "Zonnebloem Merlot", price: 2100, category: "Red Wine", size: "750ml", image: "images/zonnebloem merlot.jpg", stock: 15, abv:"", country:"", brand:"", description:"" },
-  { name: "Zonnebloem Shiraz", price: 2100, category: "Red Wine", size: "750ml", image: "images/zonnebloem shiraz.jpg", stock: 15, abv:"", country:"", brand:"", description:"" },
-  { name: "Durbanville Hills Merlot", price: 1950, category: "Red Wine", size: "750ml", image: "images/durbanville hills merlot.jpg", stock: 15, abv:"", country:"", brand:"", description:"" },
-  { name: "Durbanville Hills Cabernet Sauvignon", price: 2000, category: "Red Wine", size: "750ml", image: "images/durbanville cabernet.jpg", stock: 15, abv:"", country:"", brand:"", description:"" },
-  { name: "KWV Classic Collection Pinotage", price: 1600, category: "Red Wine", size: "750ml", image: "images/kwv pinotage.jpg", stock: 20, abv:"14%", country:"South Africa", brand:"KWV", description:"Rich red wine with smooth fruity taste." },
-  { name: "KWV Merlot", price: 1650, category: "Red Wine", size: "750ml", image: "images/kwv merlot.jpg", stock: 20, abv:"", country:"", brand:"", description:"" },
-  { name: "Porcupine Ridge Syrah", price: 1750, category: "Red Wine", size: "750ml", image: "images/porcupine ridge syrah.jpg", stock: 15, abv:"", country:"", brand:"", description:"" },
-  { name: "Porcupine Ridge Merlot", price: 1750, category: "Red Wine", size: "750ml", image: "images/porcupine ridge merlot.jpg", stock: 15, abv:"", country:"", brand:"", description:"" },
- 
-
-  { name: "Drostdy Hof Chenin Blanc", price: 1450, category: "White Wine", size: "750ml", image: "images/drostdy hof chenin blanc.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Drostdy Hof Sauvignon Blanc", price: 1450, category: "White Wine", size: "750ml", image: "images/drostdy hof sauvignon blanc.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Four Cousins Natural Sweet White", price: 1300, category: "White Wine", size: "750ml", image: "images/four cousins white.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Robertson Winery Chenin Blanc", price: 1400, category: "White Wine", size: "750ml", image: "images/robertson chenin.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Robertson Winery Sauvignon Blanc", price: 1400, category: "White Wine", size: "750ml", image: "images/robertson sauvignon.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Tall Horse Chardonnay", price: 1350, category: "White Wine", size: "750ml", image: "images/tall horse chardonnay.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Tall Horse Sauvignon Blanc", price: 1350, category: "White Wine", size: "750ml", image: "images/tall horse sauvignon.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Zonnebloem Chardonnay", price: 2100, category: "White Wine", size: "750ml", image: "images/zonnebloem chardonnay.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Zonnebloem Sauvignon Blanc", price: 2100, category: "White Wine", size: "750ml", image: "images/zonnebloem sauvignon.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Durbanville Hills Chardonnay", price: 2000, category: "White Wine", size: "750ml", image: "images/durbanville chardonnay.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Durbanville Hills Sauvignon Blanc", price: 2000, category: "White Wine", size: "750ml", image: "images/durbanville sauvignon.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "KWV Sauvignon Blanc", price: 1650, category: "White Wine", size: "750ml", image: "images/kwv sauvignon.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "KWV Chardonnay", price: 1650, category: "White Wine", size: "750ml", image: "images/kwv chardonnay.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Porcupine Ridge Chardonnay", price: 1750, category: "White Wine", size: "750ml", image: "images/porcupine chardonnay.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Porcupine Ridge Sauvignon Blanc", price: 1750, category: "White Wine", size: "750ml", image: "images/porcupine sauvignon.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Allesverloren Chenin Blanc", price: 2400, category: "White Wine", size: "750ml", image: "images/allesverloren chenin.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Allesverloren Chardonnay", price: 2400, category: "White Wine", size: "750ml", image: "images/allesverloren chardonnay.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Amani Bay Crisp White", price: 1500, category: "White Wine", size: "750ml", image: "images/amani bay white.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "4th Street Natural Sweet White", price: 1400, category: "White Wine", size: "750ml", image: "images/4th street white.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-  { name: "Nederburg Chardonnay", price: 1950, category: "White Wine", size: "750ml", image: "images/nederburg chardonnay.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-
-  
-
-{ name: "Jameson Irish Whiskey 4.5", price: 18000, category: "Whiskey", size: "4.5l", image: "images/Jameson Irish Whiskey 4.5.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Glenfiddich 12 Years", price: 5500, category: "Whiskey", size: "750ml", image: "images/Glenfiddich 12 Years.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Johnnie Walker Black Label", price: 3600, category: "Whiskey", size: "750ml", image: "images/Johnnie Walker Black Label.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Johnnie Walker Red Label", price: 2100, category: "Whiskey", size: "750ml", image: "images/Johnnie Walker Red Label.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Black & White Blackl", price: 1400, category: "Whiskey", size: "750ml", image: "images/Black & White Black.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Chivas Regal 12 Years", price: 4200, category: "Whiskey", size: "750ml", image: "images/Chivas Regal 12 Years.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Chivas Regal 12 Years", price: 4200, category: "Whiskey", size: "1L", image: "images/Chivas Regal 12 Years..jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Ballantine's Finest", price: 2500, category: "Whiskey", size: "750ml", image: "images/Ballantine's Finest.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Famous Grouse", price: 2300, category: "Whiskey", size: "750ml", image: "images/Famous Grouse.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "William Lawson's William Lawson's Scotch l", price: 1900, category: "Whiskey", size: "750ml", image: "images/William Lawson's William Lawson's Scotch.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "William Lawson's WillIam Lawsons Spiced Whisky", price: 1800, category: "Whiskey", size: "700ml", image: "images/William Lawson's WillIam Lawsons Spiced Whisky.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Best Best Whisky", price: 1800, category: "Whiskey", size: "700ml", image: "images/Best Best Whisky.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Jack Daniel's Jack 1l", price: 5200, category: "Whiskey", size: "1l", image: "images/Jack Daniel's Jack 1l.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Jack Daniel's Honey", price: 4000, category: "Whiskey", size: "700ml", image: "images/Jack Daniel's Honey.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Jagermeister Herbal Liqueur", price: 5000, category: "Whiskey", size: "750ml", image: "images/Jagermeister Herbal Liqueur.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Singleton Singleton of Dufftown 12 yrs single malt", price: 6000, category: "Whiskey", size: "750ml", image: "images/Singleton Singleton of Dufftown 12 yrs single malt.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Hennessy VS NBA Limited edition", price: 13500, category: "Whiskey", size: "700ml", image: "images/Hennessy VS NBA Limited edition.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Hennessy VS Cognac", price: 7500, category: "Whiskey", size: "350ml", image: "images/Hennessy VS Cognac.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Martell Martell Cognac VS", price: 5000, category: "Whiskey", size: "700ml", image: "images/Martell Martell Cognac VS.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-
-
-{ name: "Skyy Vodka", price: 1100, category: "Vodka", size: "750ml", image: "images/Skyy Vodka.jpg", stock: 10, abv:"40%", country:"USA", brand:"Skyy", description:"Smooth vodka with triple distillation purity." },
-{ name: "Absolut Vodka", price: 2100, category: "Vodka", size: "750ml", image: "images/Absolut Vodka.jpg", stock: 10, abv:"40%", country:"Sweden", brand:"Absolut", description:"Premium Swedish vodka made from winter wheat." },
-{ name: "Ciroc Vodka", price: 5200, category: "Vodka", size: "750ml", image: "images/Ciroc Vodka.jpg", stock: 10, abv:"40%", country:"France", brand:"Ciroc", description:"Grape-based ultra-premium vodka with smooth finish." },
-{ name: "Chrome Vodka", price: 800, category: "Vodka", size: "750ml", image: "images/chrome-vodka.jpg", stock: 10, abv:"37.5%", country:"Kenya", brand:"Chrome", description:"Affordable local vodka with strong kick." },
-{ name: "Chrome Lemon", price: 700, category: "Vodka", size: "750ml", image: "images/Chrome Lemon.jpg", stock: 10, abv:"37.5%", country:"Kenya", brand:"Chrome", description:"Lemon-flavored vodka with a sweet citrus twist." },
-{ name: "Belvedere Vodka", price: 5200, category: "Vodka", size: "750ml", image: "images/Belvedere Vodka.jpg", stock: 10, abv:"40%", country:"Poland", brand:"Belvedere", description:"Luxury rye vodka with creamy smooth taste." },
-{ name: "Kibao Kibao Vodka", price: 700, category: "Vodka", size: "750ml", image: "images/Kibao Kibao Vodka.jpg", stock: 10, abv:"37.5%", country:"Kenya", brand:"Kibao Kibao", description:"Budget-friendly local vodka spirit." },
-{ name: "Flirt Vodka Strawberry", price: 4000, category: "Vodka", size: "1l", image: "images/Flirt Vodka Strawberry.jpg", stock: 10, abv:"37.5%", country:"Germany", brand:"Flirt", description:"Sweet strawberry-flavored vodka." },
-{ name: "Smirnoff Vodka Red Label", price: 4000, category: "Vodka", size: "750ml", image: "images/Smirnoff Vodka Red Label.jpg", stock: 10, abv:"37.5%", country:"Russia", brand:"Smirnoff", description:"Classic triple distilled vodka." },
-{ name: "Smirnoff Blue No. 57 Premium Vodka", price: 4000, category: "Vodka", size: "1l", image: "images/Smirnoff Blue No. 57 Premium Vodka.jpg", stock: 10, abv:"50%", country:"Russia", brand:"Smirnoff", description:"High-strength premium vodka." },
-{ name: "Smirnoff No. 21 Vodka", price: 4000, category: "Vodka", size: "1l", image: "images/Smirnoff No. 21 Vodka.jpg", stock: 10, abv:"37.5%", country:"Russia", brand:"Smirnoff", description:"World-famous smooth vodka." },
-{ name: "Kenya Cane Smooth Spirit", price: 2500, category: "Vodka", size: "1l", image: "images/Kenya Cane Smooth Spirit.jpg", stock: 10, abv:"37.5%", country:"Kenya", brand:"Kenya Cane", description:"Local sugarcane spirit with smooth taste." },
-{ name: "Hunter's Choice Whisky", price: 900, category: "Vodka", size: "250ml", image: "images/Hunter's Choice Whisky.jpg", stock: 10, abv:"37.5%", country:"Kenya", brand:"Hunter's Choice", description:"Budget whisky-style spirit." },
-{ name: "Best Classic Whiskey", price: 1800, category: "Vodka", size: "750ml", image: "images/Best Classic Whiskey.jpg", stock: 10, abv:"37.5%", country:"Kenya", brand:"Best", description:"Locally popular blended spirit." },
-{ name: "Best Classic Whiskey", price: 500, category: "Vodka", size: "250ml", image: "images/Best Classic Whiskey.jpg", stock: 10, abv:"37.5%", country:"Kenya", brand:"Best", description:"Small pack budget spirit." },
-{ name: "County County", price: 800, category: "Vodka", size: "1l", image: "images/County County.jpg", stock: 10, abv:"37.5%", country:"Kenya", brand:"County County", description:"Affordable local distilled spirit." },
-{ name: "Grey Goose Vodka", price: 6500, category: "Vodka", size: "750ml", image: "images/grey goose.jpg", stock: 10, abv:"40%", country:"France", brand:"Grey Goose", description:"Ultra-premium wheat vodka with soft finish." },
-{ name: "Russian Standard Vodka", price: 2800, category: "Vodka", size: "750ml", image: "images/russian standard.jpg", stock: 10, abv:"40%", country:"Russia", brand:"Russian Standard", description:"Authentic Russian vodka with crisp taste." },
-{ name: "Stolichnaya Vodka", price: 3000, category: "Vodka", size: "750ml", image: "images/stolichnaya.jpg", stock: 10, abv:"40%", country:"Latvia", brand:"Stolichnaya", description:"Classic Eastern European vodka." },
-{ name: "Eristoff Vodka", price: 1800, category: "Vodka", size: "750ml", image: "images/eristoff.jpg", stock: 10, abv:"37.5%", country:"Georgia", brand:"Eristoff", description:"Smooth triple distilled vodka." },
-{ name: "Three Sixty Vodka", price: 3200, category: "Vodka", size: "750ml", image: "images/three sixty.jpg", stock: 10, abv:"37.5%", country:"Germany", brand:"Three Sixty", description:"Diamond filtered premium vodka." },
-{ name: "Smirnoff Ice Black Can pack of 6- 330ml ", price: 3200, category: "Vodka", size: "300ml", image: "images/Smirnoff Ice Black Can - 330ml.jpg", stock: 10 },
-{ name: "Pepsi Soft Drink 1L", price: 120, category: "Soft drinks", size: "1L", image: "images/pepsi 1l.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Mirinda Orange Soft Drink 1L", price: 120, category: "Soft drinks", size: "1L", image: "images/mirinda 1l.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "7Up Soft Drink 1L", price: 120, category: "Soft drinks", size: "1L", image: "images/7up 1l.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Coca Cola Soft Drink 1.25L", price: 130, category: "Soft drinks", size: "1.25L", image: "images/coca cola 1.25l.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Fanta Blackcurrant Soft Drink 1.25L", price: 130, category: "Soft drinks", size: "1.25L", image: "images/fanta blackcurrant 1.25l.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-
-{ name: "Coca Cola Soft Drink 2L", price: 150, category: "Soft drinks", size: "2L", image: "images/coca cola 2l.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Fanta Orange Soft Drink 2L", price: 150, category: "Soft drinks", size: "2L", image: "images/fanta 2l.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Pepsi Soft Drink 2L", price: 150, category: "Soft drinks", size: "2L", image: "images/pepsi 2l.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Mirinda Soft Drink 2L", price: 150, category: "Soft drinks", size: "2L", image: "images/mirinda 2l.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-
-{ name: "Krest Bitter Lemon 300ml", price: 70, category: "Soft drinks", size: "300ml", image: "images/krest bitter lemon.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Stoney Tangawizi 300ml", price: 70, category: "Soft drinks", size: "300ml", image: "images/stoney tangawizi.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Schweppes Tonic Water 300ml", price: 70, category: "Soft drinks", size: "300ml", image: "images/schweppes tonic.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Schweppes Ginger Ale 300ml", price: 70, category: "Soft drinks", size: "300ml", image: "images/schweppes ginger ale.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Krest Club Soda 300ml", price: 70, category: "Soft drinks", size: "300ml", image: "images/krest club soda.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-
-{ name: "Coca Cola 300ml", price: 60, category: "Soda", size: "300ml", image: "images/coca cola 300ml.jpg", stock: 20, abv:"", country:"", brand:"", description:"" },
-{ name: "Fanta Orange 300ml", price: 60, category: "Soda", size: "300ml", image: "images/fanta 300ml.jpg", stock: 20, abv:"", country:"", brand:"", description:"" },
-{ name: "Sprite 300ml", price: 60, category: "Soda", size: "300ml", image: "images/sprite 300ml.jpg", stock: 20, abv:"", country:"", brand:"", description:"" },
-{ name: "Pepsi 500ml", price: 80, category: "Soda", size: "500ml", image: "images/pepsi 500ml.jpg", stock: 20, abv:"", country:"", brand:"", description:"" },
-{ name: "Mirinda Orange 500ml", price: 80, category: "Soda", size: "500ml", image: "images/mirinda 500ml.jpg", stock: 20, abv:"", country:"", brand:"", description:"" },
-{ name: "7Up 500ml", price: 80, category: "Soda", size: "500ml", image: "images/7up 500ml.jpg", stock: 20, abv:"", country:"", brand:"", description:"" },
-{ name: "Mountain Dew 500ml", price: 90, category: "Soda", size: "500ml", image: "images/mountain dew 500ml.jpg", stock: 20, abv:"", country:"", brand:"", description:"" },
-{ name: "Coca Cola Zero 1L", price: 120, category: "Soda", size: "1L", image: "images/coca cola zero 1l.jpg", stock: 15, abv:"", country:"", brand:"", description:"" },
-{ name: "Fanta Blackcurrant 1L", price: 120, category: "Soda", size: "1L", image: "images/fanta blackcurrant.jpg", stock: 15, abv:"", country:"", brand:"", description:"" },
-{ name: "Sprite 2L", price: 150, category: "Soda", size: "2L", image: "images/sprite 2l.jpg", stock: 15, abv:"", country:"", brand:"", description:"" },
-
-{ name: "Romantic Chocolate Box", price: 2500, category: "Gifts for her", size: "Medium", image: "images/romantic chocolate box.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Perfume Gift Set", price: 4500, category: "Gifts for her", size: "Mixed", image: "images/perfume set.jpg", stock: 8, abv:"", country:"", brand:"", description:"" },
-{ name: "Luxury Spa Gift Basket", price: 6000, category: "Gifts for her", size: "Large", image: "images/spa gift basket.jpg", stock: 5, abv:"", country:"", brand:"", description:"" },
-{ name: "Flowers and Chocolate Combo", price: 3000, category: "Gifts for her", size: "Mixed", image: "images/flowers chocolate.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Makeup Kit Gift Set", price: 5500, category: "Gifts for her", size: "Mixed", image: "images/makeup kit.jpg", stock: 7, abv:"", country:"", brand:"", description:"" },
-{ name: "Handbag Gift Package", price: 5000, category: "Gifts for her", size: "Large", image: "images/handbag gift.jpg", stock: 6, abv:"", country:"", brand:"", description:"" },
-{ name: "Jewelry Gift Box", price: 7000, category: "Gifts for her", size: "Small", image: "images/jewelry box.jpg", stock: 5, abv:"", country:"", brand:"", description:"" },
-{ name: "Teddy Bear Gift Set", price: 2800, category: "Gifts for her", size: "Medium", image: "images/teddy set.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Skincare Gift Set", price: 4800, category: "Gifts for her", size: "Mixed", image: "images/skincare set.jpg", stock: 8, abv:"", country:"", brand:"", description:"" },
-{ name: "Ladies Surprise Box", price: 4000, category: "Gifts for her", size: "Mixed", image: "images/ladies surprise.jpg", stock: 8, abv:"", country:"", brand:"", description:"" },
-
-{ name: "Whiskey Gift Set", price: 6500, category: "Gifts for him", size: "Mixed", image: "images/whiskey gift set.jpg", stock: 5, abv:"", country:"", brand:"", description:"" },
-{ name: "Men’s Grooming Kit", price: 4500, category: "Gifts for him", size: "Mixed", image: "images/grooming kit.jpg", stock: 8, abv:"", country:"", brand:"", description:"" },
-{ name: "Leather Wallet Gift Box", price: 3000, category: "Gifts for him", size: "Small", image: "images/wallet gift.jpg", stock: 10, abv:"", country:"", brand:"", description:"" },
-{ name: "Watch Gift Set", price: 7000, category: "Gifts for him", size: "Medium", image: "images/watch set.jpg", stock: 6, abv:"", country:"", brand:"", description:"" },
-{ name: "Perfume Gift Set for Him", price: 5000, category: "Gifts for him", size: "Mixed", image: "images/mens perfume.jpg", stock: 7, abv:"", country:"", brand:"", description:"" },
-{ name: "Executive Gift Box", price: 8000, category: "Gifts for him", size: "Large", image: "images/executive box.jpg", stock: 4, abv:"", country:"", brand:"", description:"" },
-{ name: "BBQ Gift Set", price: 5500, category: "Gifts for him", size: "Large", image: "images/bbq set.jpg", stock: 5, abv:"", country:"", brand:"", description:"" },
-{ name: "Sports Fan Gift Pack", price: 3500, category: "Gifts for him", size: "Medium", image: "images/sports gift.jpg", stock: 8, abv:"", country:"", brand:"", description:"" },
-{ name: "Classic Gentleman Set", price: 6000, category: "Gifts for him", size: "Mixed", image: "images/gentleman set.jpg", stock: 5, abv:"", country:"", brand:"", description:"" },
-{ name: "Men’s Surprise Box", price: 4200, category: "Gifts for him", size: "Mixed", image: "images/mens surprise.jpg", stock: 8, abv:"", country:"", brand:"", description:"" },
-
-{ name: "Captain Morgan Spiced Rum", price: 2500, category: "Rum", size: "750ml", image: "images/captain morgan.jpg", stock: 10, abv:"35%", country:"Jamaica", brand:"Captain Morgan", description:"Smooth spiced rum with vanilla and caramel notes." },
-{ name: "Bacardi Carta Blanca", price: 2300, category: "Rum", size: "750ml", image: "images/bacardi white.jpg", stock: 10, abv:"37.5%", country:"Puerto Rico", brand:"Bacardi", description:"Light white rum ideal for cocktails." },
-{ name: "Bacardi Spiced Rum", price: 2400, category: "Rum", size: "750ml", image: "images/bacardi spiced.jpg", stock: 10, abv:"35%", country:"Puerto Rico", brand:"Bacardi", description:"Smooth spiced rum with oak and vanilla flavor." },
-{ name: "Malibu Coconut Rum", price: 2600, category: "Rum", size: "750ml", image: "images/malibu.jpg", stock: 10, abv:"21%", country:"Barbados", brand:"Malibu", description:"Coconut-flavored Caribbean rum." },
- { name: "Jose Cuervo Especial Gold", price: 2800, category: "Tequila", size: "750ml", image: "images/jose cuervo gold.jpg", stock: 10, abv:"38%", country:"Mexico", brand:"Jose Cuervo", description:"Smooth golden tequila with oak flavor." },
-
-{ name: "Jose Cuervo Silver", price: 2700, category: "Tequila", size: "750ml", image: "images/jose cuervo silver.jpg", stock: 10, abv:"38%", country:"Mexico", brand:"Jose Cuervo", description:"Clean and crisp silver tequila." },
-{ name: "Olmeca Tequila Blanco", price: 3200, category: "Tequila", size: "750ml", image: "images/olmeca blanco.jpg", stock: 10, abv:"38%", country:"Mexico", brand:"Olmeca", description:"Pure agave tequila with fresh taste." },
-{ name: "Patron Silver Tequila", price: 7500, category: "Tequila", size: "750ml", image: "images/patron silver.jpg", stock: 10, abv:"40%", country:"Mexico", brand:"Patron", description:"Ultra-premium smooth tequila." },
-{ name: "Heineken Lager Beer", price: 220, category: "Beer", size: "330ml", image: "images/heineken.jpg", stock: 50, abv:"5%", country:"Netherlands", brand:"Heineken", description:"Premium European lager beer." },
-
-{ name: "Tusker Lager", price: 180, category: "Beer", size: "500ml", image: "images/tusker.jpg", stock: 50, abv:"4.2%", country:"Kenya", brand:"Tusker", description:"Kenya’s most popular beer." },
-{ name: "Guinness Stout", price: 250, category: "Beer", size: "330ml", image: "images/guinness.jpg", stock: 40, abv:"4.2%", country:"Ireland", brand:"Guinness", description:"Rich dark stout with creamy finish." },
-{ name: "Savanna Dry Cider", price: 300, category: "Beer", size: "330ml", image: "images/savanna.jpg", stock: 30, abv:"5.5%", country:"South Africa", brand:"Savanna", description:"Crisp apple cider with dry finish." }
-  ,
-  // ===== NEW: Gin =====
-  { name: "Gordon's London Dry Gin", price: 1800, category: "Gin", size: "750ml", image: "images/gordons-gin.jpg", stock: 15, abv:"37.5%", country:"UK", brand:"Gordon's", description:"Classic London dry gin with juniper notes." },
-  { name: "Bombay Sapphire", price: 3200, category: "Gin", size: "750ml", image: "images/bombay-sapphire.jpg", stock: 12, abv:"40%", country:"UK", brand:"Bombay", description:"Premium gin infused with 10 botanicals." },
-  { name: "Tanqueray London Dry", price: 3500, category: "Gin", size: "750ml", image: "images/tanqueray.jpg", stock: 10, abv:"43.1%", country:"UK", brand:"Tanqueray", description:"Award-winning gin with crisp citrus finish." },
-  { name: "Beefeater Gin", price: 2400, category: "Gin", size: "750ml", image: "images/beefeater.jpg", stock: 12, abv:"40%", country:"UK", brand:"Beefeater", description:"Traditional London dry gin." },
-  { name: "Hendrick's Gin", price: 5500, category: "Gin", size: "750ml", image: "images/hendricks.jpg", stock: 8, abv:"41.4%", country:"Scotland", brand:"Hendrick's", description:"Cucumber and rose petal infused gin." },
-  { name: "Monkey 47 Schwarzwald Gin", price: 8500, category: "Gin", size: "500ml", image: "images/monkey47.jpg", stock: 5, abv:"47%", country:"Germany", brand:"Monkey 47", description:"Complex craft gin with 47 botanicals." },
-
-  // ===== NEW: Brandy =====
-  { name: "Viceroy Brandy", price: 1900, category: "Brandy", size: "750ml", image: "images/viceroy.jpg", stock: 15, abv:"43%", country:"South Africa", brand:"Viceroy", description:"Smooth South African brandy." },
-  { name: "Klipdrift Premium", price: 2200, category: "Brandy", size: "750ml", image: "images/klipdrift.jpg", stock: 12, abv:"43%", country:"South Africa", brand:"Klipdrift", description:"Award-winning premium brandy." },
-  { name: "Richot Brandy", price: 1700, category: "Brandy", size: "750ml", image: "images/richot.jpg", stock: 15, abv:"43%", country:"South Africa", brand:"Richot", description:"Mellow and smooth brandy." },
-  { name: "Remy Martin VSOP", price: 8500, category: "Brandy", size: "750ml", image: "images/remy-vsop.jpg", stock: 6, abv:"40%", country:"France", brand:"Remy Martin", description:"Fine champagne cognac, aged to perfection." },
-
-  // ===== NEW: Champagne & Sparkling =====
-  { name: "Moet & Chandon Imperial", price: 12000, category: "Champagne", size: "750ml", image: "images/moet-imperial.jpg", stock: 6, abv:"12%", country:"France", brand:"Moet & Chandon", description:"Iconic champagne with bright fruitiness." },
-  { name: "Veuve Clicquot Yellow Label", price: 14000, category: "Champagne", size: "750ml", image: "images/veuve-clicquot.jpg", stock: 5, abv:"12%", country:"France", brand:"Veuve Clicquot", description:"Bold and powerful champagne." },
-  { name: "Dom Perignon Vintage", price: 38000, category: "Champagne", size: "750ml", image: "images/dom-perignon.jpg", stock: 2, abv:"12.5%", country:"France", brand:"Dom Perignon", description:"Prestige cuvee — rich and complex." },
-  { name: "JC Le Roux La Chanson", price: 1200, category: "Champagne", size: "750ml", image: "images/jc-le-roux.jpg", stock: 15, abv:"7%", country:"South Africa", brand:"JC Le Roux", description:"Sweet sparkling wine." },
-  { name: "Martini Asti", price: 2200, category: "Champagne", size: "750ml", image: "images/martini-asti.jpg", stock: 10, abv:"7.5%", country:"Italy", brand:"Martini", description:"Sweet Italian sparkling wine." },
-  { name: "Prosecco DOC", price: 2500, category: "Champagne", size: "750ml", image: "images/prosecco.jpg", stock: 12, abv:"11%", country:"Italy", brand:"Prosecco", description:"Light and crisp Italian sparkler." },
-
-  // ===== NEW: Liqueurs =====
-  { name: "Baileys Irish Cream", price: 2800, category: "Liqueur", size: "750ml", image: "images/baileys.jpg", stock: 15, abv:"17%", country:"Ireland", brand:"Baileys", description:"Creamy Irish whiskey liqueur." },
-  { name: "Amarula Cream", price: 2200, category: "Liqueur", size: "750ml", image: "images/amarula.jpg", stock: 15, abv:"17%", country:"South Africa", brand:"Amarula", description:"African marula fruit cream liqueur." },
-  { name: "Kahlua Coffee Liqueur", price: 2600, category: "Liqueur", size: "750ml", image: "images/kahlua.jpg", stock: 10, abv:"20%", country:"Mexico", brand:"Kahlua", description:"Rich coffee liqueur." },
-  { name: "Cointreau", price: 3500, category: "Liqueur", size: "700ml", image: "images/cointreau.jpg", stock: 8, abv:"40%", country:"France", brand:"Cointreau", description:"Premium triple sec orange liqueur." },
-  { name: "Sambuca Romana", price: 2400, category: "Liqueur", size: "750ml", image: "images/sambuca.jpg", stock: 10, abv:"38%", country:"Italy", brand:"Romana", description:"Classic Italian anise liqueur." },
-
-  // ===== NEW: Cider & Ready-to-drink =====
-  { name: "Hunter's Gold Cider", price: 250, category: "Cider", size: "330ml", image: "images/hunters-gold.jpg", stock: 40, abv:"4.5%", country:"South Africa", brand:"Hunter's", description:"Sweet apple cider." },
-  { name: "Savanna Light Cider", price: 280, category: "Cider", size: "330ml", image: "images/savanna-light.jpg", stock: 30, abv:"3%", country:"South Africa", brand:"Savanna", description:"Crisp light cider." },
-  { name: "Strongbow Apple Cider", price: 280, category: "Cider", size: "330ml", image: "images/strongbow.jpg", stock: 30, abv:"4.5%", country:"UK", brand:"Strongbow", description:"Classic apple cider." },
-  { name: "Smirnoff Ice Original", price: 260, category: "Cider", size: "275ml", image: "images/smirnoff-ice.jpg", stock: 40, abv:"5%", country:"Russia", brand:"Smirnoff", description:"Refreshing vodka-based RTD." },
-
-  // ===== NEW: Water & Juice =====
-  { name: "Dasani Bottled Water 500ml", price: 50, category: "Water & Juice", size: "500ml", image: "images/dasani-500.jpg", stock: 100, abv:"", country:"Kenya", brand:"Dasani", description:"Pure bottled drinking water." },
-  { name: "Aquafina 1L", price: 90, category: "Water & Juice", size: "1L", image: "images/aquafina.jpg", stock: 60, abv:"", country:"Kenya", brand:"Aquafina", description:"Purified bottled water." },
-  { name: "Keringet Mineral Water 1.5L", price: 110, category: "Water & Juice", size: "1.5L", image: "images/keringet.jpg", stock: 60, abv:"", country:"Kenya", brand:"Keringet", description:"Natural mineral water from Kenyan highlands." },
-  { name: "Minute Maid Orange Juice 1L", price: 200, category: "Water & Juice", size: "1L", image: "images/minute-maid.jpg", stock: 30, abv:"", country:"Kenya", brand:"Minute Maid", description:"100% orange juice." },
-  { name: "Del Monte Pineapple Juice 1L", price: 220, category: "Water & Juice", size: "1L", image: "images/del-monte.jpg", stock: 30, abv:"", country:"Kenya", brand:"Del Monte", description:"Sweet pineapple juice." },
-  { name: "Red Bull Energy Drink", price: 280, category: "Water & Juice", size: "250ml", image: "images/red-bull.jpg", stock: 40, abv:"", country:"Austria", brand:"Red Bull", description:"Classic energy drink." },
-  { name: "Monster Energy Drink", price: 300, category: "Water & Juice", size: "500ml", image: "images/monster.jpg", stock: 30, abv:"", country:"USA", brand:"Monster", description:"High-caffeine energy boost." },
-
-  // ===== NEW: Snacks =====
-  { name: "Pringles Original 165g", price: 350, category: "Snacks", size: "165g", image: "images/pringles.jpg", stock: 25, abv:"", country:"USA", brand:"Pringles", description:"Crispy stacked potato chips." },
-  { name: "Doritos Nacho Cheese", price: 320, category: "Snacks", size: "150g", image: "images/doritos.jpg", stock: 25, abv:"", country:"USA", brand:"Doritos", description:"Cheese tortilla chips." },
-  { name: "Lay's Salted Chips", price: 150, category: "Snacks", size: "75g", image: "images/lays.jpg", stock: 40, abv:"", country:"Kenya", brand:"Lay's", description:"Classic salted potato chips." },
-  { name: "Cadbury Dairy Milk 100g", price: 280, category: "Snacks", size: "100g", image: "images/cadbury.jpg", stock: 30, abv:"", country:"UK", brand:"Cadbury", description:"Smooth milk chocolate bar." },
-  { name: "KitKat 4-Finger", price: 180, category: "Snacks", size: "45g", image: "images/kitkat.jpg", stock: 50, abv:"", country:"UK", brand:"Nestle", description:"Crispy chocolate wafer bar." },
-  { name: "Salted Peanuts 200g", price: 250, category: "Snacks", size: "200g", image: "images/peanuts.jpg", stock: 30, abv:"", country:"Kenya", brand:"Local", description:"Roasted salted peanuts — perfect bar snack." },
-  { name: "Mixed Nuts Pack 250g", price: 600, category: "Snacks", size: "250g", image: "images/mixed-nuts.jpg", stock: 20, abv:"", country:"Kenya", brand:"Local", description:"Premium mixed nuts assortment." }
-
+const products = [
+    { id: 1, name: "Glenfiddich 18 Year Single Malt", category: "Whisky", abv: "High", volume: "750ml", origin: "Scotland", rating: 5, price: "KSh 14,500", rawPrice: 14500, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 2, name: "Moët & Chandon Brut Impérial", category: "Wine", abv: "Low", volume: "750ml", origin: "France", rating: 4, price: "KSh 9,200", rawPrice: 9200, inStock: true, images: ["https://images.unsplash.com/photo-1569919659476-f0852f6834b7?q=80&w=1000"] },
+    { id: 3, name: "Executive Whiskey & Cigar Gift Hamper", category: "Gifts", abv: "High", volume: "Gift Box", origin: "Scotland", rating: 5, price: "KSh 22,000", rawPrice: 22000, inStock: true, images: ["https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000"] },
+    { id: 4, name: "San Pellegrino Sparkling Beverage (Pack)", category: "SoftDrink", abv: "Non-Alcoholic", volume: "330ml", origin: "Italy", rating: 4, price: "KSh 1,850", rawPrice: 1850, inStock: true, images: ["https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=1000"] },
+    { id: 5, name: "Penfolds Bin 389 Shiraz Cabernet", category: "Wine", abv: "Low", volume: "750ml", origin: "Australia", rating: 5, price: "KSh 11,000", rawPrice: 11000, inStock: false, images: ["https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1000"] },
+    { id: 6, name: "Luxury Gourmet Wine & Chocolate Box", category: "Gifts", abv: "Low", volume: "Gift Box", origin: "France", rating: 5, price: "KSh 15,500", rawPrice: 15500, inStock: true, images: ["https://images.unsplash.com/photo-1513201099705-a9746e1e201f?q=80&w=1000"] },
+    { id: 7, name: "Macallan 12 Year Double Cask", category: "Whisky", abv: "High", volume: "750ml", origin: "Scotland", rating: 5, price: "KSh 12,800", rawPrice: 12800, inStock: true, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 8, name: "Lagavulin 16 Year Old Single Malt", category: "Whisky", abv: "High", volume: "750ml", origin: "Scotland", rating: 5, price: "KSh 17,500", rawPrice: 17500, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 9, name: "Johnnie Walker Blue Label", category: "Whisky", abv: "High", volume: "750ml", origin: "Scotland", rating: 5, price: "KSh 28,500", rawPrice: 28500, inStock: true, images: ["https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000"] },
+    { id: 10, name: "Jack Daniel's Old No. 7 Tennessee Whiskey", category: "Whisky", abv: "High", volume: "1 Litre", origin: "USA", rating: 4, price: "KSh 5,800", rawPrice: 5800, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 11, name: "Jameson Irish Whiskey", category: "Whisky", abv: "High", volume: "750ml", origin: "Ireland", rating: 4, price: "KSh 3,500", rawPrice: 3500, inStock: true, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 12, name: "Chivas Regal 18 Year Old", category: "Whisky", abv: "High", volume: "750ml", origin: "Scotland", rating: 5, price: "KSh 10,500", rawPrice: 10500, inStock: true, images: ["https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000"] },
+    { id: 13, name: "Talisker 10 Year Old Single Malt", category: "Whisky", abv: "High", volume: "750ml", origin: "Scotland", rating: 4, price: "KSh 9,800", rawPrice: 9800, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 14, name: "Oban 14 Year Old Single Malt", category: "Whisky", abv: "High", volume: "750ml", origin: "Scotland", rating: 5, price: "KSh 13,200", rawPrice: 13200, inStock: false, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 15, name: "Highland Park 12 Year Old", category: "Whisky", abv: "High", volume: "750ml", origin: "Scotland", rating: 4, price: "KSh 8,500", rawPrice: 8500, inStock: true, images: ["https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000"] },
+    { id: 16, name: "Woodford Reserve Bourbon", category: "Whisky", abv: "High", volume: "750ml", origin: "USA", rating: 4, price: "KSh 6,900", rawPrice: 6900, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 17, name: "Bulleit Frontier Bourbon", category: "Whisky", abv: "High", volume: "750ml", origin: "USA", rating: 4, price: "KSh 5,500", rawPrice: 5500, inStock: true, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 18, name: "Maker's Mark Kentucky Bourbon", category: "Whisky", abv: "High", volume: "750ml", origin: "USA", rating: 4, price: "KSh 6,200", rawPrice: 6200, inStock: true, images: ["https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000"] },
+    { id: 19, name: "Ardbeg 10 Year Old Islay Malt", category: "Whisky", abv: "High", volume: "750ml", origin: "Scotland", rating: 5, price: "KSh 11,500", rawPrice: 11500, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 20, name: "Laphroaig 10 Year Old", category: "Whisky", abv: "High", volume: "750ml", origin: "Scotland", rating: 4, price: "KSh 10,800", rawPrice: 10800, inStock: true, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 21, name: "Yamazaki 12 Year Japanese Whisky", category: "Whisky", abv: "High", volume: "750ml", origin: "Japan", rating: 5, price: "KSh 32,000", rawPrice: 32000, inStock: false, images: ["https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000"] },
+    { id: 22, name: "Nikka Coffey Grain Whisky", category: "Whisky", abv: "High", volume: "750ml", origin: "Japan", rating: 5, price: "KSh 14,000", rawPrice: 14000, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 23, name: "Hibiki Japanese Harmony", category: "Whisky", abv: "High", volume: "750ml", origin: "Japan", rating: 5, price: "KSh 24,000", rawPrice: 24000, inStock: true, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 24, name: "Bushmills 10 Year Single Malt", category: "Whisky", abv: "High", volume: "750ml", origin: "Ireland", rating: 4, price: "KSh 5,900", rawPrice: 5900, inStock: true, images: ["https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000"] },
+    { id: 25, name: "Redbreast 12 Year Irish Whiskey", category: "Whisky", abv: "High", volume: "750ml", origin: "Ireland", rating: 5, price: "KSh 12,500", rawPrice: 12500, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 26, name: "Aberlour 12 Year Double Cask", category: "Whisky", abv: "High", volume: "750ml", origin: "Scotland", rating: 4, price: "KSh 9,500", rawPrice: 9500, inStock: true, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 27, name: "Balvenie 14 Year Caribbean Cask", category: "Whisky", abv: "High", volume: "750ml", origin: "Scotland", rating: 5, price: "KSh 18,000", rawPrice: 18000, inStock: true, images: ["https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000"] },
+    { id: 28, name: "Dalmore 15 Year Old", category: "Whisky", abv: "High", volume: "750ml", origin: "Scotland", rating: 5, price: "KSh 21,000", rawPrice: 21000, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 29, name: "Monkey Shoulder Blended Malt", category: "Whisky", abv: "High", volume: "750ml", origin: "Scotland", rating: 4, price: "KSh 4,200", rawPrice: 4200, inStock: true, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 30, name: "Glenmorangie The Original 10 Year", category: "Whisky", abv: "High", volume: "750ml", origin: "Scotland", rating: 4, price: "KSh 7,800", rawPrice: 7800, inStock: true, images: ["https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000"] },
+    { id: 31, name: "Veuve Clicquot Yellow Label Brut", category: "Wine", abv: "Low", volume: "750ml", origin: "France", rating: 5, price: "KSh 11,500", rawPrice: 11500, inStock: true, images: ["https://images.unsplash.com/photo-1569919659476-f0852f6834b7?q=80&w=1000"] },
+    { id: 32, name: "Dom Pérignon Vintage Champagne", category: "Wine", abv: "Low", volume: "750ml", origin: "France", rating: 5, price: "KSh 35,000", rawPrice: 35000, inStock: true, images: ["https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1000"] },
+    { id: 33, name: "Laurent-Perrier La Cuvée Brut", category: "Wine", abv: "Low", volume: "750ml", origin: "France", rating: 4, price: "KSh 10,200", rawPrice: 10200, inStock: true, images: ["https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000"] },
+    { id: 34, name: "Cloudy Bay Sauvignon Blanc", category: "Wine", abv: "Low", volume: "750ml", origin: "New Zealand", rating: 5, price: "KSh 6,500", rawPrice: 6500, inStock: true, images: ["https://images.unsplash.com/photo-1569919659476-f0852f6834b7?q=80&w=1000"] },
+    { id: 35, name: "Kim Crawford Sauvignon Blanc", category: "Wine", abv: "Low", volume: "750ml", origin: "New Zealand", rating: 4, price: "KSh 4,500", rawPrice: 4500, inStock: true, images: ["https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1000"] },
+    { id: 36, name: "Santa Margherita Pinot Grigio", category: "Wine", abv: "Low", volume: "750ml", origin: "Italy", rating: 4, price: "KSh 4,800", rawPrice: 4800, inStock: true, images: ["https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000"] },
+    { id: 37, name: "Whispering Angel Rosé", category: "Wine", abv: "Low", volume: "750ml", origin: "France", rating: 5, price: "KSh 5,800", rawPrice: 5800, inStock: true, images: ["https://images.unsplash.com/photo-1569919659476-f0852f6834b7?q=80&w=1000"] },
+    { id: 38, name: "Miraval Côtes de Provence Rosé", category: "Wine", abv: "Low", volume: "750ml", origin: "France", rating: 4, price: "KSh 5,200", rawPrice: 5200, inStock: true, images: ["https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1000"] },
+    { id: 39, name: "Caymus Vineyards Cabernet Sauvignon", category: "Wine", abv: "Low", volume: "750ml", origin: "USA", rating: 5, price: "KSh 18,500", rawPrice: 18500, inStock: false, images: ["https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000"] },
+    { id: 40, name: "Silver Oak Alexander Valley Cabernet", category: "Wine", abv: "Low", volume: "750ml", origin: "USA", rating: 5, price: "KSh 22,500", rawPrice: 22500, inStock: true, images: ["https://images.unsplash.com/photo-1569919659476-f0852f6834b7?q=80&w=1000"] },
+    { id: 41, name: "Beringer Founders' Estate Merlot", category: "Wine", abv: "Low", volume: "750ml", origin: "USA", rating: 4, price: "KSh 3,200", rawPrice: 3200, inStock: true, images: ["https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1000"] },
+    { id: 42, name: "Matua Marlborough Sauvignon Blanc", category: "Wine", abv: "Low", volume: "750ml", origin: "New Zealand", rating: 4, price: "KSh 3,800", rawPrice: 3800, inStock: true, images: ["https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000"] },
+    { id: 43, name: "Yellow Tail Shiraz", category: "Wine", abv: "Low", volume: "750ml", origin: "Australia", rating: 4, price: "KSh 2,200", rawPrice: 2200, inStock: true, images: ["https://images.unsplash.com/photo-1569919659476-f0852f6834b7?q=80&w=1000"] },
+    { id: 44, name: "Hardys Stamp Shiraz Cabernet", category: "Wine", abv: "Low", volume: "750ml", origin: "Australia", rating: 3, price: "KSh 1,900", rawPrice: 1900, inStock: true, images: ["https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1000"] },
+    { id: 45, name: "Casillero del Diablo Cabernet Sauvignon", category: "Wine", abv: "Low", volume: "750ml", origin: "Chile", rating: 4, price: "KSh 2,500", rawPrice: 2500, inStock: true, images: ["https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000"] },
+    { id: 46, name: "Concha y Toro Sunrise Merlot", category: "Wine", abv: "Low", volume: "750ml", origin: "Chile", rating: 3, price: "KSh 2,000", rawPrice: 2000, inStock: true, images: ["https://images.unsplash.com/photo-1569919659476-f0852f6834b7?q=80&w=1000"] },
+    { id: 47, name: "Marqués de Cáceres Rioja Crianza", category: "Wine", abv: "Low", volume: "750ml", origin: "Spain", rating: 4, price: "KSh 3,900", rawPrice: 3900, inStock: true, images: ["https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1000"] },
+    { id: 48, name: "Torres Gran Coronas Reserva", category: "Wine", abv: "Low", volume: "750ml", origin: "Spain", rating: 4, price: "KSh 4,100", rawPrice: 4100, inStock: true, images: ["https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000"] },
+    { id: 49, name: "Antinori Tignanello Toscana", category: "Wine", abv: "Low", volume: "750ml", origin: "Italy", rating: 5, price: "KSh 29,000", rawPrice: 29000, inStock: false, images: ["https://images.unsplash.com/photo-1569919659476-f0852f6834b7?q=80&w=1000"] },
+    { id: 50, name: "Ruffino Chianti Superiore", category: "Wine", abv: "Low", volume: "750ml", origin: "Italy", rating: 4, price: "KSh 3,400", rawPrice: 3400, inStock: true, images: ["https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1000"] },
+    { id: 51, name: "Bartenura Moscato", category: "Wine", abv: "Low", volume: "750ml", origin: "Italy", rating: 4, price: "KSh 2,800", rawPrice: 2800, inStock: true, images: ["https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000"] },
+    { id: 52, name: "Louis Jadot Bourgogne Pinot Noir", category: "Wine", abv: "Low", volume: "750ml", origin: "France", rating: 4, price: "KSh 6,200", rawPrice: 6200, inStock: true, images: ["https://images.unsplash.com/photo-1569919659476-f0852f6834b7?q=80&w=1000"] },
+    { id: 53, name: "Château Margaux Premier Grand Cru", category: "Wine", abv: "Low", volume: "750ml", origin: "France", rating: 5, price: "KSh 95,000", rawPrice: 95000, inStock: false, images: ["https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1000"] },
+    { id: 54, name: "Château Lafite Rothschild", category: "Wine", abv: "Low", volume: "750ml", origin: "France", rating: 5, price: "KSh 110,000", rawPrice: 110000, inStock: true, images: ["https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000"] },
+    { id: 55, name: "Perrier-Jouët Belle Epoque Brut", category: "Wine", abv: "Low", volume: "750ml", origin: "France", rating: 5, price: "KSh 26,000", rawPrice: 26000, inStock: true, images: ["https://images.unsplash.com/photo-1569919659476-f0852f6834b7?q=80&w=1000"] },
+    { id: 56, name: "Bolla Pinot Grigio", category: "Wine", abv: "Low", volume: "750ml", origin: "Italy", rating: 3, price: "KSh 2,400", rawPrice: 2400, inStock: true, images: ["https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1000"] },
+    { id: 57, name: "Freixenet Cordon Negro Brut", category: "Wine", abv: "Low", volume: "750ml", origin: "Spain", rating: 4, price: "KSh 3,100", rawPrice: 3100, inStock: true, images: ["https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000"] },
+    { id: 58, name: "Martini Asti Spumante", category: "Wine", abv: "Low", volume: "750ml", origin: "Italy", rating: 4, price: "KSh 2,600", rawPrice: 2600, inStock: true, images: ["https://images.unsplash.com/photo-1569919659476-f0852f6834b7?q=80&w=1000"] },
+    { id: 59, name: "Jacob's Creek Chardonnay", category: "Wine", abv: "Low", volume: "750ml", origin: "Australia", rating: 4, price: "KSh 2,100", rawPrice: 2100, inStock: true, images: ["https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1000"] },
+    { id: 60, name: "Drostdy-Hof Chenin Blanc", category: "Wine", abv: "Low", volume: "750ml", origin: "South Africa", rating: 3, price: "KSh 1,800", rawPrice: 1800, inStock: true, images: ["https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000"] },
+    { id: 61, name: "Smirnoff Vodka Red Label", category: "Spirits", abv: "High", volume: "750ml", origin: "Russia", rating: 4, price: "KSh 2,400", rawPrice: 2400, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 62, name: "Absolut Vodka Blue", category: "Spirits", abv: "High", volume: "750ml", origin: "Sweden", rating: 4, price: "KSh 3,200", rawPrice: 3200, inStock: true, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 63, name: "Grey Goose French Vodka", category: "Spirits", abv: "High", volume: "750ml", origin: "France", rating: 5, price: "KSh 6,500", rawPrice: 6500, inStock: true, images: ["https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000"] },
+    { id: 64, name: "Belvedere Pure Vodka", category: "Spirits", abv: "High", volume: "750ml", origin: "Poland", rating: 5, price: "KSh 6,800", rawPrice: 6800, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 65, name: "Ketel One Vodka", category: "Spirits", abv: "High", volume: "750ml", origin: "Netherlands", rating: 4, price: "KSh 4,900", rawPrice: 4900, inStock: true, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 66, name: "Tanqueray London Dry Gin", category: "Spirits", abv: "High", volume: "750ml", origin: "UK", rating: 4, price: "KSh 3,200", rawPrice: 3200, inStock: true, images: ["https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000"] },
+    { id: 67, name: "Bombay Sapphire Gin", category: "Spirits", abv: "High", volume: "750ml", origin: "UK", rating: 4, price: "KSh 3,500", rawPrice: 3500, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 68, name: "Hendrick's Gin", category: "Spirits", abv: "High", volume: "750ml", origin: "Scotland", rating: 5, price: "KSh 5,800", rawPrice: 5800, inStock: true, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 69, name: "Gordon's Special London Dry Gin", category: "Spirits", abv: "High", volume: "750ml", origin: "UK", rating: 4, price: "KSh 2,100", rawPrice: 2100, inStock: true, images: ["https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000"] },
+    { id: 70, name: "Monkey 47 Schwarzwald Dry Gin", category: "Spirits", abv: "High", volume: "500ml", origin: "Germany", rating: 5, price: "KSh 8,500", rawPrice: 8500, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 71, name: "Bacardi Superior White Rum", category: "Spirits", abv: "High", volume: "750ml", origin: "Puerto Rico", rating: 4, price: "KSh 2,600", rawPrice: 2600, inStock: true, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 72, name: "Captain Morgan Original Spiced Gold", category: "Spirits", abv: "High", volume: "750ml", origin: "Jamaica", rating: 4, price: "KSh 2,500", rawPrice: 2500, inStock: true, images: ["https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000"] },
+    { id: 73, name: "Havana Club Añejo 7 Años", category: "Spirits", abv: "High", volume: "750ml", origin: "Cuba", rating: 5, price: "KSh 4,500", rawPrice: 4500, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 74, name: "Zacapa Centenario 23 Rum", category: "Spirits", abv: "High", volume: "750ml", origin: "Guatemala", rating: 5, price: "KSh 9,500", rawPrice: 9500, inStock: true, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 75, name: "Malibu Caribbean Rum", category: "Spirits", abv: "Low", volume: "750ml", origin: "Barbados", rating: 4, price: "KSh 2,400", rawPrice: 2400, inStock: true, images: ["https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000"] },
+    { id: 76, name: "José Cuervo Especial Gold Tequila", category: "Spirits", abv: "High", volume: "750ml", origin: "Mexico", rating: 4, price: "KSh 3,100", rawPrice: 3100, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 77, name: "Patrón Silver Tequila", category: "Spirits", abv: "High", volume: "750ml", origin: "Mexico", rating: 5, price: "KSh 9,200", rawPrice: 9200, inStock: true, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 78, name: "Don Julio Reposado Tequila", category: "Spirits", abv: "High", volume: "750ml", origin: "Mexico", rating: 5, price: "KSh 11,000", rawPrice: 11000, inStock: true, images: ["https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000"] },
+    { id: 79, name: "Casamigos Blanco Tequila", category: "Spirits", abv: "High", volume: "750ml", origin: "Mexico", rating: 5, price: "KSh 10,500", rawPrice: 10500, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 80, name: "Hennessy VS Cognac", category: "Spirits", abv: "High", volume: "750ml", origin: "France", rating: 4, price: "KSh 6,800", rawPrice: 6800, inStock: true, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 81, name: "Hennessy VSOP Privilege", category: "Spirits", abv: "High", volume: "750ml", origin: "France", rating: 5, price: "KSh 11,500", rawPrice: 11500, inStock: true, images: ["https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000"] },
+    { id: 82, name: "Remy Martin 1738 Accord Royal", category: "Spirits", abv: "High", volume: "750ml", origin: "France", rating: 5, price: "KSh 13,000", rawPrice: 13000, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 83, name: "Martell VS Single Distillery", category: "Spirits", abv: "High", volume: "750ml", origin: "France", rating: 4, price: "KSh 5,900", rawPrice: 5900, inStock: true, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 84, name: "Courvoisier VSOP Cognac", category: "Spirits", abv: "High", volume: "750ml", origin: "France", rating: 4, price: "KSh 8,200", rawPrice: 8200, inStock: true, images: ["https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000"] },
+    { id: 85, name: "Baileys Original Irish Cream", category: "Spirits", abv: "Low", volume: "750ml", origin: "Ireland", rating: 5, price: "KSh 3,200", rawPrice: 3200, inStock: true, images: ["https://images.unsplash.com/photo-1544145945-f90425340c7e?q=80&w=1000"] },
+    { id: 86, name: "Kahlúa Coffee Liqueur", category: "Spirits", abv: "Low", volume: "750ml", origin: "Mexico", rating: 4, price: "KSh 3,000", rawPrice: 3000, inStock: true, images: ["https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1000"] },
+    { id: 87, name: "Jagermeister Herbal Liqueur", category: "Spirits", abv: "High", volume: "750ml", origin: "Germany", rating: 4, price: "KSh 3,500", rawPrice: 3500, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 88, name: "Campari Bitter Liqueur", category: "Spirits", abv: "High", volume: "750ml", origin: "Italy", rating: 4, price: "KSh 3,400", rawPrice: 3400, inStock: true, images: ["https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?q=80&w=1000"] },
+    { id: 89, name: "Aperol Aperitivo", category: "Spirits", abv: "Low", volume: "750ml", origin: "Italy", rating: 4, price: "KSh 3,100", rawPrice: 3100, inStock: true, images: ["https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1000"] },
+    { id: 90, name: "Cointreau Triple Sec", category: "Spirits", abv: "High", volume: "750ml", origin: "France", rating: 4, price: "KSh 4,200", rawPrice: 4200, inStock: true, images: ["https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000"] },
+    { id: 91, name: "Tusker Lager (Pack of 6)", category: "Beer", abv: "High", volume: "330ml", origin: "Kenya", rating: 4, price: "KSh 1,200", rawPrice: 1200, inStock: true, images: ["https://images.unsplash.com/photo-1608270105706-963d76b10706?q=80&w=1000"] },
+    { id: 92, name: "Tusker Malt Lager (Pack of 6)", category: "Beer", abv: "High", volume: "330ml", origin: "Kenya", rating: 4, price: "KSh 1,400", rawPrice: 1400, inStock: true, images: ["https://images.unsplash.com/photo-1535958636474-b021ee887b13?q=80&w=1000"] },
+    { id: 93, name: "White Cap Lager (Pack of 6)", category: "Beer", abv: "High", volume: "330ml", origin: "Kenya", rating: 4, price: "KSh 1,250", rawPrice: 1250, inStock: true, images: ["https://images.unsplash.com/photo-1608270105706-963d76b10706?q=80&w=1000"] },
+    { id: 94, name: "Guinness Foreign Extra Stout (Pack of 6)", category: "Beer", abv: "High", volume: "330ml", origin: "Ireland", rating: 5, price: "KSh 1,600", rawPrice: 1600, inStock: true, images: ["https://images.unsplash.com/photo-1535958636474-b021ee887b13?q=80&w=1000"] },
+    { id: 95, name: "Heineken Lager Beer (Pack of 6)", category: "Beer", abv: "High", volume: "330ml", origin: "Netherlands", rating: 4, price: "KSh 1,800", rawPrice: 1800, inStock: true, images: ["https://images.unsplash.com/photo-1608270105706-963d76b10706?q=80&w=1000"] },
+    { id: 96, name: "Corona Extra Beer (Pack of 6)", category: "Beer", abv: "High", volume: "355ml", origin: "Mexico", rating: 4, price: "KSh 1,900", rawPrice: 1900, inStock: true, images: ["https://images.unsplash.com/photo-1535958636474-b021ee887b13?q=80&w=1000"] },
+    { id: 97, name: "Stella Artois Premium Lager (Pack of 6)", category: "Beer", abv: "High", volume: "330ml", origin: "Belgium", rating: 4, price: "KSh 1,850", rawPrice: 1850, inStock: true, images: ["https://images.unsplash.com/photo-1608270105706-963d76b10706?q=80&w=1000"] },
+    { id: 98, name: "Pilsner Lager (Pack of 6)", category: "Beer", abv: "High", volume: "500ml", origin: "Kenya", rating: 4, price: "KSh 1,300", rawPrice: 1300, inStock: true, images: ["https://images.unsplash.com/photo-1535958636474-b021ee887b13?q=80&w=1000"] },
+    { id: 99, name: "Savanna Dry Cider (Pack of 6)", category: "Beer", abv: "High", volume: "330ml", origin: "South Africa", rating: 5, price: "KSh 1,900", rawPrice: 1900, inStock: true, images: ["https://images.unsplash.com/photo-1608270105706-963d76b10706?q=80&w=1000"] },
+    { id: 100, name: "Hunters Gold Cider (Pack of 6)", category: "Beer", abv: "High", volume: "330ml", origin: "South Africa", rating: 4, price: "KSh 1,750", rawPrice: 1750, inStock: true, images: ["https://images.unsplash.com/photo-1535958636474-b021ee887b13?q=80&w=1000"] },
+    { id: 101, name: "Smirnoff Guarana Cider (Pack of 6)", category: "Beer", abv: "High", volume: "330ml", origin: "Kenya", rating: 4, price: "KSh 1,600", rawPrice: 1600, inStock: true, images: ["https://images.unsplash.com/photo-1608270105706-963d76b10706?q=80&w=1000"] },
+    { id: 102, name: "Budweiser Beer (Pack of 6)", category: "Beer", abv: "High", volume: "330ml", origin: "USA", rating: 4, price: "KSh 1,700", rawPrice: 1700, inStock: true, images: ["https://images.unsplash.com/photo-1535958636474-b021ee887b13?q=80&w=1000"] },
+    { id: 103, name: "Desperados Tequila Flavored Beer (Pack of 6)", category: "Beer", abv: "High", volume: "330ml", origin: "France", rating: 4, price: "KSh 2,100", rawPrice: 2100, inStock: true, images: ["https://images.unsplash.com/photo-1608270105706-963d76b10706?q=80&w=1000"] },
+    { id: 104, name: "Balozi Lager (Pack of 6)", category: "Beer", abv: "High", volume: "500ml", origin: "Kenya", rating: 3, price: "KSh 1,100", rawPrice: 1100, inStock: true, images: ["https://images.unsplash.com/photo-1535958636474-b021ee887b13?q=80&w=1000"] },
+    { id: 105, name: "Allsopps Lager (Pack of 6)", category: "Beer", abv: "High", volume: "500ml", origin: "Kenya", rating: 3, price: "KSh 1,050", rawPrice: 1050, inStock: true, images: ["https://images.unsplash.com/photo-1608270105706-963d76b10706?q=80&w=1000"] },
+    { id: 106, name: "Peroni Nastro Azzurro (Pack of 6)", category: "Beer", abv: "High", volume: "330ml", origin: "Italy", rating: 4, price: "KSh 1,950", rawPrice: 1950, inStock: true, images: ["https://images.unsplash.com/photo-1535958636474-b021ee887b13?q=80&w=1000"] },
+    { id: 107, name: "Blue Moon Belgian White (Pack of 6)", category: "Beer", abv: "High", volume: "330ml", origin: "USA", rating: 4, price: "KSh 2,200", rawPrice: 2200, inStock: true, images: ["https://images.unsplash.com/photo-1608270105706-963d76b10706?q=80&w=1000"] },
+    { id: 108, name: "Stella Cidre (Pack of 6)", category: "Beer", abv: "High", volume: "330ml", origin: "Belgium", rating: 4, price: "KSh 1,800", rawPrice: 1800, inStock: true, images: ["https://images.unsplash.com/photo-1535958636474-b021ee887b13?q=80&w=1000"] },
+    { id: 109, name: "Redds Original Cider (Pack of 6)", category: "Beer", abv: "High", volume: "330ml", origin: "South Africa", rating: 4, price: "KSh 1,450", rawPrice: 1450, inStock: true, images: ["https://images.unsplash.com/photo-1608270105706-963d76b10706?q=80&w=1000"] },
+    { id: 110, name: "Somersby Apple Cider (Pack of 6)", category: "Beer", abv: "High", volume: "330ml", origin: "Denmark", rating: 4, price: "KSh 1,700", rawPrice: 1700, inStock: true, images: ["https://images.unsplash.com/photo-1535958636474-b021ee887b13?q=80&w=1000"] },
+    { id: 111, name: "Coca-Cola Soda Glass Bottles (Pack of 6)", category: "SoftDrink", abv: "Non-Alcoholic", volume: "300ml", origin: "Kenya", rating: 4, price: "KSh 500", rawPrice: 500, inStock: true, images: ["https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=1000"] },
+    { id: 112, name: "Schweppes Tonic Water (Pack of 6)", category: "SoftDrink", abv: "Non-Alcoholic", volume: "300ml", origin: "UK", rating: 4, price: "KSh 750", rawPrice: 750, inStock: true, images: ["https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1000"] },
+    { id: 113, name: "Schweppes Bitter Lemon (Pack of 6)", category: "SoftDrink", abv: "Non-Alcoholic", volume: "300ml", origin: "UK", rating: 4, price: "KSh 750", rawPrice: 750, inStock: true, images: ["https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=1000"] },
+    { id: 114, name: "Fanta Orange Soda (Pack of 6)", category: "SoftDrink", abv: "Non-Alcoholic", volume: "300ml", origin: "Kenya", rating: 4, price: "KSh 500", rawPrice: 500, inStock: true, images: ["https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1000"] },
+    { id: 115, name: "Sprite Lemon-Lime Soda (Pack of 6)", category: "SoftDrink", abv: "Non-Alcoholic", volume: "300ml", origin: "Kenya", rating: 4, price: "KSh 500", rawPrice: 500, inStock: true, images: ["https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=1000"] },
+    { id: 116, name: "Red Bull Energy Drink (Pack of 4)", category: "SoftDrink", abv: "Non-Alcoholic", volume: "250ml", origin: "Austria", rating: 5, price: "KSh 1,200", rawPrice: 1200, inStock: true, images: ["https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1000"] },
+    { id: 117, name: "Monster Energy Drink Green", category: "SoftDrink", abv: "Non-Alcoholic", volume: "500ml", origin: "USA", rating: 4, price: "KSh 350", rawPrice: 350, inStock: true, images: ["https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=1000"] },
+    { id: 118, name: "Dasani Still Mineral Water (Pack of 12)", category: "SoftDrink", abv: "Non-Alcoholic", volume: "500ml", origin: "Kenya", rating: 4, price: "KSh 450", rawPrice: 450, inStock: true, images: ["https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1000"] },
+    { id: 119, name: "Keringet Sparkling Water (Pack of 6)", category: "SoftDrink", abv: "Non-Alcoholic", volume: "500ml", origin: "Kenya", rating: 4, price: "KSh 600", rawPrice: 600, inStock: true, images: ["https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=1000"] },
+    { id: 120, name: "Stoney Tangawizi Ginger Beer (Pack of 6)", category: "SoftDrink", abv: "Non-Alcoholic", volume: "300ml", origin: "Kenya", rating: 5, price: "KSh 550", rawPrice: 550, inStock: true, images: ["https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1000"] },
+    { id: 121, name: "Schweppes Ginger Ale (Pack of 6)", category: "SoftDrink", abv: "Non-Alcoholic", volume: "300ml", origin: "UK", rating: 4, price: "KSh 750", rawPrice: 750, inStock: true, images: ["https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=1000"] },
+    { id: 122, name: "Fanta Blackcurrant Soda (Pack of 6)", category: "SoftDrink", abv: "Non-Alcoholic", volume: "300ml", origin: "Kenya", rating: 4, price: "KSh 500", rawPrice: 500, inStock: true, images: ["https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1000"] },
+    { id: 123, name: "Predator Energy Drink", category: "SoftDrink", abv: "Non-Alcoholic", volume: "500ml", origin: "USA", rating: 4, price: "KSh 200", rawPrice: 200, inStock: true, images: ["https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=1000"] },
+    { id: 124, name: "Lucozade Energy Original", category: "SoftDrink", abv: "Non-Alcoholic", volume: "300ml", origin: "UK", rating: 4, price: "KSh 250", rawPrice: 250, inStock: true, images: ["https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1000"] },
+    { id: 125, name: "Schweppes Club Soda (Pack of 6)", category: "SoftDrink", abv: "Non-Alcoholic", volume: "300ml", origin: "UK", rating: 4, price: "KSh 750", rawPrice: 750, inStock: true, images: ["https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=1000"] },
+    { id: 126, name: "Aquamist Natural Mineral Water (Pack of 12)", category: "SoftDrink", abv: "Non-Alcoholic", volume: "500ml", origin: "Kenya", rating: 4, price: "KSh 500", rawPrice: 500, inStock: true, images: ["https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1000"] },
+    { id: 127, name: "Lipton Ice Tea Peach", category: "SoftDrink", abv: "Non-Alcoholic", volume: "500ml", origin: "UK", rating: 4, price: "KSh 250", rawPrice: 250, inStock: true, images: ["https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=1000"] },
+    { id: 128, name: "Lipton Ice Tea Lemon", category: "SoftDrink", abv: "Non-Alcoholic", volume: "500ml", origin: "UK", rating: 4, price: "KSh 250", rawPrice: 250, inStock: true, images: ["https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1000"] },
+    { id: 129, name: "Mountain Dew Citrus Soda", category: "SoftDrink", abv: "Non-Alcoholic", volume: "500ml", origin: "USA", rating: 4, price: "KSh 150", rawPrice: 150, inStock: true, images: ["https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=1000"] },
+    { id: 130, name: "7 Up Lemon Soda", category: "SoftDrink", abv: "Non-Alcoholic", volume: "500ml", origin: "USA", rating: 4, price: "KSh 150", rawPrice: 150, inStock: true, images: ["https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1000"] },
+    { id: 131, name: "Ultimate Celebration Champagne & Truffles Basket", category: "Gifts", abv: "Low", volume: "Gift Box", origin: "France", rating: 5, price: "KSh 18,000", rawPrice: 18000, inStock: true, images: ["https://images.unsplash.com/photo-1513201099705-a9746e1e201f?q=80&w=1000"] },
+    { id: 132, name: "Single Malt Scotch Connoisseur Gift Set", category: "Gifts", abv: "High", volume: "Gift Box", origin: "Scotland", rating: 5, price: "KSh 19,500", rawPrice: 19500, inStock: true, images: ["https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000"] },
+    { id: 133, name: "Artisan Gin & Botanicals Hamper", category: "Gifts", abv: "High", volume: "Gift Box", origin: "UK", rating: 5, price: "KSh 14,000", rawPrice: 14000, inStock: true, images: ["https://images.unsplash.com/photo-1513201099705-a9746e1e201f?q=80&w=1000"] },
+    { id: 134, name: "Cognac & Crystal Glass Luxury Box", category: "Gifts", abv: "High", volume: "Gift Box", origin: "France", rating: 5, price: "KSh 25,000", rawPrice: 25000, inStock: true, images: ["https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000"] },
+    { id: 135, name: "Red Wine & Artisan Cheese Wooden Crate", category: "Gifts", abv: "Low", volume: "Gift Box", origin: "Italy", rating: 5, price: "KSh 12,500", rawPrice: 12500, inStock: true, images: ["https://images.unsplash.com/photo-1513201099705-a9746e1e201f?q=80&w=1000"] },
+    { id: 136, name: "Prosecco & Sweet Treats Party Gift Box", category: "Gifts", abv: "Low", volume: "Gift Box", origin: "Italy", rating: 4, price: "KSh 8,900", rawPrice: 8900, inStock: true, images: ["https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000"] },
+    { id: 137, name: "Bourbon Heritage Gift Pack with Glasses", category: "Gifts", abv: "High", volume: "Gift Box", origin: "USA", rating: 5, price: "KSh 11,000", rawPrice: 11000, inStock: true, images: ["https://images.unsplash.com/photo-1513201099705-a9746e1e201f?q=80&w=1000"] },
+    { id: 138, name: "Premium Tequila Tasting Trio Hamper", category: "Gifts", abv: "High", volume: "Gift Box", origin: "Mexico", rating: 5, price: "KSh 16,500", rawPrice: 16500, inStock: true, images: ["https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000"] },
+    { id: 139, name: "Irish Whiskey & Coffee Connoisseur Box", category: "Gifts", abv: "High", volume: "Gift Box", origin: "Ireland", rating: 4, price: "KSh 9,500", rawPrice: 9500, inStock: true, images: ["https://images.unsplash.com/photo-1513201099705-a9746e1e201f?q=80&w=1000"] },
+    { id: 140, name: "Royal Salute 21 Year Royal Wedding Gift Chest", category: "Gifts", abv: "High", volume: "Gift Box", origin: "Scotland", rating: 5, price: "KSh 45,000", rawPrice: 45000, inStock: false, images: ["https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000"] },
+    { id: 141, name: "Japanese Whisky & Ceramic Cup Set Hamper", category: "Gifts", abv: "High", volume: "Gift Box", origin: "Japan", rating: 5, price: "KSh 27,000", rawPrice: 27000, inStock: true, images: ["https://images.unsplash.com/photo-1513201099705-a9746e1e201f?q=80&w=1000"] },
+    { id: 142, name: "Sommelier Grand Cru Wine Selection Box", category: "Gifts", abv: "Low", volume: "Gift Box", origin: "France", rating: 5, price: "KSh 32,000", rawPrice: 32000, inStock: true, images: ["https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000"] },
+    { id: 143, name: "Craft Beer Explorer Crate with Snacks", category: "Gifts", abv: "High", volume: "Gift Box", origin: "Kenya", rating: 4, price: "KSh 4,500", rawPrice: 4500, inStock: true, images: ["https://images.unsplash.com/photo-1513201099705-a9746e1e201f?q=80&w=1000"] },
+    { id: 144, name: "Non-Alcoholic Sparkling Juice & Snack Hamper", category: "Gifts", abv: "Non-Alcoholic", volume: "Gift Box", origin: "Italy", rating: 4, price: "KSh 5,200", rawPrice: 5200, inStock: true, images: ["https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000"] },
+    { id: 145, name: "Ultimate Birthday Celebration Liquor Hamper", category: "Gifts", abv: "High", volume: "Gift Box", origin: "Scotland", rating: 5, price: "KSh 20,000", rawPrice: 20000, inStock: true, images: ["https://images.unsplash.com/photo-1513201099705-a9746e1e201f?q=80&w=1000"] },
+    { id: 146, name: "Festive Holiday Treat & Wine Box", category: "Gifts", abv: "Low", volume: "Gift Box", origin: "Australia", rating: 4, price: "KSh 10,500", rawPrice: 10500, inStock: true, images: ["https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000"] },
+    { id: 147, name: "Corporate Executive Gift Hamper Deluxe", category: "Gifts", abv: "High", volume: "Gift Box", origin: "Scotland", rating: 5, price: "KSh 38,000", rawPrice: 38000, inStock: true, images: ["https://images.unsplash.com/photo-1513201099705-a9746e1e201f?q=80&w=1000"] },
+    { id: 148, name: "Valentine's Romantic Rose & Champagne Pack", category: "Gifts", abv: "Low", volume: "Gift Box", origin: "France", rating: 5, price: "KSh 14,500", rawPrice: 14500, inStock: true, images: ["https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000"] },
+    { id: 149, name: "Father's Day Whisky & Leather Flask Set", category: "Gifts", abv: "High", volume: "Gift Box", origin: "Scotland", rating: 5, price: "KSh 13,500", rawPrice: 13500, inStock: true, images: ["https://images.unsplash.com/photo-1513201099705-a9746e1e201f?q=80&w=1000"] },
+    { id: 150, name: "Haven Grand Luxury VIP Celebration Hamper", category: "Gifts", abv: "High", volume: "Gift Box", origin: "Scotland", rating: 5, price: "KSh 60,000", rawPrice: 60000, inStock: true, images: ["https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000"] }
 ];
 
+const employees = [
+    { name: "Peter Odhiambo", email: "peter@liquor.com", role: "Salesperson", rate: 5 },
+    { name: "Mercy Wanjiku", email: "mercy@liquor.com", role: "Salesperson", rate: 4.5 }
+];
 
-/* hardcoded staff */
-const STAFF = {
-  admin: { password: "admin123", role: "admin", name: "Administrator" },
-  sales: { password: "sales123", role: "sales", name: "Sales Team" }
-};
+let invoices = [
+    { id: "INV-1001", customer: "John Doe", product: "Glenfiddich 18 yr", salesRep: "Peter Odhiambo", amount: 14500, status: "Paid" },
+    { id: "INV-1002", customer: "Alice Smith", product: "Moët & Chandon Brut", salesRep: "Mercy Wanjiku", amount: 9200, status: "Pending" }
+];
 
-const LS = {
-  get(k, d){ try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
-  set(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
-};
+let cart = [];
+let selectedPaymentMethod = 'mpesa';
 
-// Load admin-managed product overrides + new products
-let adminProducts = LS.get('acacia_products_v3', null);
-if (adminProducts) {
-  // merge: admin list is authoritative if exists
-  productList.length = 0;
-  adminProducts.forEach(p => productList.push(p));
-} else {
-  // first run: ensure discount field exists
-  productList.forEach(p => { if (p.discount == null) p.discount = 0; });
-  LS.set('acacia_products_v3', productList);
-}
-
-let users    = LS.get('acacia_users', []);      // buyer accounts
-let orders   = LS.get('acacia_orders', []);
-let ratings  = LS.get('acacia_ratings', {});    // {productName: [{user, stars, comment, date}]}
-let cart     = LS.get('acacia_cart', {});
-let session  = LS.get('acacia_session', null);  // {username, role, name}
-let inquiries = LS.get('acacia_inquiries', []); // [{id, user, name, contact, product, message, date, read, reply}]
-let favorites = LS.get('acacia_favorites', []); // [productName]
-
-function saveAll(){
-  LS.set('acacia_products_v3', productList);
-  LS.set('acacia_users', users);
-  LS.set('acacia_orders', orders);
-  LS.set('acacia_ratings', ratings);
-  LS.set('acacia_cart', cart);
-  LS.set('acacia_session', session);
-  LS.set('acacia_inquiries', inquiries);
-  LS.set('acacia_favorites', favorites);
-}
-
-/* ============ MOTTO ============ */
-const mottos = ["🚚 Fast & Reliable Delivery","✅ Trusted Quality Drinks","💰 Special Discounts Available","📞 +254 731 858 997","💳 M-PESA, Card, Cash"];
-let mIdx = 0;
-function changeMotto(){ document.getElementById('motto').textContent = mottos[mIdx]; mIdx = (mIdx+1)%mottos.length; }
-setInterval(changeMotto, 2500); changeMotto();
-setTimeout(initCurrency,0);
-
-/* ============ FILTERS UI ============ */
-function buildFilterUI(){
-  const cats = [...new Set(productList.map(p=>p.category))].sort();
-  const sizes = [...new Set(productList.map(p=>p.size).filter(Boolean))];
-  document.getElementById('catFilters').innerHTML = cats.map(c=>`<label><input type="checkbox" value="${c}" onchange="applyFilters()"> ${c}</label><br>`).join('');
-  document.getElementById('sizeFilters').innerHTML = sizes.map(s=>`<label><input type="checkbox" value="${s}" data-type="size" onchange="applyFilters()"> ${s}</label><br>`).join('');
-}
-
-/* ============ DISPLAY ============ */
-function priceOf(p){
-  const d = +p.discount || 0;
-  return d > 0 ? Math.round(p.price * (100 - d) / 100) : p.price;
-}
-
-/* ============ CURRENCY ============ */
-const CURRENCIES = {
-  KES:{symbol:'KSh',rate:1},
-  USD:{symbol:'$',rate:0.0078},
-  EUR:{symbol:'€',rate:0.0072},
-  GBP:{symbol:'£',rate:0.0061},
-  UGX:{symbol:'USh',rate:29},
-  TZS:{symbol:'TSh',rate:20},
-  ZAR:{symbol:'R',rate:0.14},
-  NGN:{symbol:'₦',rate:12},
-  INR:{symbol:'₹',rate:0.65},
-  AED:{symbol:'د.إ',rate:0.029}
-};
-let currentCurrency = LS.get('acacia_currency','KES');
-function fmt(kes){
-  const c = CURRENCIES[currentCurrency] || CURRENCIES.KES;
-  const v = kes * c.rate;
-  const n = v >= 100 ? Math.round(v).toLocaleString() : v.toFixed(2);
-  return c.symbol + ' ' + n;
-}
-function changeCurrency(code){
-  currentCurrency = code;
-  LS.set('acacia_currency', code);
-  display();
-  renderCart && renderCart();
-}
-function initCurrency(){
-  const sel = document.getElementById('currencySel');
-  if (sel) sel.value = currentCurrency;
-}
-
-function avgRating(name){
-  const rs = ratings[name] || [];
-  if (!rs.length) return 0;
-  return rs.reduce((s,r)=>s+r.stars,0)/rs.length;
-}
-function starHtml(avg){
-  const full = Math.round(avg);
-  return '<span class="stars">' + '★'.repeat(full) + '☆'.repeat(5-full) + '</span>';
-}
-function display(list = productList){
-  const grid = document.getElementById('grid');
-  if (!list.length){ grid.innerHTML = '<p>No products match.</p>'; return; }
-  grid.innerHTML = list.map(p=>{
-    const np = priceOf(p);
-    const hasD = (+p.discount||0) > 0;
-    const avg = avgRating(p.name);
-    const rCount = (ratings[p.name]||[]).length;
-    const img = p.image && p.image.startsWith('data:') ? p.image : (p.image || 'https://via.placeholder.com/220x200?text=No+Image');
-    return `<div class="card">
-      ${hasD ? `<div class="badge-discount">-${p.discount}%</div>` : ''}
-      <img src="${img}" alt="${escapeAttr(p.name)}" width="220" height="200" loading="lazy" decoding="async" onclick="viewProduct('${escapeAttr(p.name)}')" onerror="if(this.src.indexOf('placeholder')<0)this.src='https://via.placeholder.com/220x200?text=No+Image'">
-      <div class="card-body">
-        <div>
-          <h3>${escapeHtml(p.name)}</h3>
-          <p>${hasD ? `<span class="old-price">${fmt(p.price)}</span> <span class="new-price">${fmt(np)}</span>` : `<b>${fmt(np)}</b>`}</p>
-          <p style="font-size:12px;color:#888;">${p.category} | ${p.size||''}</p>
-          ${avg ? `<div>${starHtml(avg)} <small>(${rCount})</small></div>` : '<div style="color:#aaa;font-size:12px;">No ratings yet</div>'}
-          <p class="${p.stock>0?'instock':'outstock'}">${p.stock>0?'In stock ('+p.stock+')':'Out of stock'}</p>
-        </div>
-        <div class="top-icons">
-          <button class="icon-btn" onclick="add('${escapeAttr(p.name)}')" title="Add to cart">🛒</button>
-          <button class="icon-btn" onclick="viewProduct('${escapeAttr(p.name)}')" title="View">👁</button>
-          <button class="icon-btn" onclick="openInquiry('${escapeAttr(p.name)}')" title="Send inquiry">✉️</button>
-          <button class="icon-btn" onclick="toggleFavorite('${escapeAttr(p.name)}')" title="Favorite">${isFavorite(p.name)?'❤️':'🤍'}</button>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-  updateCartCount();
-}
-function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-function escapeAttr(s){ return String(s).replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
-
-
-function isFavorite(name){ return favorites.includes(name); }
-function toggleFavorite(name){
-  const i = favorites.indexOf(name);
-  if (i>=0) favorites.splice(i,1); else favorites.push(name);
-  saveAll(); display();
-}
-
-/* ============ VIEW PRODUCT ============ */
-let currentView = null;
-function viewProduct(name){
-  const p = productList.find(x => x.name === name); if (!p) return;
-  currentView = p;
-  const np = priceOf(p);
-  document.getElementById('viewImg').src = p.image || 'https://via.placeholder.com/400x300?text=No+Image';
-  document.getElementById('viewImg').onerror = function(){ this.src='https://via.placeholder.com/400x300?text=No+Image'; };
-  document.getElementById('viewName').textContent = p.name;
-  document.getElementById('viewPrice').innerHTML = (+p.discount||0) > 0
-    ? `<span class="old-price">${fmt(p.price)}</span> <span class="new-price" style="font-size:18px;">${fmt(np)}</span> <span class="badge-discount" style="position:static;">-${p.discount}%</span>`
-    : `<b style="font-size:18px;">${fmt(np)}</b>`;
-  document.getElementById('viewMeta').innerHTML = `${p.category} • ${p.size||''} • ABV: ${p.abv||'N/A'} • ${p.country||''} ${p.brand?'• '+p.brand:''} • Stock: ${p.stock}`;
-  document.getElementById('viewDesc').textContent = p.description || '';
-  const avg = avgRating(p.name), rs = ratings[p.name]||[];
-  document.getElementById('viewRatingSummary').innerHTML = rs.length ? `${starHtml(avg)} ${avg.toFixed(1)} (${rs.length} review${rs.length>1?'s':''})` : '<small>No reviews yet</small>';
-  // Rate block (buyers only, must have purchased)
-  const canRate = !!session;
-  if (canRate){
-    document.getElementById('viewRateBlock').innerHTML = `
-      <div style="margin-top:10px;"><b>Your rating:</b>
-      <div class="rate-row" id="rateRow">
-        ${[1,2,3,4,5].map(i=>`<span onclick="setRate(${i})" id="rs${i}">☆</span>`).join('')}
-      </div>
-      <textarea id="rateComment" placeholder="Optional comment" rows="2"></textarea>
-      <button onclick="submitRating()">Submit Rating</button></div>`;
-    setRate(0);
-  } else {
-    document.getElementById('viewRateBlock').innerHTML = '<small style="color:#888;">Login to leave a rating.</small>';
-  }
-  document.getElementById('viewReviews').innerHTML = rs.length
-    ? '<b>Reviews:</b>' + rs.slice(-5).reverse().map(r=>`<div style="border-top:1px solid #eee;padding:6px 0;font-size:13px;"><b>${escapeHtml(r.user)}</b> ${starHtml(r.stars)}<br>${escapeHtml(r.comment||'')}</div>`).join('')
-    : '';
-  document.getElementById('viewAddBtn').onclick = ()=>{ add(p.name); };
-  showRelatedProducts(p);
-  openModal('viewModal');
-}
-function showRelatedProducts(currentP){
-  const related = getRelatedProducts(currentP.name, 6);
-  const block = document.getElementById('relatedBlock');
-  const list = document.getElementById('relatedList');
-  if (!related.length){ block.style.display='none'; return; }
-  block.style.display='block';
-  list.innerHTML = related.map(rp=>{
-    const rnp = priceOf(rp);
-    const hasD = (+rp.discount||0) > 0;
-    const img = rp.image && rp.image.startsWith('data:') ? rp.image : (rp.image || 'https://via.placeholder.com/140x100?text=No+Image');
-    return `<div style="flex:0 0 140px;background:#fff;border-radius:8px;padding:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);text-align:center;cursor:pointer;" onclick="viewProduct('${escapeAttr(rp.name)}')">
-      <img src="${img}" style="width:100%;height:100px;object-fit:cover;border-radius:6px;" onerror="if(this.src.indexOf('placeholder')<0)this.src='https://via.placeholder.com/140x100?text=No+Image'">
-      <p style="font-size:12px;margin:6px 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(rp.name)}</p>
-      <p style="font-size:13px;margin:0;">${hasD?`<span style="text-decoration:line-through;color:#888;font-size:11px;">${fmt(rp.price)}</span> <b style="color:#b30000;">${fmt(rnp)}</b>`:`<b>${fmt(rnp)}</b>`}</p>
-    </div>`;
-  }).join('');
-}
-function getRelatedProducts(name, limit=6){
-  const p = productList.find(x=>x.name===name); if(!p) return [];
-  // same category, same brand, or similar price range (+-30%)
-  const scored = productList.filter(x=>x.name!==name).map(x=>{
-    let score = 0;
-    if (x.category === p.category) score += 3;
-    if (x.brand && p.brand && x.brand === p.brand) score += 2;
-    const priceDiff = Math.abs(priceOf(x) - priceOf(p)) / Math.max(priceOf(p), 1);
-    if (priceDiff < 0.3) score += 1;
-    return { product: x, score };
-  });
-  scored.sort((a,b)=>b.score - a.score);
-  return scored.slice(0, limit).map(s=>s.product);
-}
-let _pendingStars = 0;
-function setRate(n){
-  _pendingStars = n;
-  for (let i=1;i<=5;i++){ const el = document.getElementById('rs'+i); if(el) el.textContent = i<=n?'★':'☆'; }
-}
-function submitRating(){
-  if (!_pendingStars){ alert('Pick a star rating'); return; }
-  if (!currentView || !session) return;
-  ratings[currentView.name] = ratings[currentView.name] || [];
-  // replace existing review by same user
-  ratings[currentView.name] = ratings[currentView.name].filter(r=>r.user!==session.username);
-  ratings[currentView.name].push({ user:session.username, stars:_pendingStars, comment:document.getElementById('rateComment').value.trim(), date:new Date().toISOString() });
-  saveAll(); viewProduct(currentView.name); display(); alert('Thanks for your rating!');
-}
-function hasPurchased(username, productName){
-  return orders.some(o => o.user === username && o.items.some(i => i.name === productName));
-}
-
-/* ============ FILTERS ============ */
-function applyFilters(){
-  const search = document.getElementById('search').value.toLowerCase();
-  const checked = [...document.querySelectorAll('#filters input[type=checkbox]:checked')];
-  const cats = checked.filter(c=>!c.dataset.type).map(c=>c.value);
-  const sizes = checked.filter(c=>c.dataset.type==='size').map(c=>c.value);
-  const prices = checked.filter(c=>c.dataset.type==='price').map(c=>c.value);
-  const filtered = productList.filter(p=>{
-    if (search && !p.name.toLowerCase().includes(search)) return false;
-    if (cats.length && !cats.includes(p.category)) return false;
-    if (sizes.length && !sizes.includes(p.size)) return false;
-    if (prices.length){
-      const v = priceOf(p);
-      const ok = prices.some(r =>
-        (r==='under1000'&&v<1000)||(r==='1000-1999'&&v>=1000&&v<=1999)||
-        (r==='2000-2999'&&v>=2000&&v<=2999)||(r==='3000-4999'&&v>=3000&&v<=4999)||
-        (r==='5000plus'&&v>=5000));
-      if (!ok) return false;
+function renderProducts(list){
+    const grid = document.getElementById("itemGrid");
+    if(!grid) return;
+    grid.innerHTML = "";
+    if(list.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1/-1; padding: 40px; text-align:center; color:#888;">No products match your active filter criteria.</div>`;
+        return;
     }
-    return true;
-  });
-  display(filtered);
-}
-function clearFilters(){
-  document.querySelectorAll('#filters input[type=checkbox]').forEach(c=>c.checked=false);
-  document.getElementById('search').value=''; display(productList);
-}
-
-/* ============ CART ============ */
-function add(name){
-  const p = productList.find(x=>x.name===name); if(!p) return;
-  if (p.stock<=0){ alert('Out of stock'); return; }
-  const inCart = cart[name]?cart[name].qty:0;
-  if (inCart >= p.stock){ alert('No more stock available'); return; }
-  cart[name] = { qty: inCart+1, price: priceOf(p), name };
-  saveAll(); updateCartCount();
-}
-function updateCartCount(){
-  document.getElementById('cartCount').textContent = Object.values(cart).reduce((s,i)=>s+i.qty,0);
-}
-function openCart(){
-  const list = document.getElementById('cartList'); let total=0;
-  const entries = Object.entries(cart);
-  if (!entries.length){ list.innerHTML='<p>Cart is empty.</p>'; }
-  else {
-    list.innerHTML = entries.map(([n,i])=>{ const sub=i.qty*i.price; total+=sub;
-      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #eee;">
-        <span>${escapeHtml(n)}<br><small>${fmt(i.price)} × ${i.qty}</small></span>
-        <span><button onclick="cartDec('${escapeAttr(n)}')">−</button>
-        <button onclick="cartInc('${escapeAttr(n)}')">+</button>
-        <button onclick="cartDel('${escapeAttr(n)}')">🗑</button>
-        <b style="margin-left:8px;">${fmt(sub)}</b></span></div>`;
-    }).join('');
-  }
-  document.getElementById('total').textContent = total;
-  openModal('cartModal');
-}
-function cartInc(n){ const p=productList.find(x=>x.name===n); if(cart[n].qty<p.stock){ cart[n].qty++; saveAll(); openCart(); } else alert('Max stock'); }
-function cartDec(n){ if(--cart[n].qty<=0) delete cart[n]; saveAll(); openCart(); updateCartCount(); }
-function cartDel(n){ delete cart[n]; saveAll(); openCart(); updateCartCount(); }
-function checkout(){
-  if (!Object.keys(cart).length){ alert('Cart empty'); return; }
-  if (!session || session.role!=='buyer'){
-    alert('Please login or create a buyer account to place an order.');
-    closeModal('cartModal'); openAuth(); return;
-  }
-  // prefill
-  const u = users.find(x=>x.username===session.username);
-  if (u){ document.getElementById('coName').value=u.name||''; document.getElementById('coPhone').value=u.phone||''; }
-  closeModal('cartModal'); openModal('checkoutModal');
-}
-function buildOrderObj(){
-  const items = Object.values(cart).map(i=>({name:i.name, qty:i.qty, price:i.price, subtotal:i.qty*i.price}));
-  const total = items.reduce((s,i)=>s+i.subtotal,0);
-  return {
-    id: 'ORD-'+Date.now().toString(36).toUpperCase(),
-    user: session.username, userName: session.name,
-    date: new Date().toISOString(),
-    name: document.getElementById('coName').value.trim(),
-    phone: document.getElementById('coPhone').value.trim(),
-    address: document.getElementById('coAddr').value.trim(),
-    note: document.getElementById('coNote').value.trim(),
-    items, total, status: 'Pending'
-  };
-}
-function commitOrder(o){
-  // reduce stock
-  o.items.forEach(it=>{ const p=productList.find(x=>x.name===it.name); if(p) p.stock=Math.max(0,p.stock-it.qty); });
-  orders.push(o); cart = {}; saveAll();
-  updateCartCount();
-}
-function confirmOrder(){
-  if (!document.getElementById('coName').value.trim() || !document.getElementById('coPhone').value.trim() || !document.getElementById('coAddr').value.trim()){
-    alert('Please fill name, phone and address'); return;
-  }
-  const o = buildOrderObj(); commitOrder(o);
-  closeModal('checkoutModal');
-  alert('Order placed! ID: '+o.id+'\nTrack it under "My Orders".');
-}
-function confirmOrderWhatsApp(){
-  if (!document.getElementById('coName').value.trim() || !document.getElementById('coPhone').value.trim() || !document.getElementById('coAddr').value.trim()){
-    alert('Please fill name, phone and address'); return;
-  }
-  const o = buildOrderObj(); commitOrder(o);
-  let msg = `🛒 Order ${o.id}%0A%0A` + o.items.map(i=>`${i.name} x${i.qty} = ${fmt(i.subtotal)}`).join('%0A') + `%0A%0ATotal: ${fmt(o.total)}%0A${o.name} | ${o.phone}%0A${o.address}`;
-  window.open(`https://wa.me/254731858997?text=${msg}`, '_blank');
-  closeModal('checkoutModal');
+    list.forEach((item) => {
+        grid.innerHTML += `
+        <div class="item-card">
+            <img src="${item.images[0]}" class="item-image">
+            <div class="card-body">
+                <div class="item-title">${item.name}</div>
+                <div class="stars">${'★'.repeat(item.rating)}${'☆'.repeat(5 - item.rating)}</div>
+                <div style="font-size:18px; font-weight:bold; color:#e63946; margin-bottom:10px;">${item.price}</div>
+                <div class="item-info">
+                    <div><i class="fa fa-tags"></i> ${item.category}</div>
+                    <div><i class="fa fa-flask"></i> ${item.volume}</div>
+                    <div><i class="fa fa-globe"></i> ${item.origin}</div>
+                    <div><i class="fa fa-check-circle"></i> ${item.inStock ? 'In Stock' : 'Out of Stock'}</div>
+                </div>
+                <div class="card-buttons">
+                    <button class="add-cart-btn" onclick="addToCart(${item.id})"><i class="fa fa-cart-plus"></i> Cart</button>
+                    <button class="inquiry-btn" onclick="openModal(${item.id})">Inquire</button>
+                    <button class="view-btn" onclick="openModal(${item.id})">Details</button>
+                </div>
+            </div>
+        </div>`;
+    });
 }
 
-/* ============ AUTH ============ */
-function authTab(t){
-  document.getElementById('tabLogin').classList.toggle('active', t==='login');
-  document.getElementById('tabSignup').classList.toggle('active', t==='signup');
-  document.getElementById('loginForm').style.display = t==='login'?'block':'none';
-  document.getElementById('signupForm').style.display = t==='signup'?'block':'none';
-}
-function openAuth(){ authTab('login'); openModal('authModal'); }
-function doLogin(){
-  const u = document.getElementById('loginUser').value.trim();
-  const p = document.getElementById('loginPass').value;
-  // staff first
-  if (STAFF[u] && STAFF[u].password===p){
-    session = { username:u, role:STAFF[u].role, name:STAFF[u].name }; saveAll(); afterLogin(); return;
-  }
-  const usr = users.find(x => (x.username===u||x.email===u) && x.password===p);
-  if (!usr){ alert('Invalid credentials'); return; }
-  session = { username:usr.username, role:'buyer', name:usr.name }; saveAll(); afterLogin();
-}
-function doSignup(){
-  const name=document.getElementById('suName').value.trim();
-  const user=document.getElementById('suUser').value.trim();
-  const email=document.getElementById('suEmail').value.trim();
-  const phone=document.getElementById('suPhone').value.trim();
-  const pass=document.getElementById('suPass').value;
-  if (!name||!user||!email||!pass||pass.length<4){ alert('Fill all fields. Password ≥ 4 chars.'); return; }
-  if (STAFF[user] || users.some(x=>x.username===user)){ alert('Username taken'); return; }
-  if (users.some(x=>x.email===email)){ alert('Email already registered'); return; }
-  users.push({ name, username:user, email, phone, password:pass, createdAt:new Date().toISOString() });
-  session = { username:user, role:'buyer', name }; saveAll(); afterLogin();
-}
-function afterLogin(){ closeModal('authModal'); renderUser(); alert('Welcome, '+session.name+'!'); }
-function logout(){ session=null; saveAll(); renderUser(); }
-function renderUser(){
-  const el = document.getElementById('userArea');
-  if (!session){
-    el.innerHTML = `<button class="icon-btn" onclick="openAuth()" title="Login / Sign up">👤 Login</button>`;
-    return;
-  }
-  if (session.role==='buyer'){
-    el.innerHTML = `<button class="icon-btn" onclick="openOrders()" title="My orders">📦 My Orders</button>
-      <span style="font-size:13px;">👤 ${escapeHtml(session.name)}</span>
-      <button class="icon-btn" onclick="logout()" title="Logout">🚪</button>`;
-  } else {
-    el.innerHTML = `<button class="icon-btn" onclick="openAdmin()" title="Staff panel">🛠 ${session.role==='admin'?'Admin':'Sales'} Panel</button>
-      <span style="font-size:13px;">${escapeHtml(session.name)}</span>
-      <button class="icon-btn" onclick="logout()" title="Logout">🚪</button>`;
-  }
+function showPage(page, navElement) {
+    if(navElement) {
+        document.querySelectorAll('.nav a').forEach(el => el.classList.remove('active-nav'));
+        navElement.classList.add('active-nav');
+    }
+
+    const catalogSec = document.getElementById("catalogSection");
+    const topSearchSec = document.getElementById("topSearchSection");
+    const filterSidebar = document.getElementById("mainFilterSidebar");
+    const deliverySec = document.getElementById("deliverySection");
+    const contactSec = document.getElementById("contactSection");
+    const pageTitle = document.getElementById("pageSectionTitle");
+
+    catalogSec.style.display = "none";
+    topSearchSec.style.display = "none";
+    filterSidebar.style.display = "none";
+    deliverySec.style.display = "none";
+    contactSec.style.display = "none";
+
+    if (page === 'storefront') {
+        catalogSec.style.display = "block";
+        topSearchSec.style.display = "flex";
+        filterSidebar.style.display = "block";
+        pageTitle.innerText = "Featured Catalog";
+        renderProducts(products);
+    } else if (page === 'wines') {
+        catalogSec.style.display = "block";
+        topSearchSec.style.display = "flex";
+        filterSidebar.style.display = "block";
+        pageTitle.innerText = "Wines & Spirits Selection";
+        renderProducts(products.filter(p => p.category === 'Wine' || p.category === 'Whisky'));
+    } else if (page === 'gifts') {
+        catalogSec.style.display = "block";
+        topSearchSec.style.display = "flex";
+        filterSidebar.style.display = "block";
+        pageTitle.innerText = "Exclusive Gift Hampers & Packages";
+        renderProducts(products.filter(p => p.category === 'Gifts'));
+    } else if (page === 'delivery') {
+        deliverySec.style.display = "block";
+    } else if (page === 'contact') {
+        contactSec.style.display = "block";
+    }
 }
 
-/* ============ BUYER ORDERS ============ */
-function openOrders(){
-  const mine = orders.filter(o => o.user === session.username).reverse();
-  const el = document.getElementById('ordersList');
-  if (!mine.length){ el.innerHTML='<p>No orders yet.</p>'; openModal('ordersModal'); return; }
-  el.innerHTML = mine.map(o=>`
-    <div style="border:1px solid #ddd;border-radius:8px;padding:10px;margin-bottom:10px;">
-      <div style="display:flex;justify-content:space-between;">
-        <b>${o.id}</b>
-        <span class="status-pill status-${o.status}">${o.status}</span>
-      </div>
-      <small>${new Date(o.date).toLocaleString()}</small>
-      <table><tr><th>Item</th><th>Qty</th><th>Subtotal</th></tr>
-        ${o.items.map(i=>`<tr><td>${escapeHtml(i.name)}</td><td>${i.qty}</td><td>${fmt(i.subtotal)}</td></tr>`).join('')}
-        <tr><th colspan="2">Total</th><th>${fmt(o.total)}</th></tr>
-      </table>
-      <p style="font-size:12px;color:#888;margin-top:6px;">Ship to: ${escapeHtml(o.address)}</p>
-    </div>`).join('');
-  openModal('ordersModal');
+function openModal(id){
+    const item = products.find(p => p.id === id);
+    document.getElementById("itemModal").style.display = "flex";
+    document.getElementById("modalMainImage").src = item.images[0];
+    document.getElementById("modalTitle").innerText = item.name;
+    document.getElementById("modalStars").innerText = '★'.repeat(item.rating) + '☆'.repeat(5 - item.rating);
+    document.getElementById("modalPriceText").innerText = item.price;
+    document.getElementById("modalItemInfo").innerHTML = `
+        <div>Category: <b>${item.category}</b></div>
+        <div>Volume: <b>${item.volume}</b></div>
+        <div>Origin: <b>${item.origin}</b></div>
+        <div>ABV: <b>${item.abv}</b></div>`;
+
+    const related = products.filter(p => p.category === item.category && p.id !== item.id);
+    const relatedGrid = document.getElementById("relatedGrid");
+    relatedGrid.innerHTML = "";
+    if(related.length === 0) {
+        relatedGrid.innerHTML = "<p style='font-size:13px; color:#777;'>No other related items in this category.</p>";
+    } else {
+        related.forEach(rel => {
+            relatedGrid.innerHTML += `
+            <div class="related-card" onclick="openModal(${rel.id})">
+                <img src="${rel.images[0]}">
+                <div style="font-size:12px; font-weight:bold; margin-top:5px;">${rel.name}</div>
+                <div style="font-size:12px; color:#e63946;">${rel.price}</div>
+            </div>`;
+        });
+    }
 }
 
-/* ============ ADMIN/SALES PANEL ============ */
-function openAdmin(){
-  document.getElementById('adminTitle').textContent = session.role==='admin' ? 'Admin Panel' : 'Sales Panel';
-  document.getElementById('adminTabProducts').style.display = session.role==='admin'?'inline-block':'none';
-  document.getElementById('adminTabUsers').style.display = session.role==='admin'?'inline-block':'none';
-  updateMsgBadge();
-  adminTab('orders'); openModal('adminModal');
-}
-function adminTab(t){
-  document.querySelectorAll('#adminModal .tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===t));
-  const c = document.getElementById('adminContent');
-  if (t==='orders') c.innerHTML = adminOrdersHtml();
-  else if (t==='products') c.innerHTML = adminProductsHtml();
-  else if (t==='reports') c.innerHTML = adminReportsHtml();
-  else if (t==='users') c.innerHTML = adminUsersHtml();
-  else if (t==='messages') { c.innerHTML = adminMessagesHtml(); markInquiriesRead(); }
-}
-function adminMessagesHtml(){
-  if (!inquiries.length) return '<p>No messages yet.</p>';
-  return inquiries.slice().reverse().map(m=>`
-    <div style="border:1px solid #ddd;border-radius:8px;padding:10px;margin-bottom:10px;${m.read?'':'background:#fff8e1;'}">
-      <div style="display:flex;justify-content:space-between;">
-        <b>${escapeHtml(m.name)}</b>
-        <small>${new Date(m.date).toLocaleString()}</small>
-      </div>
-      <small>📞 ${escapeHtml(m.contact)} ${m.user?'• 👤 '+escapeHtml(m.user):''} ${m.product?'• 🍷 '+escapeHtml(m.product):''}</small>
-      <p style="margin:8px 0;white-space:pre-wrap;">${escapeHtml(m.message)}</p>
-      <button onclick="deleteInquiry('${m.id}')">🗑 Delete</button>
-      <a href="https://wa.me/${m.contact.replace(/[^0-9]/g,'')}" target="_blank" style="margin-left:8px;">💬 Reply on WhatsApp</a>
-    </div>`).join('');
-}
-function deleteInquiry(id){
-  if(!confirm('Delete this message?')) return;
-  inquiries = inquiries.filter(m=>m.id!==id); saveAll(); adminTab('messages'); updateMsgBadge();
-}
-function markInquiriesRead(){
-  inquiries.forEach(m=>m.read=true); saveAll(); updateMsgBadge();
-}
-function updateMsgBadge(){
-  const b = document.getElementById('msgBadge'); if(!b) return;
-  const n = inquiries.filter(m=>!m.read).length;
-  b.textContent = n; b.style.display = n>0 ? 'inline-block' : 'none';
+function closeModal(id){ document.getElementById(id).style.display = "none"; }
+
+function addToCart(id) {
+    const item = products.find(p => p.id === id);
+    const existing = cart.find(c => c.id === id);
+    if(existing) { existing.qty += 1; }
+    else { cart.push({ ...item, qty: 1 }); }
+    updateCartUI();
+    alert(`${item.name} added to cart!`);
 }
 
-/* ============ INQUIRIES (buyer side) ============ */
-function openInquiry(productName){
-  document.getElementById('inqProduct').value = productName || '';
-  if (session && session.role==='buyer'){
-    const u = users.find(x=>x.username===session.username);
-    document.getElementById('inqName').value = u?.name || session.name || '';
-    document.getElementById('inqContact').value = u?.phone || u?.email || '';
-  } else {
-    document.getElementById('inqName').value = '';
-    document.getElementById('inqContact').value = '';
-  }
-  document.getElementById('inqMessage').value = '';
-  openModal('inquiryModal');
-}
-function submitInquiry(){
-  const name = document.getElementById('inqName').value.trim();
-  const contact = document.getElementById('inqContact').value.trim();
-  const message = document.getElementById('inqMessage').value.trim();
-  const product = document.getElementById('inqProduct').value.trim();
-  if (!name || !contact || !message){ alert('Name, contact and message are required.'); return; }
-  inquiries.push({
-    id: 'MSG-'+Date.now().toString(36).toUpperCase(),
-    user: session?.username || '', name, contact, product, message,
-    date: new Date().toISOString(), read:false
-  });
-  saveAll(); updateMsgBadge(); closeModal('inquiryModal');
-  alert('Message sent! The team will get back to you shortly.');
-}
-function adminOrdersHtml(){
-  if (!orders.length) return '<p>No orders.</p>';
-  const statuses = ['Pending','Processing','Shipped','Delivered','Cancelled'];
-  return `<table><tr><th>ID</th><th>Date</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Action</th></tr>${
-    orders.slice().reverse().map(o=>`
-      <tr>
-        <td>${o.id}</td><td>${new Date(o.date).toLocaleString()}</td>
-        <td>${escapeHtml(o.name)}<br><small>${escapeHtml(o.phone)}</small><br><small>${escapeHtml(o.address)}</small></td>
-        <td>${o.items.map(i=>`${escapeHtml(i.name)} ×${i.qty}`).join('<br>')}</td>
-        <td>${fmt(o.total)}</td>
-        <td><span class="status-pill status-${o.status}">${o.status}</span></td>
-        <td><select onchange="updateOrderStatus('${o.id}', this.value)">
-          ${statuses.map(s=>`<option ${s===o.status?'selected':''}>${s}</option>`).join('')}
-        </select></td>
-      </tr>`).join('')}</table>`;
-}
-function updateOrderStatus(id, status){
-  const o = orders.find(x=>x.id===id); if(!o) return;
-  o.status = status; saveAll(); adminTab('orders');
-}
-function adminProductsHtml(){
-  return `<button class="btn-primary" onclick="openProductEditor()">+ Add Product</button>
-    <input id="adminProdSearch" oninput="adminTab('products')" value="" placeholder="search..." style="margin-left:10px;padding:6px;">
-    <table style="margin-top:10px;"><tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Discount</th><th>Stock</th><th></th></tr>${
-    productList.map((p,i)=>`<tr>
-      <td><img src="${p.image||''}" style="width:40px;height:40px;object-fit:cover;border-radius:4px;" onerror="this.style.display='none'"></td>
-      <td>${escapeHtml(p.name)}</td><td>${p.category}</td>
-      <td>${fmt(p.price)}</td><td>${p.discount||0}%</td><td>${p.stock}</td>
-      <td><button onclick="openProductEditor(${i})">✏️</button>
-      <button onclick="deleteProduct(${i})">🗑</button></td>
-    </tr>`).join('')}</table>`;
-}
-let editIdx = -1;
-function openProductEditor(idx){
-  editIdx = (idx==null?-1:idx);
-  const p = editIdx>=0 ? productList[editIdx] : {name:'',price:'',category:'',size:'',stock:'',discount:0,abv:'',country:'',brand:'',description:'',image:''};
-  document.getElementById('prodModalTitle').textContent = editIdx>=0?'Edit Product':'Add Product';
-  ['Name','Price','Category','Size','Stock','Discount','Abv','Country','Brand','Desc','Image'].forEach(k=>{
-    const id='pf'+k; const key = k.toLowerCase()==='desc'?'description':k.toLowerCase();
-    const el=document.getElementById(id); if(el) el.value = p[key]??'';
-  });
-  document.getElementById('pfImagePreview').style.display = p.image ? 'block' : 'none';
-  document.getElementById('pfImagePreview').src = p.image || '';
-  document.getElementById('pfImageFile').value = '';
-  openModal('prodModal');
-}
-function handleImageUpload(e){
-  const file = e.target.files[0]; if (!file) return;
-  if (file.size > 800*1024){ if(!confirm('Image is large ('+Math.round(file.size/1024)+'KB) and may slow the site. Continue?')) return; }
-  const r = new FileReader();
-  r.onload = ev => { document.getElementById('pfImage').value = ev.target.result; document.getElementById('pfImagePreview').src=ev.target.result; document.getElementById('pfImagePreview').style.display='block'; };
-  r.readAsDataURL(file);
-}
-function saveProduct(){
-  const obj = {
-    name: document.getElementById('pfName').value.trim(),
-    price: +document.getElementById('pfPrice').value||0,
-    category: document.getElementById('pfCategory').value.trim(),
-    size: document.getElementById('pfSize').value.trim(),
-    stock: +document.getElementById('pfStock').value||0,
-    discount: Math.max(0, Math.min(90, +document.getElementById('pfDiscount').value||0)),
-    abv: document.getElementById('pfAbv').value.trim(),
-    country: document.getElementById('pfCountry').value.trim(),
-    brand: document.getElementById('pfBrand').value.trim(),
-    description: document.getElementById('pfDesc').value.trim(),
-    image: document.getElementById('pfImage').value.trim()
-  };
-  if (!obj.name||!obj.price||!obj.category){ alert('Name, price, category required'); return; }
-  if (editIdx>=0) productList[editIdx] = {...productList[editIdx], ...obj};
-  else productList.push(obj);
-  saveAll(); closeModal('prodModal'); adminTab('products'); display(); buildFilterUI();
-}
-function deleteProduct(i){
-  if (!confirm('Delete "'+productList[i].name+'"?')) return;
-  productList.splice(i,1); saveAll(); adminTab('products'); display(); buildFilterUI();
-}
-function adminReportsHtml(){
-  const delivered = orders.filter(o=>o.status==='Delivered');
-  const all = orders.filter(o=>o.status!=='Cancelled');
-  const rev = all.reduce((s,o)=>s+o.total,0);
-  const delRev = delivered.reduce((s,o)=>s+o.total,0);
-  const topProd = {};
-  all.forEach(o=>o.items.forEach(i=>{ topProd[i.name]=(topProd[i.name]||0)+i.qty; }));
-  const top = Object.entries(topProd).sort((a,b)=>b[1]-a[1]).slice(0,10);
-  return `<div class="kpi-grid">
-    <div class="kpi"><b>${orders.length}</b>Total Orders</div>
-    <div class="kpi"><b>${delivered.length}</b>Delivered</div>
-    <div class="kpi"><b>${fmt(rev.toLocaleString())}</b>Gross Revenue</div>
-    <div class="kpi"><b>${fmt(delRev.toLocaleString())}</b>Delivered Revenue</div>
-    <div class="kpi"><b>${users.length}</b>Buyers</div>
-    <div class="kpi"><b>${productList.length}</b>Products</div>
-  </div>
-  <h4>Top Selling Products</h4>
-  ${top.length ? `<table><tr><th>#</th><th>Product</th><th>Units Sold</th></tr>${
-    top.map(([n,q],i)=>`<tr><td>${i+1}</td><td>${escapeHtml(n)}</td><td>${q}</td></tr>`).join('')}</table>` : '<p>No sales yet.</p>'}`;
-}
-function adminUsersHtml(){
-  if (!users.length) return '<p>No buyers registered yet.</p>';
-  return `<table><tr><th>Name</th><th>Username</th><th>Email</th><th>Phone</th><th>Joined</th><th>Orders</th></tr>${
-    users.map(u=>{
-      const cnt = orders.filter(o=>o.user===u.username).length;
-      return `<tr><td>${escapeHtml(u.name)}</td><td>${escapeHtml(u.username)}</td><td>${escapeHtml(u.email)}</td><td>${escapeHtml(u.phone||'')}</td><td>${new Date(u.createdAt).toLocaleDateString()}</td><td>${cnt}</td></tr>`;
-    }).join('')}</table>`;
+function updateCartUI() {
+    document.getElementById("cartCount").innerText = cart.reduce((sum, item) => sum + item.qty, 0);
+    const cartList = document.getElementById("cartItemsList");
+    cartList.innerHTML = "";
+    let total = 0;
+    cart.forEach((item, idx) => {
+        const itemTotal = item.rawPrice * item.qty;
+        total += itemTotal;
+        cartList.innerHTML += `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid #eee;">
+            <div>
+                <b>${item.name}</b><br>
+                <small>${item.price} x ${item.qty}</small>
+            </div>
+            <div>
+                <b>KSh ${itemTotal.toLocaleString()}</b>
+                <button onclick="removeFromCart(${idx})" style="background:none; border:none; color:red; margin-left:8px; cursor:pointer;"><i class="fa fa-trash"></i></button>
+            </div>
+        </div>`;
+    });
+    document.getElementById("cartTotalPrice").innerText = `KSh ${total.toLocaleString()}`;
 }
 
-/* ============ MODALS ============ */
-function openModal(id){ document.getElementById(id).classList.add('open'); }
-function closeModal(id){ document.getElementById(id).classList.remove('open'); }
-function toggleTheme(){ document.body.classList.toggle('dark'); LS.set('acacia_theme', document.body.classList.contains('dark')); }
-if (LS.get('acacia_theme', false)) document.body.classList.add('dark');
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartUI();
+}
 
-/* ============ INIT ============ */
-buildFilterUI();
-display();
-renderUser();
-updateCartCount();
-updateMsgBadge();
+function openCartModal() {
+    updateCartUI();
+    document.getElementById("cartModal").style.display = "flex";
+}
+
+function selectPayment(method) {
+    selectedPaymentMethod = method;
+    document.querySelectorAll('.payment-method-card').forEach(el => el.classList.remove('active'));
+    if(method === 'mpesa') {
+        document.getElementById('payMpesa').classList.add('active');
+        document.getElementById('mpesaFields').style.display = 'block';
+        document.getElementById('cardFields').style.display = 'none';
+    } else if(method === 'card') {
+        document.getElementById('payCard').classList.add('active');
+        document.getElementById('mpesaFields').style.display = 'none';
+        document.getElementById('cardFields').style.display = 'grid';
+    } else {
+        document.getElementById('payCod').classList.add('active');
+        document.getElementById('mpesaFields').style.display = 'none';
+        document.getElementById('cardFields').style.display = 'none';
+    }
+}
+
+function processPayment(e) {
+    e.preventDefault();
+    if(cart.length === 0) { alert("Your cart is empty!"); return; }
+    if(selectedPaymentMethod === 'mpesa') {
+        alert("STK Push prompt sent to your mobile phone. Please enter M-Pesa PIN to complete payment.");
+    } else {
+        alert("Order successfully placed!");
+    }
+    cart = [];
+    updateCartUI();
+    closeModal("cartModal");
+}
+
+document.getElementById("mainLogo").addEventListener("click", () => {
+    document.getElementById("adminLoginModal").style.display = "flex";
+});
+
+document.getElementById("adminLoginForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("adminEmail").value;
+    const pwd = document.getElementById("adminPassword").value;
+
+    if(email === "adminacaciabooks@gmail.com" && pwd === "admin123") {
+        closeModal("adminLoginModal");
+        activateAdminDashboard();
+    } else { 
+        alert("Invalid credentials. Access denied."); 
+    }
+});
+
+function activateAdminDashboard() {
+    document.getElementById("publicContainer").style.display = "none";
+    document.getElementById("adminContainer").style.display = "flex";
+    document.getElementById("mainNavbar").innerHTML = `
+        <span style="color:#e63946; font-weight:bold;"><i class="fa fa-user-shield"></i> Admin Panel</span>
+        <a href="#" onclick="location.reload()" style="background:#e63946; padding:6px 12px; border-radius:4px; margin-left:10px;"><i class="fa fa-sign-out-alt"></i> Logout</a>`;
+    renderAdminTables();
+}
+
+function switchAdminTab(tab) {
+    document.querySelectorAll('.admin-panel-card').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.admin-sidebar-menu li').forEach(el => el.classList.remove('active-admin-tab'));
+    document.getElementById(`panel-${tab}`).style.display = 'block';
+    event.currentTarget.classList.add('active-admin-tab');
+}
+
+function renderAdminTables() {
+   
+    const invTable = document.getElementById("adminInvoiceTableBody");
+    invTable.innerHTML = "";
+    let grossSales = 0;
+
+    invoices.forEach(inv => {
+        if(inv.status === "Paid") grossSales += inv.amount;
+        invTable.innerHTML += `
+        <tr>
+            <td><b>${inv.id}</b></td>
+            <td>${inv.customer}</td>
+            <td>${inv.product}</td>
+            <td>${inv.salesRep}</td>
+            <td>KSh ${inv.amount.toLocaleString()}</td>
+            <td><span class="status-badge ${inv.status === 'Paid' ? 'status-success' : 'status-pending'}">${inv.status}</span></td>
+            <td>
+                <button class="action-btn btn-edit" onclick="editInvoice('${inv.id}')"><i class="fa fa-edit"></i> Edit</button>
+                <button class="action-btn btn-delete" onclick="deleteInvoice('${inv.id}')"><i class="fa fa-trash"></i> Delete</button>
+            </td>
+        </tr>`;
+    });
+
+    document.getElementById("revenueGrossSales").innerText = "KSh " + grossSales.toLocaleString();
+
+    const prodTable = document.getElementById("adminProductsTableBody");
+    prodTable.innerHTML = "";
+    products.forEach(p => {
+        prodTable.innerHTML += `<tr><td><b>${p.name}</b></td><td>${p.category}</td><td>${p.price}</td><td><span class="status-badge ${p.inStock ? 'status-success':'status-pending'}">${p.inStock ? 'In Stock':'Out of Stock'}</span></td></tr>`;
+    });
+
+    const empTable = document.getElementById("adminEmployeesTableBody");
+    const commTable = document.getElementById("adminCommissionTableBody");
+    empTable.innerHTML = ""; commTable.innerHTML = "";
+    let totalComm = 0;
+    
+    employees.forEach(e => {
+      
+        const salesVolume = invoices
+            .filter(i => i.salesRep === e.name && i.status === "Paid")
+            .reduce((sum, i) => sum + i.amount, 0);
+        const commissionEarned = (salesVolume * e.rate) / 100;
+        totalComm += commissionEarned;
+
+        empTable.innerHTML += `<tr><td><b>${e.name}</b></td><td>${e.role}</td><td>${e.rate}%</td></tr>`;
+        commTable.innerHTML += `<tr><td><b>${e.name}</b></td><td>${e.role}</td><td>KSh ${salesVolume.toLocaleString()}</td><td>${e.rate}%</td><td style="color:#137333; font-weight:bold;">KSh ${commissionEarned.toLocaleString()}</td></tr>`;
+    });
+
+    document.getElementById("revenueCommissionsPaid").innerText = "KSh " + totalComm.toLocaleString();
+}
+
+function openInvoiceModal(invId = null) {
+    const repSelect = document.getElementById("invSalesRep");
+    repSelect.innerHTML = employees.map(e => `<option value="${e.name}">${e.name}</option>`).join("");
+
+    if(invId) {
+        const inv = invoices.find(i => i.id === invId);
+        document.getElementById("invoiceModalTitle").innerText = "Edit Invoice (" + inv.id + ")";
+        document.getElementById("invId").value = inv.id;
+        document.getElementById("invCustomer").value = inv.customer;
+        document.getElementById("invProduct").value = inv.product;
+        document.getElementById("invSalesRep").value = inv.salesRep;
+        document.getElementById("invAmount").value = inv.amount;
+        document.getElementById("invStatus").value = inv.status;
+    } else {
+        document.getElementById("invoiceModalTitle").innerText = "Create Invoice";
+        document.getElementById("invoiceForm").reset();
+        document.getElementById("invId").value = "";
+    }
+    document.getElementById("invoiceModal").style.display = "flex";
+}
+
+function editInvoice(id) {
+    openInvoiceModal(id);
+}
+
+function deleteInvoice(id) {
+    if(confirm(`Are you sure you want to delete invoice ${id}?`)) {
+        invoices = invoices.filter(i => i.id !== id);
+        renderAdminTables();
+    }
+}
+
+document.getElementById("invoiceForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const id = document.getElementById("invId").value;
+    const customer = document.getElementById("invCustomer").value;
+    const product = document.getElementById("invProduct").value;
+    const salesRep = document.getElementById("invSalesRep").value;
+    const amount = parseFloat(document.getElementById("invAmount").value);
+    const status = document.getElementById("invStatus").value;
+
+    if(id) {
+        
+        const index = invoices.findIndex(i => i.id === id);
+        if(index !== -1) {
+            invoices[index] = { id, customer, product, salesRep, amount, status };
+        }
+    } else {
+       
+        const newId = `INV-${1000 + invoices.length + 1}`;
+        invoices.push({ id: newId, customer, product, salesRep, amount, status });
+    }
+
+    renderAdminTables();
+    closeModal("invoiceModal");
+});
+
+
+function openAddProductModal(){ document.getElementById("addProductModal").style.display = "flex"; }
+
+document.getElementById("addProductForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = document.getElementById("addProdName").value;
+    const cat = document.getElementById("addProdCat").value;
+    const price = document.getElementById("addProdPrice").value;
+    const volume = document.getElementById("addProdVolume").value || "Standard";
+    const origin = document.getElementById("addProdOrigin").value || "Imported";
+    const img = document.getElementById("addProdImage").value || "https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1000";
+
+    const newId = products.length + 1;
+    products.push({ id: newId, name, category: cat, abv: "Low", volume, origin, rating: 5, price: `KSh ${parseInt(price).toLocaleString()}`, rawPrice: parseInt(price), inStock: true, images: [img] });
+    renderProducts(products);
+    renderAdminTables();
+    closeModal("addProductModal");
+});
+
+function applyFilters() {
+    const kw = document.getElementById("filterKeyword").value.toLowerCase();
+    const cat = document.getElementById("filterCategory").value;
+    const minPrice = parseFloat(document.getElementById("filterMinPrice").value) || 0;
+    const maxPrice = parseFloat(document.getElementById("filterMaxPrice").value) || Infinity;
+    const volume = document.getElementById("filterVolume").value;
+    const origin = document.getElementById("filterOrigin").value;
+    const abv = document.getElementById("filterAbv").value;
+    const inStockOnly = document.getElementById("filterInStockOnly").checked;
+
+    const filtered = products.filter(p => {
+        const matchesKw = p.name.toLowerCase().includes(kw);
+        const matchesCat = cat === "All" || p.category === cat;
+        const matchesPrice = p.rawPrice >= minPrice && p.rawPrice <= maxPrice;
+        const matchesVolume = volume === "All" || p.volume.includes(volume);
+        const matchesOrigin = origin === "All" || p.origin === origin;
+        const matchesAbv = abv === "All" || p.abv === abv;
+        const matchesStock = !inStockOnly || p.inStock;
+
+        return matchesKw && matchesCat && matchesPrice && matchesVolume && matchesOrigin && matchesAbv && matchesStock;
+    });
+
+    renderProducts(filtered);
+}
+
+function resetFilters() {
+    document.getElementById("filterKeyword").value = "";
+    document.getElementById("filterCategory").value = "All";
+    document.getElementById("filterMinPrice").value = "";
+    document.getElementById("filterMaxPrice").value = "";
+    document.getElementById("filterVolume").value = "All";
+    document.getElementById("filterOrigin").value = "All";
+    document.getElementById("filterAbv").value = "All";
+    document.getElementById("filterInStockOnly").checked = false;
+    renderProducts(products);
+}
+
+function topSearch() {
+    const val = document.getElementById("topSearchBar").value.toLowerCase();
+    const filtered = products.filter(p => p.name.toLowerCase().includes(val));
+    renderProducts(filtered);
+}
+
+renderProducts(products);
 </script>
 </body>
 </html>
