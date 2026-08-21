@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Spear Liquor House</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --amber: #C17817;
+    --amber-deep: #8F5A0F;
+    --burgundy: #6B2737;
+    --gold: #B8933F;
+    --green: #4C6444;
+    --rust: #A33B2E;
+    --header-bg: #000000;
+    --header-text: #F5EEE0;
+    --page-bg: #FFFFFF;
+    --card-bg: #FFFFFF;
+    --card-bg-soft: #EFE5D2;
+    --text: #2A2118;
+    --text-muted: #6B5D4F;
+    --line: #DCCFB4;
+    --btn-blue: #8F5A0F;
+    --btn-blue-text: #FFFFFF;
+    --btn-yellow: #C17817;
+    --btn-yellow-text: #FFFFFF;
+  }
+  html[data-theme="dark"] {
+    --page-bg: #15110D;
+    --card-bg: #221B14;
+    --card-bg-soft: #2A2119;
+    --text: #F0E6D6;
+    --text-muted: #A99C89;
+    --line: #3A2F23;
+    --header-bg: #0E0B08;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--page-bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: background 0.2s, color 0.2s;
+  }
+  input, select, textarea, button { font-family: 'Inter', sans-serif; }
+  button { cursor: pointer; }
+  button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--amber); outline-offset: 1px;
+  }
+  ::placeholder { color: var(--text-muted); opacity: 0.7; }
+  a { color: inherit; }
+  table { border-collapse: collapse; width: 100%; }
+
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  .serif { font-family: 'Fraunces', serif; }
+
+  .header { background: var(--header-bg); padding: 16px 32px; position: sticky; top: 0; z-index: 20; }
+  .header-inner { max-width: 100%; margin: 0; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+  .logo { display: flex; align-items: baseline; gap: 7px; cursor: pointer; }
+  .logo .mark { color: var(--amber); font-size: 20px; }
+  .logo .name { font-family: 'Fraunces', serif; font-weight: 700; font-size: 21px; color: var(--header-text); letter-spacing: 0.01em; }
+  .logo .name em { font-style: italic; font-weight: 500; color: var(--amber); }
+
+  .search-wrap { flex: 1; min-width: 180px; position: relative; }
+  .search-wrap input {
+    width: 100%; padding: 9px 12px 9px 32px; border-radius: 3px; border: none;
+    background: rgba(255,255,255,0.08); color: var(--header-text); font-size: 13.5px;
+  }
+  .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 13px; opacity: 0.6; }
+
+  .header-actions { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+  .icon-btn { background: none; border: none; color: var(--header-text); padding: 7px; border-radius: 3px; display: flex; align-items: center; font-size: 15px; }
+  .icon-btn:hover { background: rgba(255,255,255,0.08); }
+  .row-btn {
+    background: var(--btn-blue); color: var(--btn-blue-text); border: none; padding: 4px 8px; border-radius: 3px;
+    display: inline-flex; align-items: center; gap: 4px; justify-content: center; font-size: 12px; font-weight: 600; margin-left: 4px; transition: background 0.15s, color 0.15s; white-space: nowrap;
+  }
+  .row-btn:hover { background: var(--btn-yellow); color: var(--btn-yellow-text); }
+  .staff-link { background: none; border: none; color: #A99C89; font-size: 12.5px; display: flex; align-items: center; gap: 5px; padding: 6px 4px; }
+  .cart-btn { position: relative; }
+  .cart-badge {
+    position: absolute; top: -1px; right: -1px; background: var(--amber); color: var(--header-bg);
+    font-size: 10px; font-weight: 700; border-radius: 50%; width: 16px; height: 16px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .main { max-width: 100%; margin: 0; padding: 26px 32px 90px; }
+
+  .btn {
+    font-weight: 600; font-size: 13.5px; padding: 6px 12px; border-radius: 3px; border: none;
+    display: inline-flex; align-items: center; justify-content: center; gap: 7px; letter-spacing: 0.01em;
+    background: var(--btn-blue); color: var(--btn-blue-text); transition: background 0.15s, color 0.15s;
+  }
+  .btn:hover { background: var(--btn-yellow); color: var(--btn-yellow-text); }
+  .btn-primary { background: var(--btn-blue); color: var(--btn-blue-text); }
+  .btn-primary:hover { background: var(--btn-yellow); color: var(--btn-yellow-text); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-dark { background: var(--btn-blue); color: var(--btn-blue-text); }
+  .btn-dark:hover { background: var(--btn-yellow); color: var(--btn-yellow-text); }
+  .btn-outline { background: var(--btn-blue); color: var(--btn-blue-text); border: none; }
+  .btn-outline:hover { background: var(--btn-yellow); color: var(--btn-yellow-text); }
+  .btn-danger { background: var(--btn-blue); color: var(--btn-blue-text); border: none; }
+  .btn-danger:hover { background: var(--btn-yellow); color: var(--btn-yellow-text); }
+  .btn-block { width: 100%; }
+
+  .shop-grid { display: grid; grid-template-columns: 220px 1fr; gap: 30px; align-items: start; }
+  .sidebar { position: sticky; top: 84px; align-self: start; }
+  .sidebar h4 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 14px; margin: 0 0 10px; }
+  .cat-list { display: flex; flex-direction: column; gap: 2px; margin-bottom: 22px; }
+  .cat-item {
+    text-align: left; background: none; border: none; padding: 6px 8px; font-size: 13.5px;
+    border-radius: 3px; color: var(--text-muted);
+  }
+  .cat-item.active { background: var(--card-bg-soft); color: var(--text); font-weight: 700; }
+  .price-range { display: flex; gap: 8px; margin-bottom: 22px; }
+  .price-range input { width: 100%; padding: 7px 8px; border-radius: 3px; border: 1px solid var(--line); font-size: 12.5px; background: var(--card-bg); color: var(--text); }
+  .field-select { width: 100%; padding: 8px 10px; border-radius: 3px; border: 1px solid var(--line); font-size: 13px; background: var(--card-bg); color: var(--text); }
+
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(228px, 1fr)); gap: 18px; }
+  .card { background: var(--card-bg); border: 1px solid var(--line); border-radius: 4px; padding: 16px; display: flex; flex-direction: column; gap: 10px; position: relative; overflow: hidden; }
+  .card-top { display: flex; justify-content: center; align-items: center; cursor: pointer; position: relative; margin: -16px -16px 0; height: 190px; background: var(--page-bg); }
+  .card-top img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card-top .abv-badge { position: absolute; top: 10px; right: 10px; }
+  .cat-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+  .p-name { font-family: 'Fraunces', serif; font-weight: 600; font-size: 16px; margin: 3px 0 5px; line-height: 1.25; cursor: pointer; }
+  .stars { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--gold); }
+  .price-row { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
+  .price-old { font-size: 12px; color: var(--text-muted); text-decoration: line-through; }
+  .discount-badge {
+    position: absolute; top: 10px; left: 10px; background: var(--rust); color: #fff; font-size: 11px; font-weight: 700;
+    padding: 3px 8px; border-radius: 3px; letter-spacing: 0.02em; z-index: 1;
+  }
+
+  .abv-badge {
+    width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+    background: radial-gradient(circle at 32% 28%, var(--gold), var(--amber-deep));
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--card-bg); box-shadow: 0 1px 3px rgba(0,0,0,0.35);
+    font-size: 9.5px; font-weight: 600; color: #F5EEE0; text-align: center; line-height: 1.1;
+  }
+  .stock-tag {
+    display: inline-flex; align-items: center; color: #F5EEE0; font-size: 11px; font-weight: 500;
+    padding: 3px 10px 3px 14px; clip-path: polygon(8px 0, 100% 0, 100% 100%, 8px 100%, 0 50%);
+  }
+
+  .empty { padding: 60px 20px; text-align: center; color: var(--text-muted); }
+
+  .back-link { background: none; border: none; color: var(--text-muted); font-size: 13px; display: flex; align-items: center; gap: 6px; margin-bottom: 20px; padding: 0; }
+
+  .pd-grid { display: grid; grid-template-columns: 420px 1fr; gap: 40px; }
+  .pd-image { background: var(--card-bg); border: 1px solid var(--line); border-radius: 4px; padding: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 460px; }
+  .pd-image img { width: 100%; height: 100%; min-height: 460px; }
+  .qty-box { display: flex; align-items: center; border: 1.5px solid var(--text); border-radius: 3px; }
+  .qty-box button { padding: 9px 12px; background: none; border: none; font-size: 14px; }
+  .qty-box span { padding: 0 14px; font-weight: 600; }
+
+  .cart-layout { display: grid; grid-template-columns: 1.6fr 1fr; gap: 36px; align-items: start; }
+  .cart-line { display: flex; align-items: center; gap: 14px; background: var(--card-bg); border: 1px solid var(--line); border-radius: 4px; padding: 14px; }
+  .cart-summary { background: var(--card-bg); border: 1px solid var(--line); border-radius: 4px; padding: 22px; }
+  .input { padding: 9px 11px; border-radius: 3px; border: 1px solid var(--line); font-size: 13.5px; background: var(--card-bg); color: var(--text); width: 100%; }
+
+  .login-card { max-width: 380px; margin: 60px auto; background: var(--card-bg); border: 1px solid var(--line); border-radius: 6px; padding: 32px; }
+  .login-card label { display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 14px; }
+  .error-box { background: #FBEFEA; border: 1px solid var(--rust); color: var(--rust); font-size: 12.5px; padding: 10px 12px; border-radius: 3px; margin-bottom: 14px; }
+
+  .admin-wrap { min-height: 100vh; display: grid; grid-template-columns: 220px 1fr; }
+  .admin-side { background: #100C09; padding: 22px 16px; border-right: 1px solid #2E2620; }
+  .admin-side .name { font-family: 'Fraunces', serif; font-weight: 700; font-size: 18px; color: #F5EEE0; margin-bottom: 2px; }
+  .admin-side .tag { font-size: 10.5px; color: var(--amber); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .admin-side .who { font-size: 11px; color: #8A7C69; margin-bottom: 22px; word-break: break-all; }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 3px; border: none;
+    background: transparent; color: #A99C89; font-size: 13.5px; text-align: left; width: 100%;
+  }
+  .nav-item.active { background: #2E2620; color: #F5EEE0; }
+  .admin-main { background: var(--page-bg); padding: 28px 32px; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+  .stat-card { background: var(--card-bg); border: 1px solid var(--line); border-radius: 4px; padding: 16px 18px; }
+  .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; display: flex; justify-content: space-between; margin-bottom: 8px; }
+  .stat-value { font-weight: 700; font-size: 21px; }
+
+  .panel { background: var(--card-bg); border: 1px solid var(--line); border-radius: 4px; padding: 20px; }
+  .alert-panel { background: #FBEFEA; border: 1px solid #A33B2E55; border-radius: 4px; padding: 18px; }
+
+  th { padding: 10px 14px; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); text-align: left; background: var(--card-bg-soft); }
+  td { padding: 10px 14px; border-top: 1px solid var(--line); font-size: 13px; }
+
+  .form-panel { background: var(--card-bg); border: 1.5px solid var(--amber); border-radius: 4px; padding: 22px; margin-bottom: 20px; }
+  .form-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
+  .form-grid label { font-size: 11.5px; color: var(--text-muted); font-weight: 600; display: flex; flex-direction: column; gap: 4px; }
+
+  .badge-role { font-size: 11px; padding: 3px 9px; border-radius: 10px; font-weight: 600; }
+  .badge-admin { background: var(--burgundy); color: #fff; }
+  .badge-sales { background: var(--amber); color: #1C1712; }
+  .badge-procurement { background: var(--green); color: #fff; }
+  .badge-accounts { background: #4A6E7A; color: #fff; }
+  .badge-inactive { background: var(--line); color: var(--text-muted); }
+  .badge-status { font-size: 11px; padding: 3px 9px; border-radius: 10px; font-weight: 600; }
+  .badge-approved { background: var(--green); color: #fff; }
+  .badge-pending { background: var(--amber-deep); color: #fff; }
+  .badge-rejected { background: var(--rust); color: #fff; }
+
+  .social-fab-stack { position: fixed; bottom: 22px; right: 22px; display: flex; flex-direction: column; gap: 10px; z-index: 30; }
+  .social-fab {
+    width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3); text-decoration: none; font-size: 21px; color: #fff; border: none;
+  }
+  .fab-whatsapp { background: #25D366; }
+  .fab-email { background: var(--burgundy); }
+  .fab-x { background: #111; }
+  .fab-instagram { background: radial-gradient(circle at 30% 110%, #fdf497, #fd5949 30%, #d6249f 60%, #285AEB 90%); }
+
+  .love-btn {
+    background: none; border: none; font-size: 17px; padding: 4px; line-height: 1; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .site-footer { background: var(--header-bg); color: var(--header-text); padding: 0 0 22px; margin-top: 56px; position: relative; }
+  .site-footer::before {
+    content: ""; display: block; height: 3px; width: 100%;
+    background: linear-gradient(90deg, var(--burgundy), var(--amber) 35%, var(--gold) 55%, var(--amber) 75%, var(--burgundy));
+  }
+  .foot-top { padding: 40px 32px 30px; border-bottom: 1px solid rgba(245,238,224,0.08); }
+  .foot-grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1.3fr 0.9fr 1fr 1.1fr; gap: 36px; align-items: start; }
+  .site-footer .foot-brand { font-family: 'Fraunces', serif; font-weight: 700; font-size: 19px; margin-bottom: 10px; display: flex; align-items: center; gap: 7px; }
+  .site-footer .foot-col { font-size: 12.5px; color: #A99C89; line-height: 1.85; }
+  .site-footer .foot-col a { color: #A99C89; text-decoration: none; transition: color 0.15s; }
+  .foot-heading { color: #F5EEE0; font-weight: 600; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+  .foot-links { display: flex; flex-direction: column; gap: 9px; list-style: none; margin: 0; padding: 0; }
+  .foot-links li a { color: #A99C89; font-size: 13px; text-decoration: none; transition: color 0.15s, padding-left 0.15s; display: inline-block; background: none; border: none; cursor: pointer; padding-left: 0; font-family: 'Inter', sans-serif; }
+  .foot-links li a:hover { color: var(--amber); padding-left: 3px; }
+  .foot-social-row { display: flex; gap: 9px; margin-top: 18px; }
+  .foot-social-btn {
+    width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    background: rgba(245,238,224,0.08); color: #F5EEE0; font-size: 14px; text-decoration: none;
+    transition: background 0.15s, transform 0.15s, color 0.15s; border: none;
+  }
+  .foot-social-btn:hover { background: var(--amber); color: #1C1712; transform: translateY(-2px); }
+  .foot-hours-row { display: flex; justify-content: space-between; gap: 10px; }
+  .foot-hours-row + .foot-hours-row { margin-top: 2px; }
+  .foot-newsletter-copy { font-size: 12.5px; color: #A99C89; line-height: 1.7; margin-bottom: 14px; }
+  .foot-newsletter-form { display: flex; gap: 6px; }
+  .foot-newsletter-form input {
+    flex: 1; min-width: 0; padding: 10px 11px; border-radius: 3px; border: 1px solid rgba(245,238,224,0.14);
+    background: rgba(245,238,224,0.06); color: #F5EEE0; font-size: 12.5px;
+  }
+  .foot-newsletter-form input::placeholder { color: #6E6252; }
+  .foot-newsletter-form button { flex-shrink: 0; padding: 10px 14px; }
+  .foot-newsletter-note { font-size: 11px; color: #6E6252; margin-top: 9px; line-height: 1.6; }
+  .foot-newsletter-success { font-size: 12.5px; color: var(--gold); font-weight: 600; display: flex; align-items: center; gap: 7px; }
+  .foot-payments { display: flex; gap: 7px; margin-top: 16px; flex-wrap: wrap; }
+  .foot-pay-badge {
+    background: rgba(245,238,224,0.08); color: #A99C89; font-size: 10.5px; font-weight: 700;
+    padding: 5px 9px; border-radius: 3px; letter-spacing: 0.02em;
+  }
+  .foot-bottom {
+    max-width: 1240px; margin: 0 auto; padding: 18px 32px 0; font-size: 11.5px; color: #6E6252;
+    display: flex; flex-wrap: wrap; gap: 10px 20px; justify-content: space-between; align-items: center;
+  }
+  .foot-bottom-links { display: flex; gap: 18px; flex-wrap: wrap; }
+  .foot-bottom-links a { color: #6E6252; text-decoration: none; transition: color 0.15s; }
+  .foot-bottom-links a:hover { color: var(--amber); }
+  .foot-age-badge {
+    display: inline-flex; align-items: center; gap: 5px; background: rgba(163,59,46,0.18); color: #E2B4A8;
+    border: 1px solid rgba(163,59,46,0.4); font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 3px;
+  }
+  @media (max-width: 900px) {
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .foot-grid { grid-template-columns: 1fr; }
+    .foot-bottom { flex-direction: column; align-items: flex-start; }
+  }
+
+  .pay-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+  .pay-option { border: 1.5px solid var(--line); border-radius: 4px; padding: 10px 12px; cursor: pointer; }
+  .pay-option.active { border-color: var(--amber); background: var(--card-bg-soft); }
+  .pay-option-head { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
+  .pay-option-fields { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+
+  .cat-manage-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 12px; border-top: 1px solid var(--line); font-size: 13.5px; }
+  .cat-swatch { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+
+  /* ---------------- Mobile responsiveness ---------------- */
+  .mobile-menu-btn { display: none; }
+  @media (max-width: 900px) {
+    .header { padding: 12px 16px; }
+    .header-inner { gap: 12px; }
+    .logo .name { font-size: 18px; }
+    .search-wrap { order: 3; flex-basis: 100%; }
+    .staff-link span.staff-label { display: none; }
+
+    .main { padding: 18px 16px 70px; }
+
+    .shop-grid { grid-template-columns: 1fr; gap: 18px; }
+    .sidebar { position: static; }
+    .cat-list { flex-direction: row; flex-wrap: wrap; }
+    .price-range { flex-wrap: wrap; }
+
+    .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+    .card { padding: 12px; }
+    .p-name { font-size: 14px; }
+
+    .pd-grid { grid-template-columns: 1fr; gap: 20px; }
+    .pd-image { min-height: 300px; }
+    .pd-image img { min-height: 300px; }
+
+    .cart-layout { grid-template-columns: 1fr; gap: 20px; }
+    .cart-line { flex-wrap: wrap; }
+
+    .admin-wrap { grid-template-columns: 1fr; }
+    .admin-side { position: sticky; top: 0; z-index: 15; padding: 14px 16px; }
+    .admin-side nav { flex-direction: row !important; flex-wrap: wrap; gap: 6px !important; }
+    .admin-side .nav-item { width: auto; padding: 7px 10px; font-size: 12.5px; }
+    .admin-main { padding: 18px 16px; }
+
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .form-grid { grid-template-columns: 1fr 1fr; }
+    .admin-split-grid { grid-template-columns: 1fr !important; }
+
+    table { display: block; overflow-x: auto; white-space: nowrap; }
+
+    .foot-top { padding: 30px 16px 24px; }
+    .foot-bottom { padding: 16px 16px 0; }
+    .social-fab-stack { bottom: 14px; right: 14px; }
+    .social-fab { width: 42px; height: 42px; font-size: 18px; }
+    .invoice-head { padding: 20px 16px 14px; flex-direction: column; }
+    .invoice-stamp { position: static; align-self: flex-start; margin-top: 10px; transform: rotate(-4deg); }
+    .invoice-bill-row { padding: 14px 16px; gap: 16px; }
+    .invoice-table-wrap { padding: 0 16px; overflow-x: auto; }
+    .invoice-totals { padding: 12px 16px 6px; margin-right: 0; max-width: none; }
+    .invoice-footer { padding: 14px 16px 22px; }
+  }
+  @media (max-width: 560px) {
+    .product-grid { grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); gap: 10px; }
+    .stat-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .cart-line { padding: 10px; }
+    .header-actions { gap: 2px; }
+    .row-btn { padding: 4px 6px; font-size: 11px; }
+  }
+
+  /* ---------------- Invoice document ---------------- */
+  .invoice-doc {
+    background: #FBF6EC; border: 1px solid var(--line); border-radius: 6px; overflow: hidden;
+    box-shadow: 0 10px 30px rgba(30,20,10,0.14); position: relative; max-width: 620px;
+  }
+  .invoice-doc::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.05;
+    background-image: repeating-linear-gradient(45deg, var(--amber-deep) 0, var(--amber-deep) 1px, transparent 1px, transparent 26px);
+  }
+  .invoice-band { height: 6px; background: linear-gradient(90deg, var(--amber-deep), var(--gold), var(--rust)); }
+  .invoice-head {
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+    padding: 26px 28px 18px; border-bottom: 1px dashed var(--line); position: relative;
+  }
+  .invoice-brand { display: flex; align-items: center; gap: 12px; }
+  .invoice-crest {
+    width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+    background: radial-gradient(circle at 32% 28%, var(--gold), var(--amber-deep));
+    display: flex; align-items: center; justify-content: center; font-size: 20px;
+    border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+  .invoice-brand-name { font-family: 'Fraunces', serif; font-weight: 700; font-size: 19px; line-height: 1.15; }
+  .invoice-brand-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .invoice-meta { text-align: right; }
+  .invoice-meta .inv-no { font-family: 'Fraunces', serif; font-weight: 700; font-size: 15px; letter-spacing: 0.02em; }
+  .invoice-meta .inv-line { font-size: 11.5px; color: var(--text-muted); margin-top: 3px; }
+  .invoice-stamp {
+    position: absolute; top: 22px; right: 28px; border: 2px solid var(--green); color: var(--green);
+    font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.12em;
+    padding: 4px 10px; border-radius: 4px; transform: rotate(-8deg); opacity: 0.85;
+  }
+  .invoice-bill-row { display: flex; gap: 28px; padding: 16px 28px; flex-wrap: wrap; }
+  .invoice-bill-block { flex: 1; min-width: 160px; }
+  .invoice-bill-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 4px; }
+  .invoice-bill-value { font-size: 13px; font-weight: 600; }
+  .invoice-table-wrap { padding: 0 28px; }
+  .invoice-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .invoice-table thead th {
+    text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);
+    padding: 8px 6px; border-bottom: 1.5px solid var(--amber-deep);
+  }
+  .invoice-table thead th:last-child, .invoice-table td:last-child { text-align: right; }
+  .invoice-table thead th:nth-child(2), .invoice-table td:nth-child(2) { text-align: center; }
+  .invoice-table tbody td { padding: 9px 6px; border-bottom: 1px solid var(--line); }
+  .invoice-table tbody tr:last-child td { border-bottom: none; }
+  .invoice-item-name { font-weight: 600; }
+  .invoice-totals { padding: 14px 28px 8px; margin-left: auto; max-width: 260px; margin-right: 28px; }
+  .invoice-totals-row { display: flex; justify-content: space-between; font-size: 12.5px; padding: 4px 0; color: var(--text-muted); }
+  .invoice-totals-row.grand { color: var(--text); font-weight: 700; font-size: 16px; border-top: 1.5px solid var(--amber-deep); margin-top: 6px; padding-top: 10px; }
+  .invoice-footer {
+    padding: 16px 28px 26px; display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap;
+  }
+  .invoice-note { font-size: 11px; color: var(--text-muted); max-width: 300px; line-height: 1.5; }
+  .invoice-barcode { display: flex; gap: 2px; align-items: flex-end; height: 32px; }
+  .invoice-barcode span { display: block; width: 2px; background: var(--text); }
+  .invoice-actions { display: flex; gap: 10px; margin-top: 18px; }
+  .invoice-scallop {
+    height: 12px;
+    background: radial-gradient(circle at 6px 0, transparent 6px, #FBF6EC 6.5px) repeat-x;
+    background-size: 14px 12px;
+    background-color: transparent;
+  }
+  @media print {
+    body * { visibility: hidden; }
+    .invoice-doc, .invoice-doc * { visibility: visible; }
+    .invoice-doc { position: absolute; top: 0; left: 0; width: 100%; box-shadow: none; border: none; margin: 0; max-width: none; }
+    .invoice-actions, .no-print { display: none !important; }
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+// ---------------- Data ----------------
+const ADMIN_EMAIL = "adminacaciabooks@gmail.com";
+const ADMIN_PASSWORD = "admin123";
+
+const CATEGORY_COLOR = { Whisky: "#C17817", Wine: "#6B2737", Beer: "#A8791E", Vodka: "#4A6E7A", Gin: "#4A6E7A", Champagne: "#B8933F", Cognac: "#9C5B32", Rum: "#8A4B22", Tequila: "#B0742E" };
+const FALLBACK_CAT_COLORS = ["#C17817","#6B2737","#4C6444","#9C5B32","#4A6E7A","#8F5A0F"];
+function catColor(cat) {
+  if (CATEGORY_COLOR[cat]) return CATEGORY_COLOR[cat];
+  let h = 0; for (let i=0;i<cat.length;i++) h += cat.charCodeAt(i);
+  return FALLBACK_CAT_COLORS[h % FALLBACK_CAT_COLORS.length];
+}
+let categories = ["Whisky","Wine","Beer","Vodka","Gin","Champagne","Cognac","Rum","Tequila"];
+const ROLES = ["Sales","Procurement","Accounts","Admin"];
+const ROLE_BADGE = { Sales: "badge-sales", Procurement: "badge-procurement", Accounts: "badge-accounts", Admin: "badge-admin" };
+
+// ---------------- Permissions ----------------
+function isAdminRole() { return !!(state.currentUser && (state.currentUser.isSuperAdmin || state.currentUser.role === "Admin")); }
+function canManageCatalog() { return isAdminRole() || (state.currentUser && state.currentUser.role === "Procurement"); }
+function canManageCategories() { return isAdminRole(); }
+function canManageUsers() { return !!(state.currentUser && state.currentUser.isSuperAdmin); }
+function canCreateInvoice() { return isAdminRole() || (state.currentUser && state.currentUser.role === "Sales"); }
+function canApproveReturns() { return isAdminRole() || (state.currentUser && state.currentUser.role === "Accounts"); }
+
+let state = {
+  role: "customer",      // customer | staff
+  view: "shop",           // shop | product | cart | success | login
+  adminTab: "dashboard",
+  theme: "light",
+  currentUser: null,
+  search: "",
+  category: "All",
+  sort: "featured",
+  priceMin: "",
+  priceMax: "",
+  favoritesOnly: false,
+  selectedId: null,
+  editingProductId: null, // "new" | id | null
+  editingUserId: null,    // "new" | id | null
+  loginEmail: "",
+  loginPassword: "",
+  loginError: "",
+  lastInvoice: null,
+  cart: [], // {productId, qty}
+  saleCart: [],        // {productId, qty} — used while creating/editing a manual sale
+  editingSaleId: null,  // "new" | id | null
+  newSaleType: "Sale",  // "Sale" | "Return"
+  viewingSaleId: null,  // id of a sale being viewed read-only
+  saleCustomer: "",
+  lastStaffInvoice: null,   // last invoice created from the staff "New sale" screen
+  viewingInvoiceId: null,   // sale record id currently being viewed as a full invoice in Sales & returns
+  newCategoryName: "",
+  paymentMethod: "mpesa-paybill", // mpesa-paybill | mpesa-till | paypal | card
+  editingProductImage: "",  // data URL for the product currently being added/edited
+  deletingProductId: null,  // product pending delete confirmation (shows sale-history preview)
+  previewingProductId: null, // product shown in the read-only quick preview panel
+  adjustProductId: "",
+  adjustQty: "",
+  adjustReason: "Restock",
+  newsletterEmail: "",
+  newsletterSubscribed: false,
+  newsletterError: "",
+};
+
+let products = [
+  { id: "p1", name: "Johnnie Walker Black Label", brand: "Johnnie Walker", category: "Whisky", size: "750ml", abv: 40, price: 5500, discountPrice: 4999, stock: 14, sku: "WHS-JW-BL-750", rating: 4.7, reviews: 32, description: "A rich, complex blend with notes of dried fruits, sherry, smoke and vanilla. Aged a minimum of 12 years." , image: "https://images.unsplash.com/photo-1680359938276-f38abea544df?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p2", name: "Jameson Irish Whiskey", brand: "Jameson", category: "Whisky", size: "750ml", abv: 40, price: 3200, discountPrice: null, stock: 4, sku: "WHS-JM-750", rating: 4.5, reviews: 21, description: "Triple-distilled for exceptional smoothness, with a balance of spicy, nutty and vanilla notes." , image: "https://images.unsplash.com/photo-1569977621579-58987bec59cd?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p3", name: "Chivas Regal 12YO", brand: "Chivas Regal", category: "Whisky", size: "750ml", abv: 40, price: 4800, discountPrice: null, stock: 0, sku: "WHS-CR-12-750", rating: 4.6, reviews: 18, description: "A smooth, honeyed blend with hints of apple, hazelnut and vanilla, aged for a minimum of 12 years." , image: "https://images.unsplash.com/photo-1680359938276-f38abea544df?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p4", name: "Four Cousins Sweet Red", brand: "Four Cousins", category: "Wine", size: "750ml", abv: 12, price: 1200, discountPrice: null, stock: 26, sku: "WIN-4C-RED-750", rating: 4.3, reviews: 54, description: "A light, sweet red blend with juicy berry flavours. Best served chilled or at room temperature." , image: "https://images.unsplash.com/photo-1554230561-b04b0394d4ef?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p5", name: "Nederburg Baronne", brand: "Nederburg", category: "Wine", size: "750ml", abv: 13.5, price: 1800, discountPrice: null, stock: 9, sku: "WIN-NB-BAR-750", rating: 4.4, reviews: 27, description: "A classic Cape red blend of Cabernet Sauvignon, Shiraz and Merlot with soft tannins and dark fruit character." , image: "https://images.unsplash.com/photo-1554230561-b04b0394d4ef?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p6", name: "Moet & Chandon Brut", brand: "Moet & Chandon", category: "Champagne", size: "750ml", abv: 12, price: 8500, discountPrice: null, stock: 6, sku: "CHM-MC-BR-750", rating: 4.8, reviews: 15, description: "The house's signature style — bright and elegant, with a fruity core balanced by red-berry notes." , image: "https://images.unsplash.com/photo-1643618829236-a23857519fb6?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p7", name: "Tusker Lager", brand: "Tusker", category: "Beer", size: "500ml", abv: 4.2, price: 250, discountPrice: null, stock: 120, sku: "BER-TUS-500", rating: 4.5, reviews: 88, description: "Kenya's iconic crisp, refreshing lager. Best served ice cold." , image: "https://images.unsplash.com/photo-1681422695061-9023e14a28c1?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p8", name: "Guinness Foreign Extra", brand: "Guinness", category: "Beer", size: "500ml", abv: 6.5, price: 280, discountPrice: null, stock: 3, sku: "BER-GNS-FX-500", rating: 4.6, reviews: 41, description: "A bold, dark stout with roasted bitterness and a signature creamy character." , image: "https://images.unsplash.com/photo-1709625607945-28fee5d8d1f9?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p9", name: "Smirnoff Red Vodka", brand: "Smirnoff", category: "Vodka", size: "750ml", abv: 40, price: 1900, discountPrice: 1699, stock: 17, sku: "VOD-SMI-RED-750", rating: 4.2, reviews: 36, description: "Triple-distilled and charcoal-filtered for a clean, smooth taste. A versatile mixer's essential." , image: "https://images.unsplash.com/photo-1550985543-f47f38aeee65?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p10", name: "Gilbeys Gin", brand: "Gilbeys", category: "Gin", size: "750ml", abv: 37.5, price: 1500, discountPrice: null, stock: 22, sku: "GIN-GLB-750", rating: 4.1, reviews: 19, description: "A classic London Dry-style gin with juniper-forward botanicals. Great with tonic and a slice of lime." , image: "https://images.unsplash.com/photo-1619471239683-237055fedde0?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p11", name: "Glenfiddich 12YO", brand: "Glenfiddich", category: "Whisky", size: "750ml", abv: 40, price: 6200, discountPrice: null, stock: 8, sku: "WHS-GF-12-750", rating: 4.7, reviews: 24, description: "The world's most awarded single malt. Fresh pear notes with a subtle oak finish, matured for 12 years." , image: "https://images.unsplash.com/photo-1680359938276-f38abea544df?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p12", name: "Black & White Whisky", brand: "Black & White", category: "Whisky", size: "750ml", abv: 40, price: 2400, discountPrice: null, stock: 30, sku: "WHS-BW-750", rating: 4.0, reviews: 22, description: "A light, easy-drinking blended Scotch whisky with a smooth, gently smoky character." , image: "https://images.unsplash.com/photo-1680359938276-f38abea544df?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p13", name: "Drostdy-Hof Sauvignon Blanc", brand: "Drostdy-Hof", category: "Wine", size: "750ml", abv: 12.5, price: 1100, discountPrice: null, stock: 19, sku: "WIN-DH-SB-750", rating: 4.2, reviews: 16, description: "A crisp, dry white wine with zesty citrus and green-fig notes. Best served well chilled." , image: "https://images.unsplash.com/photo-1556442281-77c90134c61f?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p14", name: "Robertson Winery Merlot", brand: "Robertson Winery", category: "Wine", size: "750ml", abv: 13, price: 1350, discountPrice: null, stock: 15, sku: "WIN-RW-MER-750", rating: 4.3, reviews: 20, description: "A soft, medium-bodied red with plum and dark-cherry flavours and a smooth finish." , image: "https://images.unsplash.com/photo-1554230561-b04b0394d4ef?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p15", name: "Heineken Lager", brand: "Heineken", category: "Beer", size: "500ml", abv: 5, price: 300, discountPrice: null, stock: 90, sku: "BER-HKN-500", rating: 4.4, reviews: 47, description: "A balanced, mildly bitter lager with a distinctive fruity, herbal aroma." , image: "https://images.unsplash.com/photo-1681422695061-9023e14a28c1?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p16", name: "White Cap Lager", brand: "White Cap", category: "Beer", size: "500ml", abv: 4.5, price: 240, discountPrice: null, stock: 75, sku: "BER-WC-500", rating: 4.3, reviews: 39, description: "A smooth, well-rounded lager brewed with a touch of local flavour. Easy to drink, any occasion." , image: "https://images.unsplash.com/photo-1681422695061-9023e14a28c1?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p17", name: "Absolut Vodka", brand: "Absolut", category: "Vodka", size: "750ml", abv: 40, price: 2800, discountPrice: null, stock: 12, sku: "VOD-ABS-750", rating: 4.5, reviews: 29, description: "Made from winter wheat with no added sugar, giving a rich, full-bodied taste with a hint of dried fruit." , image: "https://images.unsplash.com/photo-1539606494565-02e568638d91?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p18", name: "Tanqueray London Dry Gin", brand: "Tanqueray", category: "Gin", size: "750ml", abv: 43.1, price: 3400, discountPrice: null, stock: 10, sku: "GIN-TQ-750", rating: 4.6, reviews: 25, description: "A bold, juniper-forward gin with four botanicals, distilled in small batches for a crisp, dry finish." , image: "https://images.unsplash.com/photo-1619471239683-237055fedde0?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p19", name: "Veuve Clicquot Brut", brand: "Veuve Clicquot", category: "Champagne", size: "750ml", abv: 12, price: 9800, discountPrice: null, stock: 4, sku: "CHM-VC-BR-750", rating: 4.8, reviews: 11, description: "A rich, full-bodied champagne with notes of brioche and orchard fruit, anchored by Pinot Noir.", image: "https://images.unsplash.com/photo-1643618829236-a23857519fb6?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p20", name: "Hennessy VS", brand: "Hennessy", category: "Cognac", size: "700ml", abv: 40, price: 5200, discountPrice: 4799, stock: 7, sku: "CGN-HN-VS-700", rating: 4.6, reviews: 20, description: "A bold, full-bodied cognac with notes of oak and toasted almond. A versatile cellar staple.", image: "https://images.unsplash.com/photo-1569953005412-51e40de38856?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p21", name: "Captain Morgan Spiced Gold", brand: "Captain Morgan", category: "Rum", size: "750ml", abv: 35, price: 2200, discountPrice: null, stock: 18, sku: "RUM-CM-SG-750", rating: 4.4, reviews: 33, description: "A smooth blend of Caribbean rum and spices, with warm notes of vanilla and caramel.", image: "https://images.unsplash.com/photo-1664353087093-e7ac3b082e8d?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p22", name: "Bacardi Carta Blanca", brand: "Bacardi", category: "Rum", size: "750ml", abv: 37.5, price: 2100, discountPrice: 1899, stock: 25, sku: "RUM-BC-CB-750", rating: 4.3, reviews: 28, description: "A crisp, light-bodied white rum, triple-filtered for a clean finish. Perfect for cocktails." , image: "https://images.unsplash.com/photo-1648963897952-77329b73b05a?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p23", name: "Jose Cuervo Especial Gold", brand: "Jose Cuervo", category: "Tequila", size: "750ml", abv: 38, price: 3100, discountPrice: null, stock: 11, sku: "TEQ-JC-ESP-750", rating: 4.2, reviews: 17, description: "A golden tequila with a smooth, mellow character and notes of caramel and oak." , image: "https://images.unsplash.com/photo-1516535794938-6063878f08cc?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p24", name: "Patron Silver", brand: "Patron", category: "Tequila", size: "750ml", abv: 40, price: 6800, discountPrice: null, stock: 5, sku: "TEQ-PT-SIL-750", rating: 4.7, reviews: 14, description: "A crisp, additive-free tequila handcrafted from 100% Weber blue agave." , image: "https://images.unsplash.com/photo-1516535794938-6063878f08cc?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p25", name: "Ballantine's Finest", brand: "Ballantine's", category: "Whisky", size: "1L", abv: 40, price: 3600, discountPrice: null, stock: 16, sku: "WHS-BL-FN-1L", rating: 4.3, reviews: 26, description: "A well-balanced blended Scotch whisky with a smooth, floral character and a hint of vanilla." , image: "https://images.unsplash.com/photo-1680359938276-f38abea544df?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p26", name: "KWV 10 Year Brandy", brand: "KWV", category: "Cognac", size: "750ml", abv: 38, price: 2900, discountPrice: null, stock: 13, sku: "BRD-KWV-10-750", rating: 4.4, reviews: 19, description: "A rich, matured South African brandy with notes of dried fruit, spice and oak." , image: "https://images.unsplash.com/photo-1569953005412-51e40de38856?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p27", name: "Bombay Sapphire", brand: "Bombay Sapphire", category: "Gin", size: "750ml", abv: 40, price: 3300, discountPrice: null, stock: 14, sku: "GIN-BS-750", rating: 4.6, reviews: 23, description: "A vibrant, aromatic gin infused with ten hand-selected botanicals for a crisp, balanced taste." , image: "https://images.unsplash.com/photo-1619471239683-237055fedde0?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p28", name: "J.C. Le Roux Le Domaine", brand: "J.C. Le Roux", category: "Champagne", size: "750ml", abv: 11.5, price: 1600, discountPrice: 1399, stock: 20, sku: "CHM-JCL-LD-750", rating: 4.1, reviews: 31, description: "A light, off-dry sparkling wine with delicate bubbles and fresh fruit aromas. Great value bubbly." , image: "https://images.unsplash.com/photo-1643618829236-a23857519fb6?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p29", name: "Kenya Cane White Rum", brand: "Kenya Cane", category: "Rum", size: "750ml", abv: 35, price: 900, discountPrice: null, stock: 40, sku: "RUM-KC-WH-750", rating: 4.0, reviews: 52, description: "A clean, mellow local white rum distilled from Kenyan sugarcane. Great value for cocktails." , image: "https://images.unsplash.com/photo-1664353087093-e7ac3b082e8d?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p30", name: "Don Julio Blanco", brand: "Don Julio", category: "Tequila", size: "750ml", abv: 38, price: 7200, discountPrice: null, stock: 6, sku: "TEQ-DJ-BL-750", rating: 4.7, reviews: 12, description: "A premium 100% blue agave tequila, unaged for a bright, peppery, citrus-forward taste." , image: "https://images.unsplash.com/photo-1516535794938-6063878f08cc?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p31", name: "The Macallan 12YO Double Cask", brand: "Macallan", category: "Whisky", size: "750ml", abv: 40, price: 11500, discountPrice: null, stock: 3, sku: "WHS-MC-12DC-750", rating: 4.9, reviews: 9, description: "A rich single malt matured in American and European oak sherry casks, with notes of vanilla, ginger and dried fruit." , image: "https://images.unsplash.com/photo-1680359938276-f38abea544df?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p32", name: "Buchanan's Deluxe", brand: "Buchanan's", category: "Whisky", size: "750ml", abv: 40, price: 4200, discountPrice: 3899, stock: 10, sku: "WHS-BC-DLX-750", rating: 4.4, reviews: 16, description: "A smooth 12-year blended Scotch whisky with layered notes of dried fruit, oak and a gentle smoky finish." , image: "https://images.unsplash.com/photo-1680359938276-f38abea544df?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p33", name: "Ciroc Vodka", brand: "Ciroc", category: "Vodka", size: "750ml", abv: 40, price: 4600, discountPrice: null, stock: 8, sku: "VOD-CR-750", rating: 4.5, reviews: 15, description: "A luxury vodka distilled from French grapes, giving a subtly fruity, smooth finish." , image: "https://images.unsplash.com/photo-1539606494565-02e568638d91?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p34", name: "Grey Goose Vodka", brand: "Grey Goose", category: "Vodka", size: "750ml", abv: 40, price: 5100, discountPrice: null, stock: 9, sku: "VOD-GG-750", rating: 4.6, reviews: 21, description: "A premium French wheat vodka prized for its exceptionally smooth, clean character." , image: "https://images.unsplash.com/photo-1550985543-f47f38aeee65?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p35", name: "Beefeater London Dry Gin", brand: "Beefeater", category: "Gin", size: "750ml", abv: 40, price: 2900, discountPrice: null, stock: 17, sku: "GIN-BF-750", rating: 4.4, reviews: 18, description: "A classic London Dry gin with a bold juniper character balanced by citrus botanicals." , image: "https://images.unsplash.com/photo-1619471239683-237055fedde0?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p36", name: "Casillero del Diablo Cabernet Sauvignon", brand: "Casillero del Diablo", category: "Wine", size: "750ml", abv: 13.5, price: 1700, discountPrice: null, stock: 22, sku: "WIN-CD-CS-750", rating: 4.3, reviews: 24, description: "A full-bodied Chilean red with dark berry flavours, soft tannins and a hint of vanilla oak." , image: "https://images.unsplash.com/photo-1554230561-b04b0394d4ef?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p37", name: "KWV Pinotage", brand: "KWV", category: "Wine", size: "750ml", abv: 14, price: 1450, discountPrice: null, stock: 18, sku: "WIN-KWV-PIN-750", rating: 4.2, reviews: 13, description: "A distinctly South African red with smoky, earthy notes and ripe dark-fruit character." , image: "https://images.unsplash.com/photo-1554230561-b04b0394d4ef?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+  { id: "p38", name: "Courvoisier VS", brand: "Courvoisier", category: "Cognac", size: "700ml", abv: 40, price: 4900, discountPrice: null, stock: 6, sku: "CGN-CV-VS-700", rating: 4.4, reviews: 10, description: "A vibrant, fruity cognac with fresh grape notes and a hint of vanilla, aged in French oak." , image: "https://images.unsplash.com/photo-1569953005412-51e40de38856?fm=jpg&q=80&w=800&auto=format&fit=crop" },
+];
+
+products.forEach(p => { p.liked = false; p.image = p.image || null; });
+let stockAdjustments = []; // { id, productId, productName, qty, reason, date, by }
+
+let mockOrders = [
+  { id: "INV-2026-00121", date: "2026-08-19", total: 9998, items: 3 },
+  { id: "INV-2026-00120", date: "2026-08-19", total: 1500, items: 1 },
+  { id: "INV-2026-00119", date: "2026-08-18", total: 4999, items: 1 },
+  { id: "INV-2026-00118", date: "2026-08-17", total: 3400, items: 2 },
+  { id: "INV-2026-00117", date: "2026-08-15", total: 12300, items: 4 },
+  { id: "INV-2026-00116", date: "2026-07-29", total: 2800, items: 2 },
+];
+
+// manual sales & returns created by staff, subject to admin approval
+let sales = [
+  { id: "SL1", invoiceId: "INV-2026-00214", date: "2026-08-19", customer: "Walk-in customer", type: "Sale",
+    lines: [{ productId: "p7", name: "Tusker Lager", qty: 6, price: 250 }],
+    total: 1500, status: "Approved", createdBy: ADMIN_EMAIL },
+  { id: "SL2", invoiceId: "INV-2026-00215", date: "2026-08-19", customer: "Faith's counter sale", type: "Sale",
+    lines: [{ productId: "p2", name: "Jameson Irish Whiskey", qty: 1, price: 3200 }],
+    total: 3200, status: "Pending", createdBy: "faith.sales@spearliquor.com" },
+];
+
+// staff users the admin creates — admin (super) is not in this list, it's hardcoded above
+let users = [
+  { id: "u1", name: "Faith Mwangi", email: "faith.sales@spearliquor.com", password: "sales123", role: "Sales", active: true },
+];
+
+const fmt = (n) => `KSh ${Number(n).toLocaleString()}`;
+
+// ---------------- Helpers ----------------
+function bottleSvg(category, size) {
+  const c = catColor(category);
+  return `<svg width="${size}" height="${Math.round(size*1.7)}" viewBox="0 0 40 68" fill="none">
+    <rect x="16" y="0" width="8" height="10" rx="1.5" fill="#2A2118"/>
+    <path d="M15 10 L15 20 L8 30 Q6 34 6 40 L6 62 Q6 66 10 66 L30 66 Q34 66 34 62 L34 40 Q34 34 32 30 L25 20 L25 10 Z" fill="${c}" opacity="0.92"/>
+    <rect x="9" y="42" width="22" height="16" rx="1" fill="#F5EEE0" opacity="0.9"/>
+  </svg>`;
+}
+function starsHtml(rating, reviews) {
+  let s = "";
+  for (let i = 1; i <= 5; i++) s += i <= Math.round(rating) ? "★" : "☆";
+  return `<span class="stars">${s} ${reviews != null ? `<span style="color:var(--text-muted)">(${reviews})</span>` : ""}</span>`;
+}
+function stockTagHtml(stock) {
+  const low = stock > 0 && stock <= 5;
+  const out = stock === 0;
+  const bg = out ? "var(--rust)" : low ? "var(--amber-deep)" : "var(--green)";
+  const label = out ? "Out of stock" : low ? `Only ${stock} left` : `${stock} in stock`;
+  return `<span class="stock-tag mono" style="background:${bg}">${label}</span>`;
+}
+function abvBadgeHtml(abv) { return `<div class="abv-badge mono">${abv}<br/>%</div>`; }
+function productThumb(p, size) {
+  return p.image ? `<img src="${p.image}" style="width:${size}px;height:${Math.round(size*1.4)}px;object-fit:cover;border-radius:3px;flex-shrink:0" />` : bottleSvg(p.category, size);
+}
+
+function getFilteredProducts() {
+  let list = products.filter(p =>
+    (p.name.toLowerCase().includes(state.search.toLowerCase()) || p.brand.toLowerCase().includes(state.search.toLowerCase()))
+  );
+  if (state.category !== "All") list = list.filter(p => p.category === state.category);
+  if (state.favoritesOnly) list = list.filter(p => p.liked);
+  const min = state.priceMin !== "" ? Number(state.priceMin) : null;
+  const max = state.priceMax !== "" ? Number(state.priceMax) : null;
+  if (min !== null) list = list.filter(p => (p.discountPrice ?? p.price) >= min);
+  if (max !== null) list = list.filter(p => (p.discountPrice ?? p.price) <= max);
+  if (state.sort === "price-asc") list = [...list].sort((a,b) => (a.discountPrice??a.price)-(b.discountPrice??b.price));
+  if (state.sort === "price-desc") list = [...list].sort((a,b) => (b.discountPrice??b.price)-(a.discountPrice??a.price));
+  if (state.sort === "abv") list = [...list].sort((a,b) => b.abv - a.abv);
+  return list;
+}
+function cartLines() {
+  return state.cart.map(c => ({ ...c, product: products.find(p => p.id === c.productId) })).filter(l => l.product);
+}
+function cartCount() { return state.cart.reduce((s,c) => s + c.qty, 0); }
+
+// ---------------- Actions ----------------
+function goShop() { state.view = "shop"; render(); }
+function goProduct(id) { state.selectedId = id; state.view = "product"; render(); window.scrollTo(0,0); }
+function goCart() { state.view = "cart"; render(); }
+function toggleTheme() {
+  state.theme = state.theme === "light" ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", state.theme);
+  render();
+}
+function setSearch(v) { state.search = v; render(); }
+function setCategory(c) { state.category = c; render(); }
+function setSort(v) { state.sort = v; render(); }
+function setPriceMin(v) { state.priceMin = v; render(); }
+function setPriceMax(v) { state.priceMax = v; render(); }
+function toggleFavoritesOnly() { state.favoritesOnly = !state.favoritesOnly; render(); }
+
+function addToCart(id, qty) {
+  qty = qty || 1;
+  const existing = state.cart.find(c => c.productId === id);
+  if (existing) existing.qty += qty; else state.cart.push({ productId: id, qty });
+  render();
+}
+function setCartQty(id, qty) {
+  if (qty <= 0) { state.cart = state.cart.filter(c => c.productId !== id); render(); return; }
+  const line = state.cart.find(c => c.productId === id);
+  if (line) line.qty = qty;
+  render();
+}
+function removeFromCart(id) { state.cart = state.cart.filter(c => c.productId !== id); render(); }
+
+function placeOrder() {
+  const nameEl = document.getElementById("ckName"), phoneEl = document.getElementById("ckPhone"), addrEl = document.getElementById("ckAddress");
+  if (!nameEl.value || !phoneEl.value || !addrEl.value) return;
+  const lines = cartLines();
+  const subtotal = lines.reduce((s,l) => s + (l.product.discountPrice ?? l.product.price) * l.qty, 0);
+  const delivery = subtotal > 0 ? 300 : 0;
+  lines.forEach(l => { const p = products.find(x => x.id === l.productId); if (p) p.stock = Math.max(0, p.stock - l.qty); });
+  const invNum = `INV-2026-${Math.floor(200 + Math.random()*799)}`;
+  state.lastInvoice = { id: invNum, lines, subtotal, delivery, total: subtotal + delivery, date: "2026-08-19", paymentMethod: state.paymentMethod };
+  state.cart = [];
+  state.view = "success";
+  render();
+}
+
+function openStaffLogin() { state.view = "login"; state.loginError = ""; render(); }
+function normalizePw(s) { return String(s || "").trim().replace(/\s+/g, ""); }
+function attemptLogin() {
+  const email = (document.getElementById("loginEmail").value || "").trim();
+  const password = normalizePw(document.getElementById("loginPassword").value);
+  if (email.toLowerCase() === ADMIN_EMAIL.toLowerCase() && password === normalizePw(ADMIN_PASSWORD)) {
+    state.currentUser = { name: "Admin", email: ADMIN_EMAIL, role: "Admin", isSuperAdmin: true };
+    state.role = "staff"; state.view = "admin-dashboard"; state.adminTab = "dashboard"; state.loginError = "";
+    render(); return;
+  }
+  const u = users.find(x => x.email.toLowerCase() === email.toLowerCase() && normalizePw(x.password) === password);
+  if (u) {
+    if (!u.active) { state.loginError = "This account has been deactivated. Contact the admin."; render(); return; }
+    state.currentUser = { name: u.name, email: u.email, role: u.role, isSuperAdmin: false };
+    state.role = "staff"; state.view = "admin-dashboard"; state.adminTab = "dashboard"; state.loginError = "";
+    render(); return;
+  }
+  state.loginError = "Incorrect email or password.";
+  render();
+}
+function logout() { state.role = "customer"; state.view = "shop"; state.currentUser = null; render(); }
+function setAdminTab(tab) { state.adminTab = tab; state.editingProductId = null; state.editingUserId = null; state.viewingInvoiceId = null; render(); }
+
+function newProduct() { state.editingProductId = "new"; state.editingProductImage = ""; render(); }
+function editProduct(id) {
+  state.editingProductId = id;
+  const p = products.find(x => x.id === id);
+  state.editingProductImage = (p && p.image) || "";
+  render();
+}
+function cancelProductEdit() { state.editingProductId = null; state.editingProductImage = ""; render(); }
+function handleProductImageChange(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => { state.editingProductImage = reader.result; render(); };
+  reader.readAsDataURL(file);
+}
+function clearProductImage() { state.editingProductImage = ""; render(); }
+function saveProduct(e) {
+  e.preventDefault();
+  const f = e.target;
+  const data = {
+    name: f.name.value, brand: f.brand.value, category: f.category.value, size: f.size.value,
+    abv: Number(f.abv.value), sku: f.sku.value, price: Number(f.price.value),
+    discountPrice: f.discountPrice.value ? Number(f.discountPrice.value) : null,
+    stock: Number(f.stock.value), description: f.description.value,
+    image: state.editingProductImage || null,
+  };
+  if (state.editingProductId === "new") {
+    products.unshift({ ...data, id: "p" + Date.now(), rating: 4.5, reviews: 0, liked: false });
+  } else {
+    const idx = products.findIndex(p => p.id === state.editingProductId);
+    products[idx] = { ...products[idx], ...data };
+  }
+  state.editingProductId = null;
+  state.editingProductImage = "";
+  render();
+}
+function getProductSaleHistory(id) {
+  const rows = [];
+  sales.forEach(s => {
+    (s.lines || []).forEach(l => {
+      if (l.productId === id) rows.push({ invoiceId: s.invoiceId, date: s.date, customer: s.customer, type: s.type, status: s.status, qty: l.qty, price: l.price });
+    });
+  });
+  return rows;
+}
+function askDeleteProduct(id) { state.deletingProductId = id; state.previewingProductId = null; render(); }
+function cancelDeleteProduct() { state.deletingProductId = null; render(); }
+function confirmDeleteProduct() {
+  products = products.filter(p => p.id !== state.deletingProductId);
+  state.deletingProductId = null;
+  render();
+}
+function deleteProduct(id) { askDeleteProduct(id); }
+function previewProduct(id) { state.previewingProductId = id; state.deletingProductId = null; render(); }
+function closePreview() { state.previewingProductId = null; render(); }
+
+// ---------------- Discounts ----------------
+function applyDiscount(id, value) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  const v = Number(value);
+  p.discountPrice = (v > 0 && v < p.price) ? v : null;
+  render();
+}
+function applyDiscountPercent(id, pct) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  const v = Number(pct);
+  if (!(v > 0 && v < 100)) return;
+  p.discountPrice = Math.round(p.price * (1 - v / 100));
+  render();
+}
+function removeDiscount(id) { const p = products.find(x => x.id === id); if (p) p.discountPrice = null; render(); }
+function discountPercent(p) {
+  if (!p.discountPrice) return null;
+  return Math.round((1 - p.discountPrice / p.price) * 100);
+}
+
+// ---------------- Stock adjustments ----------------
+function setAdjustProduct(v) { state.adjustProductId = v; render(); }
+function setAdjustQty(v) { state.adjustQty = v; render(); }
+function setAdjustReason(v) { state.adjustReason = v; render(); }
+function submitStockAdjustment() {
+  const pid = state.adjustProductId;
+  const qty = Number(state.adjustQty);
+  if (!pid || !qty) return;
+  const p = products.find(x => x.id === pid);
+  if (!p) return;
+  p.stock = Math.max(0, p.stock + qty);
+  stockAdjustments.unshift({ id: "ADJ" + Date.now(), productId: pid, productName: p.name, qty, reason: state.adjustReason, date: "2026-08-19", by: state.currentUser.email });
+  state.adjustProductId = ""; state.adjustQty = ""; state.adjustReason = "Restock";
+  render();
+}
+
+function newUser() { state.editingUserId = "new"; render(); }
+function editUser(id) { state.editingUserId = id; render(); }
+function cancelUserEdit() { state.editingUserId = null; render(); }
+function saveUser(e) {
+  e.preventDefault();
+  const f = e.target;
+  const data = { name: f.name.value, email: f.email.value, password: f.password.value, role: f.role.value };
+  if (state.editingUserId === "new") {
+    users.unshift({ ...data, id: "u" + Date.now(), active: true });
+  } else {
+    const idx = users.findIndex(u => u.id === state.editingUserId);
+    users[idx] = { ...users[idx], ...data };
+  }
+  state.editingUserId = null;
+  render();
+}
+function toggleUserActive(id) { const u = users.find(x => x.id === id); if (u) u.active = !u.active; render(); }
+function deleteUser(id) { users = users.filter(u => u.id !== id); render(); }
+
+// ---------------- Categories (admin only) ----------------
+function setNewCategoryName(v) { state.newCategoryName = v; render(); }
+function addCategory() {
+  const name = (state.newCategoryName || "").trim();
+  if (!name) return;
+  if (!categories.some(c => c.toLowerCase() === name.toLowerCase())) categories.push(name);
+  state.newCategoryName = "";
+  render();
+}
+function removeCategory(name) {
+  categories = categories.filter(c => c !== name);
+  if (state.category === name) state.category = "All";
+  render();
+}
+
+// ---------------- Product love / like ----------------
+function toggleLike(id) {
+  const p = products.find(x => x.id === id);
+  if (p) p.liked = !p.liked;
+  render();
+}
+
+// ---------------- Checkout payment method ----------------
+function setPaymentMethod(v) { state.paymentMethod = v; render(); }
+function paymentLabel(v) {
+  return { "mpesa-paybill": "M-Pesa (Paybill)", "mpesa-till": "M-Pesa (Till/Buy Goods)", "paypal": "PayPal", "card": "Credit / Debit Card" }[v] || v;
+}
+
+// ---------------- Invoice document ----------------
+function printInvoice() { window.print(); }
+function invoiceBarcodeHtml(seed) {
+  let bars = "";
+  let h = 0; for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
+  for (let i = 0; i < 34; i++) {
+    h = (h * 1103515245 + 12345) >>> 0;
+    const w = (h % 3) + 1;
+    const height = 14 + (h % 18);
+    bars += `<span style="width:${w}px;height:${height}px"></span>`;
+  }
+  return `<div class="invoice-barcode">${bars}</div>`;
+}
+function invoiceDocumentHtml(opts) {
+  const { invoiceNo, date, customer, paymentMethod, items, subtotal, delivery } = opts;
+  const total = opts.total;
+  const vatAmount = total - total / 1.16;
+  return `
+  <div class="invoice-doc">
+    <div class="invoice-band"></div>
+    <div class="invoice-head">
+      <div class="invoice-brand">
+        <div class="invoice-crest">🍷</div>
+        <div>
+          <div class="invoice-brand-name">Spear Liquor House</div>
+          <div class="invoice-brand-sub">Ngong Road, Nairobi · PIN P0512345678K<br/>+254 700 123 456 · orders@spearliquor.co.ke</div>
+        </div>
+      </div>
+      <div class="invoice-meta">
+        <div class="inv-no">${escapeHtml(invoiceNo)}</div>
+        <div class="inv-line">${escapeHtml(date)}</div>
+        ${paymentMethod ? `<div class="inv-line">${escapeHtml(paymentLabel(paymentMethod))}</div>` : ""}
+      </div>
+      <div class="invoice-stamp">PAID</div>
+    </div>
+    <div class="invoice-bill-row">
+      <div class="invoice-bill-block">
+        <div class="invoice-bill-label">Billed to</div>
+        <div class="invoice-bill-value">${escapeHtml(customer || "Walk-in customer")}</div>
+      </div>
+      <div class="invoice-bill-block">
+        <div class="invoice-bill-label">Issued by</div>
+        <div class="invoice-bill-value">${escapeHtml((state.currentUser && state.currentUser.name) || "Spear Liquor House")}</div>
+      </div>
+    </div>
+    <div class="invoice-table-wrap">
+      <table class="invoice-table">
+        <thead><tr><th>Item</th><th>Qty</th><th>Unit price</th><th>Amount</th></tr></thead>
+        <tbody>
+          ${items.map(it => `
+          <tr>
+            <td class="invoice-item-name">${escapeHtml(it.name)}</td>
+            <td class="mono">${it.qty}</td>
+            <td class="mono">${fmt(it.unitPrice)}</td>
+            <td class="mono">${fmt(it.unitPrice * it.qty)}</td>
+          </tr>`).join("")}
+        </tbody>
+      </table>
+    </div>
+    <div class="invoice-totals">
+      <div class="invoice-totals-row"><span>Subtotal</span><span class="mono">${fmt(subtotal)}</span></div>
+      ${delivery ? `<div class="invoice-totals-row"><span>Delivery</span><span class="mono">${fmt(delivery)}</span></div>` : ""}
+      <div class="invoice-totals-row"><span>VAT (16%, incl.)</span><span class="mono">${fmt(Math.round(vatAmount))}</span></div>
+      <div class="invoice-totals-row grand"><span>Total</span><span class="mono">${fmt(total)}</span></div>
+    </div>
+    <div class="invoice-scallop"></div>
+    <div class="invoice-footer">
+      <div class="invoice-note">Thank you for shopping with Spear Liquor House. Goods are sold subject to our standard return policy — please retain this invoice for any returns or exchanges.</div>
+      ${invoiceBarcodeHtml(invoiceNo)}
+    </div>
+  </div>`;
+}
+
+// ---------------- Staff: create invoice (Sales role) ----------------
+function saleCartLines() {
+  return state.saleCart.map(c => ({ ...c, product: products.find(p => p.id === c.productId) })).filter(l => l.product);
+}
+function addToSaleCart(id) {
+  const existing = state.saleCart.find(c => c.productId === id);
+  if (existing) existing.qty += 1; else state.saleCart.push({ productId: id, qty: 1 });
+  render();
+}
+function setSaleCartQty(id, qty) {
+  if (qty <= 0) { state.saleCart = state.saleCart.filter(c => c.productId !== id); render(); return; }
+  const line = state.saleCart.find(c => c.productId === id);
+  if (line) line.qty = qty;
+  render();
+}
+function setSaleCustomer(v) { state.saleCustomer = v; render(); }
+function submitNewSale() {
+  const lines = saleCartLines();
+  if (lines.length === 0) return;
+  const total = lines.reduce((s,l) => s + (l.product.discountPrice ?? l.product.price) * l.qty, 0);
+  lines.forEach(l => { const p = products.find(x => x.id === l.productId); if (p) p.stock = Math.max(0, p.stock - l.qty); });
+  const invNum = `INV-2026-${Math.floor(300 + Math.random()*699)}`;
+  const record = {
+    id: "SL" + Date.now(), invoiceId: invNum, date: "2026-08-19",
+    customer: state.saleCustomer.trim() || "Walk-in customer", type: "Sale",
+    lines: lines.map(l => ({ productId: l.productId, name: l.product.name, qty: l.qty, price: l.product.discountPrice ?? l.product.price })),
+    total, status: "Approved", createdBy: state.currentUser.email,
+  };
+  sales.unshift(record);
+  mockOrders.unshift({ id: invNum, date: "2026-08-19", total, items: lines.length });
+  state.lastStaffInvoice = record;
+  state.saleCart = [];
+  state.saleCustomer = "";
+  render();
+}
+function dismissStaffInvoice() { state.lastStaffInvoice = null; render(); }
+
+// ---------------- Sale returns / credit notes ----------------
+function requestReturn(saleId) {
+  const original = sales.find(s => s.id === saleId);
+  if (!original) return;
+  const record = {
+    id: "SL" + Date.now(), invoiceId: original.invoiceId, date: "2026-08-19",
+    customer: original.customer, type: "Credit Note",
+    lines: original.lines, total: original.total, status: "Pending",
+    createdBy: state.currentUser.email, refInvoice: original.invoiceId,
+  };
+  sales.unshift(record);
+  render();
+}
+function viewInvoice(saleId) { state.viewingInvoiceId = saleId; render(); }
+function closeInvoiceView() { state.viewingInvoiceId = null; render(); }
+function approveSale(saleId) {
+  const s = sales.find(x => x.id === saleId);
+  if (!s) return;
+  s.status = "Approved";
+  if (s.type === "Return") {
+    s.lines.forEach(l => { const p = products.find(x => x.id === l.productId); if (p) p.stock += l.qty; });
+  }
+  render();
+}
+function rejectSale(saleId) {
+  const s = sales.find(x => x.id === saleId);
+  if (s) s.status = "Rejected";
+  render();
+}
+
+// ---------------- Render: shared ----------------
+function headerHtml() {
+  const onShop = state.role === "customer" && state.view === "shop";
+  return `
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo" onclick="goShop()">
+        <span class="mark">🗡</span>
+        <span class="name">Spear <em>Liquor House</em></span>
+      </div>
+      ${onShop ? `
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input id="searchInput" placeholder="Search bottles, brands..." value="${escapeAttr(state.search)}" oninput="setSearch(this.value)" />
+      </div>` : `<div style="flex:1"></div>`}
+      <div class="header-actions">
+        <button class="icon-btn" title="Toggle dark mode" onclick="toggleTheme()">${state.theme === "light" ? "🌙" : "☀️"}</button>
+        <button class="staff-link" onclick="openStaffLogin()">📊 <span class="staff-label">Staff sign-in</span></button>
+        <button class="icon-btn cart-btn" title="Cart" onclick="goCart()">
+          🛒${cartCount() > 0 ? `<span class="cart-badge">${cartCount()}</span>` : ""}
+        </button>
+      </div>
+    </div>
+  </header>`;
+}
+function escapeAttr(s) { return String(s).replace(/"/g, "&quot;"); }
+function escapeHtml(s) { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+function footerHtml() {
+  const year = new Date().getFullYear();
+  return `
+  <footer class="site-footer">
+    <div class="foot-top">
+      <div class="foot-grid">
+
+        <div>
+          <div class="foot-brand serif">🗡 Spear <em style="color:var(--amber);font-style:italic">Liquor House</em></div>
+          <div class="foot-col">Premium spirits, wine &amp; beer, sourced from trusted distillers and delivered across the city.</div>
+          <div class="foot-social-row">
+            <a class="foot-social-btn" href="#" onclick="return false" title="Instagram">📷</a>
+            <a class="foot-social-btn" href="#" onclick="return false" title="X (Twitter)">𝕏</a>
+            <a class="foot-social-btn" href="#" onclick="return false" title="Chat on WhatsApp">💬</a>
+            <a class="foot-social-btn" href="mailto:info@spearliquorhouse.com" title="Email us">✉️</a>
+          </div>
+          <div class="foot-payments">
+            <span class="foot-pay-badge">M-PESA</span>
+            <span class="foot-pay-badge">VISA</span>
+            <span class="foot-pay-badge">MASTERCARD</span>
+            <span class="foot-pay-badge">PAYPAL</span>
+          </div>
+        </div>
+
+        <div class="foot-col">
+          <div class="foot-heading">Shop</div>
+          <ul class="foot-links">
+            <li><a onclick="footerGoShop()">All products</a></li>
+            ${categories.slice(0, 5).map(c => `<li><a onclick="footerGoCategory('${c}')">${c}</a></li>`).join("")}
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <div class="foot-heading">Company</div>
+          <ul class="foot-links">
+            <li><a href="#" onclick="return false">About us</a></li>
+            <li><a href="#" onclick="return false">Delivery info</a></li>
+            <li><a href="#" onclick="return false">Returns policy</a></li>
+            <li><a href="#" onclick="return false">FAQs</a></li>
+            <li><a onclick="openStaffLogin()">Staff sign-in</a></li>
+          </ul>
+          <div class="foot-heading" style="margin-top:20px">Contact</div>
+          <div>📞 <a href="tel:+254717346231">0717 346 231</a></div>
+          <div>📞 <a href="tel:+254731885997">0731 885 997</a></div>
+          <div>✉️ <a href="mailto:info@spearliquorhouse.com">info@spearliquorhouse.com</a></div>
+        </div>
+
+        <div class="foot-col">
+          <div class="foot-heading">Store hours</div>
+          <div class="foot-hours-row"><span>Mon – Fri</span><span class="mono">9:00 – 21:00</span></div>
+          <div class="foot-hours-row"><span>Saturday</span><span class="mono">10:00 – 22:00</span></div>
+          <div class="foot-hours-row"><span>Sunday</span><span class="mono">11:00 – 19:00</span></div>
+          <div class="foot-heading" style="margin-top:20px">Newsletter</div>
+          <div class="foot-newsletter-copy">New arrivals and offers, once in a while — no spam.</div>
+          ${state.newsletterSubscribed
+            ? `<div class="foot-newsletter-success">✓ You're subscribed — thank you!</div>`
+            : `<div class="foot-newsletter-form">
+                <input id="newsletterEmail" type="email" placeholder="you@email.com" value="${escapeAttr(state.newsletterEmail)}" oninput="setNewsletterEmail(this.value)" onkeydown="if(event.key==='Enter')subscribeNewsletter()" />
+                <button class="btn btn-primary" onclick="subscribeNewsletter()">Subscribe</button>
+              </div>
+              ${state.newsletterError ? `<div class="foot-newsletter-note" style="color:var(--rust)">${escapeHtml(state.newsletterError)}</div>` : ""}`}
+        </div>
+
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <span>© ${year} Spear Liquor House. All rights reserved.</span>
+        <span class="foot-age-badge">🔞 18+ Only</span>
+      </div>
+      <div class="foot-bottom-links">
+        <a href="#" onclick="return false">Privacy policy</a>
+        <a href="#" onclick="return false">Terms of service</a>
+        <span>Please drink responsibly.</span>
+      </div>
+    </div>
+  </footer>`;
+}
+function footerGoShop() { state.role = "customer"; state.view = "shop"; state.category = "All"; render(); window.scrollTo(0,0); }
+function footerGoCategory(c) { state.role = "customer"; state.view = "shop"; state.category = c; render(); window.scrollTo(0,0); }
+function setNewsletterEmail(v) { state.newsletterEmail = v; state.newsletterError = ""; render(); }
+function subscribeNewsletter() {
+  const email = state.newsletterEmail.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    state.newsletterError = "Please enter a valid email address.";
+    render();
+    return;
+  }
+  state.newsletterSubscribed = true;
+  state.newsletterError = "";
+  render();
+}
+
+function socialFabHtml() {
+  return `
+  <div class="social-fab-stack">
+    <a class="social-fab fab-instagram" href="#" onclick="return false" title="Instagram">📷</a>
+    <a class="social-fab fab-x" href="#" onclick="return false" title="X (Twitter)">𝕏</a>
+    <a class="social-fab fab-email" href="mailto:info@spearliquorhouse.com" title="Email us">✉️</a>
+    <a class="social-fab fab-whatsapp" href="#" onclick="return false" title="Chat on WhatsApp">💬</a>
+  </div>`;
+}
+
+// ---------------- Render: shop / product / cart / success ----------------
+function productCardHtml(p) {
+  const pct = discountPercent(p);
+  return `
+  <div class="card">
+    ${pct ? `<span class="discount-badge">-${pct}%</span>` : ""}
+    <div class="card-top" onclick="goProduct('${p.id}')">
+      ${p.image ? `<img src="${p.image}" alt="${escapeHtml(p.name)}" />` : bottleSvg(p.category, 60)}
+      ${abvBadgeHtml(p.abv)}
+    </div>
+    <div onclick="goProduct('${p.id}')" style="cursor:pointer">
+      <div class="cat-label" style="color:${catColor(p.category)}">${p.category} · ${p.size}</div>
+      <div class="p-name">${escapeHtml(p.name)}</div>
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        ${starsHtml(p.rating, p.reviews)}
+        <button class="love-btn" title="${p.liked ? 'Remove from favourites' : 'Add to favourites'}" onclick="event.stopPropagation();toggleLike('${p.id}')">${p.liked ? "❤️" : "🤍"}</button>
+      </div>
+    </div>
+    <div class="price-row">
+      <div>
+        ${p.discountPrice
+          ? `<span class="mono" style="font-weight:600;font-size:15px">${fmt(p.discountPrice)}</span> <span class="mono price-old">${fmt(p.price)}</span>`
+          : `<span class="mono" style="font-weight:600;font-size:15px">${fmt(p.price)}</span>`}
+      </div>
+      ${stockTagHtml(p.stock)}
+    </div>
+    <button class="btn btn-primary btn-block" ${p.stock === 0 ? "disabled" : ""} onclick="addToCart('${p.id}',1)">
+      ${p.stock === 0 ? "Out of stock" : "＋ Add to cart"}
+    </button>
+  </div>`;
+}
+
+function renderShopView() {
+  const list = getFilteredProducts();
+  const catOptions = ["All", ...categories];
+  return `
+  <div class="shop-grid">
+    <aside class="sidebar">
+      <button class="cat-item ${state.favoritesOnly?'active':''}" style="margin-bottom:16px;font-weight:600" onclick="toggleFavoritesOnly()">${state.favoritesOnly ? "❤️" : "🤍"} Favourites only</button>
+      <h4>Category</h4>
+      <div class="cat-list">
+        ${catOptions.map(c => `<button class="cat-item ${state.category===c?'active':''}" onclick="setCategory('${c}')">${c}</button>`).join("")}
+      </div>
+      <h4>Price range (KSh)</h4>
+      <div class="price-range">
+        <input id="priceMinInput" type="number" min="0" placeholder="Min" value="${state.priceMin}" oninput="setPriceMin(this.value)" />
+        <input id="priceMaxInput" type="number" min="0" placeholder="Max" value="${state.priceMax}" oninput="setPriceMax(this.value)" />
+      </div>
+      <h4>Sort by</h4>
+      <select class="field-select" onchange="setSort(this.value)">
+        <option value="featured" ${state.sort==="featured"?"selected":""}>Featured</option>
+        <option value="price-asc" ${state.sort==="price-asc"?"selected":""}>Price: Low to High</option>
+        <option value="price-desc" ${state.sort==="price-desc"?"selected":""}>Price: High to Low</option>
+        <option value="abv" ${state.sort==="abv"?"selected":""}>Alcohol level</option>
+      </select>
+    </aside>
+    <div>
+      <div style="font-size:13px;color:var(--text-muted);margin-bottom:16px">${list.length} product${list.length!==1?"s":""}</div>
+      ${list.length === 0
+        ? `<div class="empty">${state.favoritesOnly ? "You haven't favourited any products yet — tap the 🤍 on a product to save it here." : "No products match your filters. Try a different search, category, or price range."}</div>`
+        : `<div class="product-grid">${list.map(productCardHtml).join("")}</div>`}
+    </div>
+  </div>`;
+}
+
+function renderProductView() {
+  const p = products.find(x => x.id === state.selectedId);
+  if (!p) return `<div class="empty">Product not found.</div>`;
+  const related = products.filter(x => x.id !== p.id && x.category === p.category).slice(0,4);
+  const pct = discountPercent(p);
+  return `
+  <button class="back-link" onclick="goShop()">← Back to shop</button>
+  <div class="pd-grid">
+    <div class="pd-image" style="position:relative">
+      ${pct ? `<span class="discount-badge">-${pct}% OFF</span>` : ""}
+      ${p.image ? `<img src="${p.image}" alt="${escapeHtml(p.name)}" style="object-fit:cover" />` : bottleSvg(p.category, 140)}
+    </div>
+    <div>
+      <div class="cat-label" style="color:${catColor(p.category)}">${p.category} · ${escapeHtml(p.brand)}</div>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+        <h1 class="serif" style="font-weight:700;font-size:28px;margin:6px 0 10px">${escapeHtml(p.name)}</h1>
+        <button class="love-btn" style="font-size:24px" title="${p.liked ? 'Remove from favourites' : 'Add to favourites'}" onclick="toggleLike('${p.id}')">${p.liked ? "❤️" : "🤍"}</button>
+      </div>
+      ${starsHtml(p.rating, p.reviews)}
+      <div style="display:flex;align-items:center;gap:14px;margin:18px 0">
+        ${p.discountPrice
+          ? `<span class="mono" style="font-weight:700;font-size:24px">${fmt(p.discountPrice)}</span><span class="mono price-old" style="font-size:15px">${fmt(p.price)}</span>${pct ? `<span class="discount-badge" style="position:static">-${pct}%</span>` : ""}`
+          : `<span class="mono" style="font-weight:700;font-size:24px">${fmt(p.price)}</span>`}
+        ${abvBadgeHtml(p.abv)}
+      </div>
+      <p style="font-size:14.5px;line-height:1.65;max-width:520px;margin-bottom:20px">${escapeHtml(p.description)}</p>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:22px">
+        ${stockTagHtml(p.stock)}
+        <span class="mono" style="font-size:12px;color:var(--text-muted)">SKU ${p.sku}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <div class="qty-box">
+          <button onclick="stepQty(-1)">−</button>
+          <span id="pdQty">1</span>
+          <button onclick="stepQty(1)">＋</button>
+        </div>
+        <button class="btn btn-primary" ${p.stock===0?"disabled":""} onclick="addPdToCart('${p.id}')">🛒 Add to cart</button>
+      </div>
+    </div>
+  </div>
+  ${related.length ? `
+  <div style="margin-top:52px">
+    <div class="serif" style="font-style:italic;font-size:19px;margin-bottom:16px">You may also like</div>
+    <div class="product-grid">${related.map(productCardHtml).join("")}</div>
+  </div>` : ""}`;
+}
+let pdQty = 1;
+function stepQty(delta) {
+  const p = products.find(x => x.id === state.selectedId);
+  pdQty = Math.max(1, Math.min(p ? p.stock : 99, pdQty + delta));
+  const el = document.getElementById("pdQty");
+  if (el) el.textContent = pdQty;
+}
+function addPdToCart(id) { addToCart(id, pdQty); pdQty = 1; }
+
+function renderCartView() {
+  const lines = cartLines();
+  const subtotal = lines.reduce((s,l) => s + (l.product.discountPrice ?? l.product.price) * l.qty, 0);
+  const delivery = subtotal > 0 ? 300 : 0;
+  const total = subtotal + delivery;
+  const canOrder = lines.length > 0;
+  return `
+  <button class="back-link" onclick="goShop()">← Continue shopping</button>
+  <h1 class="serif" style="font-weight:700;font-size:25px;margin-bottom:22px">Your cart</h1>
+  ${lines.length === 0 ? `<div class="empty" style="text-align:left;padding:40px 0">Your cart is empty. Add a bottle to get started.</div>` : `
+  <div class="cart-layout">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      ${lines.map(l => `
+        <div class="cart-line">
+          ${productThumb(l.product, 64)}
+          <div style="flex:1">
+            <div class="serif" style="font-weight:600;font-size:14.5px">${escapeHtml(l.product.name)}</div>
+            <div style="font-size:12px;color:var(--text-muted)">${fmt(l.product.discountPrice ?? l.product.price)} each</div>
+          </div>
+          <div class="qty-box" style="border-width:1px">
+            <button onclick="setCartQty('${l.productId}', ${l.qty - 1})">−</button>
+            <span class="mono" style="font-size:13px">${l.qty}</span>
+            <button onclick="setCartQty('${l.productId}', ${Math.min(l.product.stock, l.qty + 1)})">＋</button>
+          </div>
+          <div class="mono" style="font-weight:600;font-size:14px;width:90px;text-align:right">${fmt((l.product.discountPrice ?? l.product.price) * l.qty)}</div>
+          <button class="icon-btn" style="color:var(--rust)" onclick="removeFromCart('${l.productId}')">🗑</button>
+        </div>`).join("")}
+    </div>
+    <div class="cart-summary">
+      <div style="display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:8px"><span>Subtotal</span><span class="mono">${fmt(subtotal)}</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:14px"><span>Delivery</span><span class="mono">${fmt(delivery)}</span></div>
+      <div style="border-top:1px solid var(--line);padding-top:14px;display:flex;justify-content:space-between;font-weight:700;font-size:16px;margin-bottom:20px"><span>Total</span><span class="mono">${fmt(total)}</span></div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px">
+        <input id="ckName" class="input" placeholder="Full name" />
+        <input id="ckPhone" class="input" placeholder="Phone number" />
+        <input id="ckAddress" class="input" placeholder="Delivery address" />
+      </div>
+      <div style="font-size:11.5px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px">Payment method</div>
+      ${paymentOptionsHtml()}
+      <button class="btn btn-primary btn-block" ${canOrder ? "" : "disabled"} onclick="placeOrder()">Place order</button>
+    </div>
+  </div>`}`;
+}
+
+function paymentOptionsHtml() {
+  const options = [
+    { id: "mpesa-paybill", label: "M-Pesa · Paybill", icon: "📲",
+      fields: `<div class="mono" style="font-size:12.5px"><div>Paybill: <b>400200</b></div><div>Account: your phone number</div></div>` },
+    { id: "mpesa-till", label: "M-Pesa · Buy Goods (Till)", icon: "📲",
+      fields: `<div class="mono" style="font-size:12.5px">Till number: <b>8823110</b></div>` },
+    { id: "paypal", label: "PayPal", icon: "🅿️",
+      fields: `<input class="input" placeholder="PayPal email" />` },
+    { id: "card", label: "Credit / Debit Card", icon: "💳",
+      fields: `<input class="input" placeholder="Card number" /><div style="display:flex;gap:8px"><input class="input" placeholder="MM/YY" /><input class="input" placeholder="CVC" /></div>` },
+  ];
+  return `<div class="pay-options">
+    ${options.map(o => `
+      <div class="pay-option ${state.paymentMethod===o.id?'active':''}" onclick="setPaymentMethod('${o.id}')">
+        <div class="pay-option-head"><input type="radio" name="payMethod" ${state.paymentMethod===o.id?"checked":""} onclick="event.stopPropagation();setPaymentMethod('${o.id}')" /><span>${o.icon}</span><span>${o.label}</span></div>
+        ${state.paymentMethod===o.id ? `<div class="pay-option-fields">${o.fields}</div>` : ""}
+      </div>`).join("")}
+  </div>`;
+}
+
+function renderSuccessView() {
+  const inv = state.lastInvoice;
+  if (!inv) return `<div class="empty">No recent order.</div>`;
+  const items = inv.lines.map(l => ({ name: l.product.name, qty: l.qty, unitPrice: l.product.discountPrice ?? l.product.price }));
+  return `
+  <div style="max-width:620px;margin:32px auto">
+    <div class="no-print" style="text-align:center;margin-bottom:20px">
+      <div style="width:52px;height:52px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:#fff;font-size:24px">✓</div>
+      <h1 class="serif" style="font-weight:700;font-size:22px;margin-bottom:4px">Order confirmed</h1>
+      <div style="font-size:13px;color:var(--text-muted)">Here's your invoice — save it, print it, or screenshot it for your records.</div>
+    </div>
+    ${invoiceDocumentHtml({ invoiceNo: inv.id, date: inv.date, customer: (state.currentUser && state.currentUser.name) || "Walk-in customer", paymentMethod: inv.paymentMethod, items, subtotal: inv.subtotal, delivery: inv.delivery, total: inv.total })}
+    <div class="invoice-actions no-print" style="justify-content:center">
+      <button class="btn btn-outline" onclick="printInvoice()">🖨️ Print invoice</button>
+      <button class="btn btn-primary" onclick="goShop()">Continue shopping</button>
+    </div>
+  </div>`;
+}
+
+
+function renderLoginView() {
+  return `
+  <div class="login-card">
+    <button class="back-link" onclick="goShop()">← Back to shop</button>
+    <div class="serif" style="font-weight:700;font-size:20px;margin-bottom:4px">Staff sign-in</div>
+    <div style="font-size:12.5px;color:var(--text-muted);margin-bottom:20px">Accounts are created by the admin. If you don't have one, ask the admin to set you up.</div>
+    ${state.loginError ? `<div class="error-box">${escapeHtml(state.loginError)}</div>` : ""}
+    <form onsubmit="event.preventDefault(); attemptLogin();">
+      <label>Email<input id="loginEmail" class="input" type="email" required /></label>
+      <label>Password<input id="loginPassword" class="input" type="password" required /></label>
+      <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+    </form>
+  </div>`;
+}
+
+// ---------------- Render: admin ----------------
+function statCardHtml(label, value, warn) {
+  return `<div class="stat-card"><div class="stat-label"><span>${label}</span></div><div class="stat-value" style="color:${warn?'var(--rust)':'var(--text)'}">${value}</div></div>`;
+}
+
+function renderAdminDashboard() {
+  const today = mockOrders.filter(o => o.date === "2026-08-19").reduce((s,o) => s+o.total, 0);
+  const month = mockOrders.filter(o => o.date.startsWith("2026-08")).reduce((s,o) => s+o.total, 0);
+  const lowStock = products.filter(p => p.stock > 0 && p.stock <= 5);
+  const outOfStock = products.filter(p => p.stock === 0);
+  const maxOrder = Math.max(...mockOrders.map(o => o.total));
+  const topSelling = [...products].sort((a,b) => (100-a.stock)-(100-b.stock)).slice(0,4);
+  return `
+  <h1 class="serif" style="font-weight:700;font-size:23px;margin-bottom:20px">Dashboard</h1>
+  <div class="stat-grid">
+    ${statCardHtml("Today's sales", fmt(today))}
+    ${statCardHtml("This month", fmt(month))}
+    ${statCardHtml("Orders (recent)", mockOrders.length)}
+    ${statCardHtml("Low / out of stock", `${lowStock.length} / ${outOfStock.length}`, outOfStock.length > 0)}
+  </div>
+  <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:20px">
+    <div class="panel">
+      <div class="serif" style="font-weight:600;font-size:15px;margin-bottom:16px">Recent orders</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        ${mockOrders.map(o => `
+          <div style="display:flex;align-items:center;gap:12px">
+            <span class="mono" style="font-size:12px;color:var(--text-muted);width:130px">${o.id}</span>
+            <div style="flex:1;background:var(--card-bg-soft);border-radius:2px;height:8px;overflow:hidden">
+              <div style="width:${(o.total/maxOrder)*100}%;height:100%;background:var(--amber)"></div>
+            </div>
+            <span class="mono" style="font-size:12.5px;width:76px;text-align:right">${fmt(o.total)}</span>
+          </div>`).join("")}
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div class="panel">
+        <div class="serif" style="font-weight:600;font-size:15px;margin-bottom:12px">Top selling</div>
+        ${topSelling.map(p => `<div style="font-size:13px;display:flex;justify-content:space-between;padding:5px 0"><span>${escapeHtml(p.name)}</span><span style="color:var(--text-muted)">${p.category}</span></div>`).join("")}
+      </div>
+      ${(lowStock.length || outOfStock.length) ? `
+      <div class="alert-panel">
+        <div style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:13.5px;color:var(--rust);margin-bottom:10px">⚠️ Stock alerts</div>
+        ${outOfStock.map(p => `<div style="font-size:12.5px;margin-bottom:4px">${escapeHtml(p.name)} — out of stock</div>`).join("")}
+        ${lowStock.map(p => `<div style="font-size:12.5px;margin-bottom:4px">${escapeHtml(p.name)} — only ${p.stock} left</div>`).join("")}
+      </div>` : ""}
+    </div>
+  </div>`;
+}
+
+function productFormHtml(p) {
+  const f = p || { name:"", brand:"", category:"Whisky", size:"750ml", abv:40, sku:"", price:"", discountPrice:"", stock:"", description:"" };
+  const history = p ? getProductSaleHistory(p.id) : [];
+  return `
+  <div class="form-panel">
+    <div style="display:flex;justify-content:space-between;margin-bottom:16px">
+      <div class="serif" style="font-weight:600;font-size:16px">${p ? "Edit product" : "Add product"}</div>
+      <button class="icon-btn" style="color:var(--text)" onclick="cancelProductEdit()">✕</button>
+    </div>
+    <form onsubmit="saveProduct(event)">
+      <div style="display:flex;gap:16px;align-items:center;margin-bottom:16px">
+        <div style="width:74px;height:74px;border:1px solid var(--line);border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--card-bg-soft)">
+          ${state.editingProductImage ? `<img src="${state.editingProductImage}" style="width:100%;height:100%;object-fit:cover" />` : bottleSvg(f.category, 40)}
+        </div>
+        <div>
+          <label class="btn btn-outline" style="cursor:pointer;display:inline-flex">
+            📷 ${state.editingProductImage ? "Change image" : "Pick product image"}
+            <input type="file" accept="image/*" style="display:none" onchange="handleProductImageChange(event)" />
+          </label>
+          ${state.editingProductImage ? `<button type="button" class="icon-btn" style="color:var(--rust)" onclick="clearProductImage()">🗑 Remove</button>` : ""}
+        </div>
+      </div>
+      <div class="form-grid">
+        <label>Name<input class="input" name="name" value="${escapeAttr(f.name)}" required /></label>
+        <label>Brand<input class="input" name="brand" value="${escapeAttr(f.brand)}" required /></label>
+        <label>Category
+          <select class="input" name="category">
+            ${categories.map(c => `<option ${f.category===c?"selected":""}>${c}</option>`).join("")}
+          </select>
+        </label>
+        <label>Size<input class="input" name="size" value="${escapeAttr(f.size)}" /></label>
+        <label>ABV %<input class="input" type="number" step="0.1" name="abv" value="${f.abv}" /></label>
+        <label>SKU<input class="input" name="sku" value="${escapeAttr(f.sku)}" /></label>
+        <label>Price (KSh)<input class="input" type="number" name="price" value="${f.price}" required /></label>
+        <label>Discount price<input class="input" type="number" name="discountPrice" value="${f.discountPrice ?? ""}" /></label>
+        <label>Stock<input class="input" type="number" name="stock" value="${f.stock}" required /></label>
+      </div>
+      <label style="display:block;font-size:11.5px;color:var(--text-muted);font-weight:600;margin-bottom:16px">Description
+        <textarea class="input" name="description" style="min-height:60px;resize:vertical;margin-top:4px">${escapeHtml(f.description)}</textarea>
+      </label>
+      <div style="display:flex;gap:10px">
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-outline" onclick="cancelProductEdit()">Cancel</button>
+      </div>
+    </form>
+    ${p ? `
+    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line)">
+      <div class="serif" style="font-weight:600;font-size:13.5px;margin-bottom:10px">Sale history</div>
+      ${history.length === 0 ? `<div style="font-size:12.5px;color:var(--text-muted)">No sales recorded for this product yet.</div>` : `
+      <div style="max-height:180px;overflow:auto">
+        <table>
+          <thead><tr><th>Invoice</th><th>Date</th><th>Customer</th><th>Type</th><th>Qty</th><th>Status</th></tr></thead>
+          <tbody>
+            ${history.map(h => `<tr><td class="mono">${h.invoiceId}</td><td>${h.date}</td><td>${escapeHtml(h.customer)}</td><td>${h.type}</td><td class="mono">${h.qty}</td><td>${saleStatusBadge(h.status)}</td></tr>`).join("")}
+          </tbody>
+        </table>
+      </div>`}
+    </div>` : ""}
+  </div>`;
+}
+
+function previewProductHtml(p) {
+  const history = getProductSaleHistory(p.id);
+  return `
+  <div class="form-panel">
+    <div style="display:flex;justify-content:space-between;margin-bottom:14px">
+      <div class="serif" style="font-weight:600;font-size:16px">Product preview</div>
+      <button class="icon-btn" style="color:var(--text)" onclick="closePreview()">✕</button>
+    </div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px">
+      <div style="width:120px;height:120px;border:1px solid var(--line);border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--card-bg-soft);flex-shrink:0">
+        ${p.image ? `<img src="${p.image}" style="width:100%;height:100%;object-fit:cover" />` : bottleSvg(p.category, 60)}
+      </div>
+      <div style="flex:1;min-width:220px">
+        <div class="cat-label" style="color:${catColor(p.category)}">${p.category} · ${escapeHtml(p.brand)}</div>
+        <div class="serif" style="font-weight:700;font-size:19px;margin:4px 0 8px">${escapeHtml(p.name)}</div>
+        ${starsHtml(p.rating, p.reviews)}
+        <div style="display:flex;align-items:center;gap:12px;margin:10px 0">
+          ${p.discountPrice
+            ? `<span class="mono" style="font-weight:700;font-size:18px">${fmt(p.discountPrice)}</span><span class="mono price-old">${fmt(p.price)}</span>`
+            : `<span class="mono" style="font-weight:700;font-size:18px">${fmt(p.price)}</span>`}
+          ${stockTagHtml(p.stock)}
+        </div>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px">SKU ${p.sku} · ${p.size} · ${p.abv}% ABV ${p.liked ? "· ❤️ favourited" : ""}</div>
+        <p style="font-size:13px;line-height:1.55;color:var(--text-muted)">${escapeHtml(p.description)}</p>
+      </div>
+    </div>
+    <div class="serif" style="font-weight:600;font-size:13px;margin-bottom:8px">Sale history</div>
+    ${history.length === 0 ? `<div style="font-size:12.5px;color:var(--text-muted)">No sales recorded for this product yet.</div>` : `
+    <div style="max-height:160px;overflow:auto">
+      <table>
+        <thead><tr><th>Invoice</th><th>Date</th><th>Customer</th><th>Qty</th><th>Status</th></tr></thead>
+        <tbody>${history.map(h => `<tr><td class="mono">${h.invoiceId}</td><td>${h.date}</td><td>${escapeHtml(h.customer)}</td><td class="mono">${h.qty}</td><td>${saleStatusBadge(h.status)}</td></tr>`).join("")}</tbody>
+      </table>
+    </div>`}
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button class="btn btn-outline" onclick="closePreview();editProduct('${p.id}')">Edit product</button>
+      <button class="btn btn-outline" onclick="closePreview()">Close</button>
+    </div>
+  </div>`;
+}
+
+function renderAdminProducts() {
+  const editing = state.editingProductId;
+  const editingProduct = editing && editing !== "new" ? products.find(p => p.id === editing) : null;
+  const deleting = state.deletingProductId ? products.find(p => p.id === state.deletingProductId) : null;
+  const previewing = state.previewingProductId ? products.find(p => p.id === state.previewingProductId) : null;
+  return `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+    <h1 class="serif" style="font-weight:700;font-size:23px">Products</h1>
+    <button class="btn btn-primary" onclick="newProduct()">＋ Add product</button>
+  </div>
+  ${previewing ? previewProductHtml(previewing) : ""}
+  ${editing ? productFormHtml(editingProduct) : ""}
+  ${deleting ? deleteProductPreviewHtml(deleting) : ""}
+  <div class="panel" style="padding:0;overflow:hidden">
+    <table>
+      <thead><tr><th>Image</th><th>Product</th><th>Category</th><th>Size</th><th>ABV</th><th>Price</th><th>Stock</th><th></th></tr></thead>
+      <tbody>
+        ${products.map(p => `
+          <tr>
+            <td style="width:52px">
+              <div style="width:38px;height:38px;border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--card-bg-soft)">
+                ${p.image ? `<img src="${p.image}" style="width:100%;height:100%;object-fit:cover" />` : bottleSvg(p.category, 26)}
+              </div>
+            </td>
+            <td style="font-weight:600">${escapeHtml(p.name)}</td>
+            <td style="color:var(--text-muted)">${p.category}</td>
+            <td style="color:var(--text-muted)">${p.size}</td>
+            <td style="color:var(--text-muted)">${p.abv}%</td>
+            <td class="mono">${fmt(p.discountPrice ?? p.price)}</td>
+            <td>${stockTagHtml(p.stock)}</td>
+            <td style="text-align:right;white-space:nowrap">
+              <button class="row-btn" onclick="previewProduct('${p.id}')" title="Preview">👁 Preview</button>
+              <button class="row-btn" onclick="editProduct('${p.id}')" title="Edit">✏️ Edit</button>
+              <button class="row-btn" onclick="deleteProduct('${p.id}')" title="Delete">🗑 Delete</button>
+            </td>
+          </tr>`).join("")}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function deleteProductPreviewHtml(p) {
+  const history = getProductSaleHistory(p.id);
+  return `
+  <div class="form-panel" style="border-color:var(--rust)">
+    <div style="display:flex;justify-content:space-between;margin-bottom:14px">
+      <div class="serif" style="font-weight:600;font-size:16px;color:var(--rust)">Delete product?</div>
+      <button class="icon-btn" style="color:var(--text)" onclick="cancelDeleteProduct()">✕</button>
+    </div>
+    <div style="display:flex;gap:14px;align-items:center;margin-bottom:14px">
+      <div style="width:56px;height:56px;border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--card-bg-soft)">
+        ${p.image ? `<img src="${p.image}" style="width:100%;height:100%;object-fit:cover" />` : bottleSvg(p.category, 32)}
+      </div>
+      <div>
+        <div style="font-weight:600;font-size:14.5px">${escapeHtml(p.name)}</div>
+        <div style="font-size:12px;color:var(--text-muted)">${p.category} · SKU ${p.sku}</div>
+      </div>
+    </div>
+    <div class="serif" style="font-weight:600;font-size:13px;margin-bottom:8px">Sale history</div>
+    ${history.length === 0 ? `<div style="font-size:12.5px;color:var(--text-muted);margin-bottom:14px">No sales recorded for this product — safe to delete.</div>` : `
+    <div style="max-height:160px;overflow:auto;margin-bottom:14px">
+      <table>
+        <thead><tr><th>Invoice</th><th>Date</th><th>Qty</th><th>Status</th></tr></thead>
+        <tbody>${history.map(h => `<tr><td class="mono">${h.invoiceId}</td><td>${h.date}</td><td class="mono">${h.qty}</td><td>${saleStatusBadge(h.status)}</td></tr>`).join("")}</tbody>
+      </table>
+    </div>
+    <div style="font-size:12px;color:var(--rust);margin-bottom:14px">⚠️ This product has recorded sales. Deleting it won't change past invoices, but it will disappear from the catalog.</div>`}
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-danger" onclick="confirmDeleteProduct()">Delete permanently</button>
+      <button class="btn btn-outline" onclick="cancelDeleteProduct()">Cancel</button>
+    </div>
+  </div>`;
+}
+
+function renderAdminStock() {
+  return `
+  <h1 class="serif" style="font-weight:700;font-size:23px;margin-bottom:20px">Stock</h1>
+  <div class="panel" style="padding:0;overflow:hidden">
+    <table>
+      <thead><tr><th>Product</th><th>SKU</th><th>Current stock</th><th>Status</th></tr></thead>
+      <tbody>
+        ${products.map(p => `
+          <tr>
+            <td style="font-weight:600">${escapeHtml(p.name)}</td>
+            <td class="mono" style="color:var(--text-muted)">${p.sku}</td>
+            <td class="mono">${p.stock}</td>
+            <td>${stockTagHtml(p.stock)}</td>
+          </tr>`).join("")}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderAdminPromotions() {
+  const promo = products.filter(p => p.discountPrice);
+  return `
+  <h1 class="serif" style="font-weight:700;font-size:23px;margin-bottom:20px">Promotions</h1>
+  ${promo.length === 0 ? `<div style="color:var(--text-muted);font-size:13.5px">No active promotions. Add a discount price to a product to feature it here.</div>` : `
+  <div class="product-grid">
+    ${promo.map(p => `
+      <div class="card">
+        <div class="serif" style="font-weight:600;font-size:15px">${escapeHtml(p.name)}</div>
+        <div style="display:flex;gap:8px;align-items:baseline">
+          <span class="mono price-old" style="font-size:13px">${fmt(p.price)}</span>
+          <span class="mono" style="font-weight:700;font-size:16px;color:var(--amber-deep)">${fmt(p.discountPrice)}</span>
+        </div>
+      </div>`).join("")}
+  </div>`}`;
+}
+
+function userFormHtml(u) {
+  const f = u || { name:"", email:"", password:"", role:"Sales" };
+  return `
+  <div class="form-panel">
+    <div style="display:flex;justify-content:space-between;margin-bottom:16px">
+      <div class="serif" style="font-weight:600;font-size:16px">${u ? "Edit user" : "Add user"}</div>
+      <button class="icon-btn" style="color:var(--text)" onclick="cancelUserEdit()">✕</button>
+    </div>
+    <form onsubmit="saveUser(event)">
+      <div class="form-grid" style="grid-template-columns:repeat(2,1fr)">
+        <label>Full name<input class="input" name="name" value="${escapeAttr(f.name)}" required /></label>
+        <label>Email<input class="input" type="email" name="email" value="${escapeAttr(f.email)}" required /></label>
+        <label>Password<input class="input" name="password" value="${escapeAttr(f.password)}" required /></label>
+        <label>Role
+          <select class="input" name="role">
+            ${ROLES.map(r => `<option ${f.role===r?"selected":""}>${r}</option>`).join("")}
+          </select>
+        </label>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:6px">
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-outline" onclick="cancelUserEdit()">Cancel</button>
+      </div>
+    </form>
+  </div>`;
+}
+
+function renderAdminUsers() {
+  const editing = state.editingUserId;
+  const editingUser = editing && editing !== "new" ? users.find(u => u.id === editing) : null;
+  return `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+    <h1 class="serif" style="font-weight:700;font-size:23px">Staff users</h1>
+    <button class="btn btn-primary" onclick="newUser()">＋ Add user</button>
+  </div>
+  <div style="font-size:12.5px;color:var(--text-muted);margin-bottom:18px">Only the admin account can create or manage staff logins. New users sign in with the email and password set here.<br/><b>Sales</b> can create invoices and request credit notes/returns. <b>Procurement</b> manages products, stock &amp; categories. <b>Accounts</b> approves credit notes &amp; returns. <b>Admin</b> has full access.</div>
+  ${editing ? userFormHtml(editingUser) : ""}
+  <div class="panel" style="padding:0;overflow:hidden">
+    <table>
+      <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        ${users.length === 0 ? `<tr><td colspan="5" style="color:var(--text-muted)">No staff users yet.</td></tr>` : users.map(u => `
+          <tr>
+            <td style="font-weight:600">${escapeHtml(u.name)}</td>
+            <td class="mono" style="color:var(--text-muted)">${escapeHtml(u.email)}</td>
+            <td><span class="badge-role ${ROLE_BADGE[u.role] || "badge-sales"}">${u.role}</span></td>
+            <td><span class="badge-role ${u.active?"badge-sales":"badge-inactive"}">${u.active?"Active":"Inactive"}</span></td>
+            <td style="text-align:right">
+              <button class="row-btn" onclick="editUser('${u.id}')">✏️ Edit</button>
+              <button class="row-btn" onclick="toggleUserActive('${u.id}')">${u.active?"⏸ Deactivate":"▶️ Activate"}</button>
+              <button class="row-btn" onclick="deleteUser('${u.id}')">🗑 Delete</button>
+            </td>
+          </tr>`).join("")}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderAdminNewSale() {
+  const lines = saleCartLines();
+  const total = lines.reduce((s,l) => s + (l.product.discountPrice ?? l.product.price) * l.qty, 0);
+  if (state.lastStaffInvoice) {
+    const inv = state.lastStaffInvoice;
+    const items = inv.lines.map(l => ({ name: l.name, qty: l.qty, unitPrice: l.price }));
+    return `
+    <div style="max-width:620px">
+      <div class="no-print" style="margin-bottom:18px">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:14px;color:#fff;font-size:22px">✓</div>
+        <h1 class="serif" style="font-weight:700;font-size:22px;margin-bottom:4px">Invoice created</h1>
+        <div style="font-size:13px;color:var(--text-muted)">Stock has been updated automatically.</div>
+      </div>
+      ${invoiceDocumentHtml({ invoiceNo: inv.invoiceId, date: inv.date, customer: inv.customer, paymentMethod: null, items, subtotal: inv.total, delivery: 0, total: inv.total })}
+      <div class="invoice-actions no-print">
+        <button class="btn btn-outline" onclick="printInvoice()">🖨️ Print invoice</button>
+        <button class="btn btn-primary" onclick="dismissStaffInvoice()">Create another invoice</button>
+      </div>
+    </div>`;
+  }
+  return `
+  <h1 class="serif" style="font-weight:700;font-size:23px;margin-bottom:6px">New sale</h1>
+  <div style="font-size:12.5px;color:var(--text-muted);margin-bottom:20px">Create an invoice for a walk-in or phone sale. Stock updates automatically once the invoice is created.</div>
+  <div class="admin-split-grid" style="display:grid;grid-template-columns:1.5fr 1fr;gap:24px;align-items:start">
+    <div>
+      <input class="input" style="margin-bottom:14px" placeholder="Search products to add..." oninput="setSearch(this.value)" value="${escapeAttr(state.search)}" />
+      <div class="product-grid">
+        ${getFilteredProducts().slice(0,12).map(p => `
+          <div class="card" style="padding:12px">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start">
+              ${productThumb(p, 34)}
+              <span class="mono" style="font-size:12.5px;font-weight:600">${fmt(p.discountPrice ?? p.price)}</span>
+            </div>
+            <div class="p-name" style="font-size:13.5px">${escapeHtml(p.name)}</div>
+            ${stockTagHtml(p.stock)}
+            <button class="btn btn-outline btn-block" style="font-size:12px;padding:7px" ${p.stock===0?"disabled":""} onclick="addToSaleCart('${p.id}')">＋ Add to sale</button>
+          </div>`).join("")}
+      </div>
+    </div>
+    <div class="cart-summary">
+      <div class="serif" style="font-weight:600;font-size:15px;margin-bottom:12px">Invoice items</div>
+      ${lines.length === 0 ? `<div style="font-size:12.5px;color:var(--text-muted);margin-bottom:14px">No items added yet.</div>` : `
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px">
+        ${lines.map(l => `
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="flex:1;font-size:12.5px">${escapeHtml(l.product.name)}</div>
+            <div class="qty-box" style="border-width:1px">
+              <button onclick="setSaleCartQty('${l.productId}', ${l.qty - 1})">−</button>
+              <span class="mono" style="font-size:12.5px">${l.qty}</span>
+              <button onclick="setSaleCartQty('${l.productId}', ${Math.min(l.product.stock, l.qty + 1)})">＋</button>
+            </div>
+          </div>`).join("")}
+      </div>`}
+      <div style="border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between;font-weight:700;font-size:15px;margin-bottom:14px"><span>Total</span><span class="mono">${fmt(total)}</span></div>
+      <input class="input" style="margin-bottom:12px" placeholder="Customer name (optional)" value="${escapeAttr(state.saleCustomer)}" oninput="setSaleCustomer(this.value)" />
+      <button class="btn btn-primary btn-block" ${lines.length===0?"disabled":""} onclick="submitNewSale()">Create invoice</button>
+    </div>
+  </div>`;
+}
+
+function renderAdminCategories() {
+  return `
+  <h1 class="serif" style="font-weight:700;font-size:23px;margin-bottom:6px">Categories</h1>
+  <div style="font-size:12.5px;color:var(--text-muted);margin-bottom:20px">Add or remove product categories. Removing a category won't delete existing products in it.</div>
+  <div class="panel" style="max-width:480px;margin-bottom:20px">
+    <div style="display:flex;gap:10px">
+      <input class="input" placeholder="New category name" value="${escapeAttr(state.newCategoryName)}" oninput="setNewCategoryName(this.value)" />
+      <button class="btn btn-primary" onclick="addCategory()">＋ Add</button>
+    </div>
+  </div>
+  <div class="panel" style="max-width:480px;padding:0;overflow:hidden">
+    ${categories.map(c => `
+      <div class="cat-manage-row">
+        <span><span class="cat-swatch" style="background:${catColor(c)}"></span>${escapeHtml(c)}</span>
+        <button class="icon-btn" style="color:var(--rust)" onclick="removeCategory('${escapeAttr(c)}')">🗑</button>
+      </div>`).join("")}
+  </div>`;
+}
+
+function saleStatusBadge(status) {
+  const cls = status === "Approved" ? "badge-approved" : status === "Pending" ? "badge-pending" : "badge-rejected";
+  return `<span class="badge-status ${cls}">${status}</span>`;
+}
+
+function renderAdminSalesReturns() {
+  const canApprove = canApproveReturns();
+  const mine = !isAdminRole() && !canApprove;
+  const visible = mine ? sales.filter(s => s.createdBy === state.currentUser.email) : sales;
+
+  if (state.viewingInvoiceId) {
+    const s = sales.find(x => x.id === state.viewingInvoiceId);
+    if (s) {
+      const items = s.lines.map(l => ({ name: l.name, qty: l.qty, unitPrice: l.price }));
+      return `
+      <button class="back-link no-print" onclick="closeInvoiceView()" style="margin-bottom:16px">← Back to Sales &amp; returns</button>
+      ${s.type === "Credit Note" ? `<div class="no-print" style="font-size:12.5px;color:var(--rust);margin-bottom:14px">This is a credit note against invoice ${escapeHtml(s.refInvoice || s.invoiceId)}.</div>` : ""}
+      ${invoiceDocumentHtml({ invoiceNo: s.invoiceId, date: s.date, customer: s.customer, paymentMethod: null, items, subtotal: s.total, delivery: 0, total: s.total })}
+      <div class="invoice-actions no-print">
+        <button class="btn btn-outline" onclick="printInvoice()">🖨️ Print invoice</button>
+      </div>`;
+    }
+  }
+
+  return `
+  <h1 class="serif" style="font-weight:700;font-size:23px;margin-bottom:6px">Sales &amp; returns</h1>
+  <div style="font-size:12.5px;color:var(--text-muted);margin-bottom:20px">
+    ${canApprove ? "Review and approve credit notes or sale returns raised by the sales team." : "Raise a credit note or return request if an invoice was created in error. Admin or Accounts will approve it."}
+  </div>
+  <div class="panel" style="padding:0;overflow:hidden">
+    <table>
+      <thead><tr><th>Invoice</th><th>Customer</th><th>Type</th><th>Total</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        ${visible.length === 0 ? `<tr><td colspan="6" style="color:var(--text-muted)">No sales recorded yet.</td></tr>` : visible.map(s => `
+          <tr>
+            <td class="mono" style="font-weight:600">${s.invoiceId}</td>
+            <td>${escapeHtml(s.customer)}</td>
+            <td>${s.type}</td>
+            <td class="mono">${fmt(s.total)}</td>
+            <td>${saleStatusBadge(s.status)}</td>
+            <td style="text-align:right;white-space:nowrap">
+              <button class="btn btn-outline" style="padding:6px 10px;font-size:12px" onclick="viewInvoice('${s.id}')">View invoice</button>
+              ${(s.type === "Sale" && s.status === "Approved" && !canApprove) ? `<button class="btn btn-outline" style="padding:6px 10px;font-size:12px" onclick="requestReturn('${s.id}')">Request credit note</button>` : ""}
+              ${(s.status === "Pending" && canApprove) ? `
+                <button class="btn btn-primary" style="padding:6px 10px;font-size:12px" onclick="approveSale('${s.id}')">Approve</button>
+                <button class="btn btn-danger" style="padding:6px 10px;font-size:12px" onclick="rejectSale('${s.id}')">Reject</button>` : ""}
+            </td>
+          </tr>`).join("")}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderAdminDiscounts() {
+  return `
+  <h1 class="serif" style="font-weight:700;font-size:23px;margin-bottom:6px">Discounts</h1>
+  <div style="font-size:12.5px;color:var(--text-muted);margin-bottom:20px">Set a discount as a fixed price or a percentage off. Discounted items automatically appear under Promotions and show a "% off" badge to customers.</div>
+  <div class="panel" style="padding:0;overflow:hidden">
+    <table>
+      <thead><tr><th>Product</th><th>Price</th><th>Discount price</th><th>% off</th><th></th></tr></thead>
+      <tbody>
+        ${products.map(p => `
+          <tr>
+            <td style="font-weight:600">${escapeHtml(p.name)}</td>
+            <td class="mono">${fmt(p.price)}</td>
+            <td>
+              <input class="input" type="number" min="0" max="${p.price - 1}" style="width:110px;display:inline-block" id="disc_${p.id}" value="${p.discountPrice ?? ""}" placeholder="No discount" />
+            </td>
+            <td>
+              <div style="display:flex;align-items:center;gap:4px">
+                <input class="input" type="number" min="1" max="99" style="width:70px" id="pct_${p.id}" placeholder="${discountPercent(p) ?? '%'}" />
+                <span style="font-size:12.5px;color:var(--text-muted)">%</span>
+                <button class="btn btn-outline" style="padding:6px 10px;font-size:12px" onclick="applyDiscountPercent('${p.id}', document.getElementById('pct_${p.id}').value)">Apply %</button>
+              </div>
+            </td>
+            <td style="text-align:right;white-space:nowrap">
+              <button class="btn btn-primary" style="padding:6px 10px;font-size:12px" onclick="applyDiscount('${p.id}', document.getElementById('disc_${p.id}').value)">Apply price</button>
+              ${p.discountPrice ? `<button class="btn btn-outline" style="padding:6px 10px;font-size:12px" onclick="removeDiscount('${p.id}')">Remove</button>` : ""}
+            </td>
+          </tr>`).join("")}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderAdminStockAdjust() {
+  return `
+  <h1 class="serif" style="font-weight:700;font-size:23px;margin-bottom:6px">Stock adjustment</h1>
+  <div style="font-size:12.5px;color:var(--text-muted);margin-bottom:20px">Add newly received stock, or correct stock counts (damages, stocktake corrections, etc).</div>
+  <div class="panel" style="max-width:520px;margin-bottom:24px">
+    <div class="form-grid" style="grid-template-columns:1fr">
+      <label>Product
+        <select class="input" onchange="setAdjustProduct(this.value)">
+          <option value="">Select a product...</option>
+          ${products.map(p => `<option value="${p.id}" ${state.adjustProductId===p.id?"selected":""}>${escapeHtml(p.name)} (currently ${p.stock})</option>`).join("")}
+        </select>
+      </label>
+    </div>
+    <div class="form-grid" style="grid-template-columns:1fr 1fr">
+      <label>Quantity (use a negative number to remove stock)<input class="input" type="number" value="${state.adjustQty}" oninput="setAdjustQty(this.value)" placeholder="e.g. 24 or -3" /></label>
+      <label>Reason
+        <select class="input" onchange="setAdjustReason(this.value)">
+          ${["Restock","Damage / breakage","Stocktake correction","Other"].map(r => `<option ${state.adjustReason===r?"selected":""}>${r}</option>`).join("")}
+        </select>
+      </label>
+    </div>
+    <button class="btn btn-primary" onclick="submitStockAdjustment()">Apply adjustment</button>
+  </div>
+  <div class="serif" style="font-weight:600;font-size:15px;margin-bottom:10px">Adjustment history</div>
+  <div class="panel" style="padding:0;overflow:hidden">
+    <table>
+      <thead><tr><th>Product</th><th>Change</th><th>Reason</th><th>Date</th><th>By</th></tr></thead>
+      <tbody>
+        ${stockAdjustments.length === 0 ? `<tr><td colspan="5" style="color:var(--text-muted)">No adjustments recorded yet.</td></tr>` : stockAdjustments.map(a => `
+          <tr>
+            <td style="font-weight:600">${escapeHtml(a.productName)}</td>
+            <td class="mono" style="color:${a.qty>=0?'var(--green)':'var(--rust)'}">${a.qty>=0?"+":""}${a.qty}</td>
+            <td>${escapeHtml(a.reason)}</td>
+            <td>${a.date}</td>
+            <td class="mono" style="color:var(--text-muted)">${escapeHtml(a.by)}</td>
+          </tr>`).join("")}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderAdmin() {
+  const isSuper = state.currentUser && state.currentUser.isSuperAdmin;
+  const tabs = [{ id: "dashboard", label: "Dashboard", icon: "📊" }];
+  if (canCreateInvoice()) tabs.push({ id: "newsale", label: "New sale", icon: "🧾" });
+  if (canManageCatalog()) tabs.push({ id: "products", label: "Products", icon: "📦" });
+  if (canManageCatalog()) tabs.push({ id: "stock", label: "Stock", icon: "🧮" });
+  if (canManageCatalog()) tabs.push({ id: "adjust", label: "Stock adjustment", icon: "➕" });
+  if (canManageCategories()) tabs.push({ id: "categories", label: "Categories", icon: "🗂️" });
+  if (canManageCatalog()) tabs.push({ id: "discounts", label: "Discounts", icon: "💸" });
+  if (canManageCatalog()) tabs.push({ id: "promotions", label: "Promotions", icon: "🏷️" });
+  if (canCreateInvoice() || canApproveReturns()) tabs.push({ id: "returns", label: "Sales & returns", icon: "↩️" });
+  if (canManageUsers()) tabs.push({ id: "users", label: "Users", icon: "👥" });
+
+  const allowedIds = tabs.map(t => t.id);
+  if (!allowedIds.includes(state.adminTab)) state.adminTab = "dashboard";
+
+  let body = "";
+  if (state.adminTab === "dashboard") body = renderAdminDashboard();
+  else if (state.adminTab === "newsale") body = renderAdminNewSale();
+  else if (state.adminTab === "products") body = renderAdminProducts();
+  else if (state.adminTab === "stock") body = renderAdminStock();
+  else if (state.adminTab === "adjust") body = renderAdminStockAdjust();
+  else if (state.adminTab === "categories") body = renderAdminCategories();
+  else if (state.adminTab === "discounts") body = renderAdminDiscounts();
+  else if (state.adminTab === "promotions") body = renderAdminPromotions();
+  else if (state.adminTab === "returns") body = renderAdminSalesReturns();
+  else if (state.adminTab === "users") body = isSuper ? renderAdminUsers() : renderAdminDashboard();
+
+  return `
+  <div class="admin-wrap">
+    <aside class="admin-side">
+      <div class="name serif">Spear Liquor House</div>
+      <div class="tag">Staff dashboard</div>
+      <div class="who">${escapeHtml(state.currentUser.name)} · ${escapeHtml(state.currentUser.role)}</div>
+      <nav style="display:flex;flex-direction:column;gap:2px">
+        ${tabs.map(t => `<button class="nav-item ${state.adminTab===t.id?"active":""}" onclick="setAdminTab('${t.id}')">${t.icon} ${t.label}</button>`).join("")}
+      </nav>
+      <button class="nav-item" style="margin-top:26px" onclick="logout()">🚪 Log out</button>
+      <button class="icon-btn" style="margin-top:6px;color:#A99C89" onclick="toggleTheme()">${state.theme==="light"?"🌙 Dark mode":"☀️ Light mode"}</button>
+    </aside>
+    <main class="admin-main">${body}</main>
+  </div>`;
+}
+
+// ---------------- Root render ----------------
+function render() {
+  const activeId = document.activeElement ? document.activeElement.id : null;
+  const selStart = document.activeElement && document.activeElement.selectionStart != null ? document.activeElement.selectionStart : null;
+
+  let html = "";
+  if (state.role === "staff" && state.currentUser) {
+    html = renderAdmin();
+  } else if (state.view === "login") {
+    html = headerHtml() + `<div class="main">${renderLoginView()}</div>` + footerHtml();
+  } else {
+    let body = "";
+    if (state.view === "shop") body = renderShopView();
+    else if (state.view === "product") body = renderProductView();
+    else if (state.view === "cart") body = renderCartView();
+    else if (state.view === "success") body = renderSuccessView();
+    html = headerHtml() + `<div class="main">${body}</div>` + footerHtml() + socialFabHtml();
+  }
+  document.getElementById("app").innerHTML = html;
+
+  if (activeId) {
+    const el = document.getElementById(activeId);
+    if (el && el.focus) {
+      el.focus();
+      if (selStart != null && el.setSelectionRange) { try { el.setSelectionRange(selStart, selStart); } catch(e) {} }
+    }
+  }
+}
+
+render();
+</script>
+</body>
+</html>
